@@ -55,6 +55,74 @@
       color: #4a9eff;
       letter-spacing: 0.05em;
     }
+
+    .tools {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tools-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 4px;
+    }
+
+    .tool-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(74, 158, 255, 0.2);
+      border-radius: 10px;
+      padding: 14px 24px;
+      width: 280px;
+      text-decoration: none;
+      color: #e0e0e0;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: all 0.2s ease;
+    }
+
+    .tool-link:hover {
+      background: rgba(74, 158, 255, 0.08);
+      border-color: rgba(74, 158, 255, 0.5);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(74, 158, 255, 0.12);
+    }
+
+    .tool-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .tool-text {
+      text-align: left;
+    }
+
+    .tool-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: inherit;
+    }
+
+    .tool-desc {
+      font-size: 11px;
+      color: #555;
+      margin-top: 2px;
+      transition: color 0.2s;
+    }
+
+    .tool-link:hover .tool-desc {
+      color: #888;
+    }
   </style>
 </head>
 <body>
@@ -63,6 +131,17 @@
     <div class="divider"></div>
     <p class="name">Jamal Hollingsworth</p>
     <p class="subtitle">Welcome</p>
+
+    <div class="tools">
+      <div class="tools-label">Tools</div>
+      <a href="stop-loss-calculator.html" class="tool-link">
+        <span class="tool-icon">📉</span>
+        <div class="tool-text">
+          <div class="tool-title">MNQ Stop Loss Calculator</div>
+          <div class="tool-desc">Topstep funded account risk management</div>
+        </div>
+      </a>
+    </div>
   </div>
 </body>
 </html>
