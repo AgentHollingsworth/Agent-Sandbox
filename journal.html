@@ -182,9 +182,12 @@
     .trade-list { margin-bottom: 16px; }
     .no-trades { font-size: 13px; color: var(--text-3); text-align: center; padding: 16px 0; font-style: italic; }
     .trade-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 12px; border-radius: 8px; background: var(--bg-2);
+      display: flex; flex-direction: column; gap: 10px;
+      padding: 12px; border-radius: 8px; background: var(--bg-2);
       border: 1px solid var(--border); margin-bottom: 6px;
+    }
+    .trade-item-row {
+      display: flex; align-items: center; gap: 12px;
     }
     .trade-desc { flex: 1; font-size: 13px; font-weight: 500; color: var(--text); }
     .trade-pnl { font-size: 14px; font-weight: 700; white-space: nowrap; }
@@ -195,15 +198,35 @@
       font-size: 18px; line-height: 1; padding: 0 4px; transition: color 0.15s;
     }
     .trade-del:hover { color: var(--red); }
+    .trade-screenshot {
+      width: 100%; max-height: 280px; object-fit: contain;
+      border-radius: 6px; border: 1px solid var(--border); cursor: pointer;
+    }
+    .trade-screenshot:hover { border-color: var(--blue); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.8); align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 92vw; max-height: 92vh; border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
 
     .add-form {
-      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+      display: flex; flex-direction: column; gap: 10px;
       padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .add-form-row {
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
     }
     .add-input {
       background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px;
       padding: 9px 12px; font-size: 13px; color: var(--text); outline: none;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s; font-family: inherit;
     }
     .add-input:focus { border-color: var(--border-lit); }
     .add-desc { flex: 1; min-width: 160px; }
@@ -214,6 +237,29 @@
       transition: all 0.15s; white-space: nowrap;
     }
     .add-btn:hover { background: #2b63f0; }
+
+    .screenshot-upload {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .screenshot-upload-btn {
+      background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 14px; font-size: 12px; font-weight: 600; color: var(--text-2);
+      cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .screenshot-upload-btn:hover { border-color: var(--border-lit); color: var(--blue); }
+    .screenshot-upload-btn svg { width: 14px; height: 14px; }
+    .screenshot-preview {
+      height: 36px; border-radius: 4px; border: 1px solid var(--border);
+    }
+    .screenshot-filename {
+      font-size: 11px; color: var(--text-3); max-width: 140px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .screenshot-clear {
+      background: none; border: none; cursor: pointer; color: var(--text-3);
+      font-size: 16px; line-height: 1; padding: 0 2px;
+    }
+    .screenshot-clear:hover { color: var(--red); }
 
     /* ── FOOTER ── */
     footer {
@@ -323,17 +369,27 @@
       </div>
       <div class="trade-list" id="tradeList"></div>
       <div class="add-form">
-        <select id="newDesc" class="add-input add-desc">
-          <option value="" disabled selected>Select setup...</option>
-          <option value="Trend Continuation — Fast (3m/30s)">Trend Continuation — Fast (3m/30s)</option>
-          <option value="Trend Continuation — Medium (5m/1m)">Trend Continuation — Medium (5m/1m)</option>
-          <option value="Trend Continuation — Slow (15m/3m)">Trend Continuation — Slow (15m/3m)</option>
-          <option value="Counter Trend — Fast (3m/30s)">Counter Trend — Fast (3m/30s)</option>
-          <option value="Counter Trend — Medium (5m/1m)">Counter Trend — Medium (5m/1m)</option>
-          <option value="Counter Trend — Slow (15m/3m)">Counter Trend — Slow (15m/3m)</option>
-        </select>
-        <input type="number" id="newPnl" class="add-input add-pnl" placeholder="P&amp;L (e.g. 250 or -150)" step="0.01">
-        <button class="add-btn" onclick="addTrade()">+ Add Trade</button>
+        <div class="add-form-row">
+          <select id="newDesc" class="add-input add-desc">
+            <option value="" disabled selected>Select setup...</option>
+            <option value="Trend Continuation — Fast (3m/30s)">Trend Continuation — Fast (3m/30s)</option>
+            <option value="Trend Continuation — Medium (5m/1m)">Trend Continuation — Medium (5m/1m)</option>
+            <option value="Trend Continuation — Slow (15m/3m)">Trend Continuation — Slow (15m/3m)</option>
+            <option value="Counter Trend — Fast (3m/30s)">Counter Trend — Fast (3m/30s)</option>
+            <option value="Counter Trend — Medium (5m/1m)">Counter Trend — Medium (5m/1m)</option>
+            <option value="Counter Trend — Slow (15m/3m)">Counter Trend — Slow (15m/3m)</option>
+          </select>
+          <input type="number" id="newPnl" class="add-input add-pnl" placeholder="P&amp;L (e.g. 250 or -150)" step="0.01">
+          <button class="add-btn" onclick="addTrade()">+ Add Trade</button>
+        </div>
+        <div class="screenshot-upload" id="screenshotRow">
+          <label class="screenshot-upload-btn" for="tradeScreenshot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Screenshot
+          </label>
+          <input type="file" id="tradeScreenshot" accept="image/*" style="display:none">
+          <span id="screenshotInfo"></span>
+        </div>
       </div>
     </div>
 
@@ -343,6 +399,11 @@
     <span class="footer-name">Jamal Hollingsworth &nbsp;·&nbsp; PMax Precision</span>
     <span class="footer-note">Journal data is saved locally in your browser.</span>
   </footer>
+
+  <!-- Lightbox for full-size screenshot -->
+  <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+    <img id="lightboxImg" src="" alt="Full screenshot">
+  </div>
 
   <script>
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -469,9 +530,12 @@
       } else {
         tl.innerHTML = dd.trades.map((t, i) => `
           <div class="trade-item">
-            <div class="trade-desc">${escHtml(t.desc)}</div>
-            <div class="trade-pnl ${t.pnl >= 0 ? 'pnl-pos' : 'pnl-neg'}">${fmtMoney(t.pnl)}</div>
-            <button class="trade-del" onclick="deleteTrade('${key}', ${i})" title="Delete">&#x2715;</button>
+            <div class="trade-item-row">
+              <div class="trade-desc">${escHtml(t.desc)}</div>
+              <div class="trade-pnl ${t.pnl >= 0 ? 'pnl-pos' : 'pnl-neg'}">${fmtMoney(t.pnl)}</div>
+              <button class="trade-del" onclick="deleteTrade('${key}', ${i})" title="Delete">&#x2715;</button>
+            </div>
+            ${t.image ? `<img class="trade-screenshot" src="${t.image}" alt="Trade screenshot" onclick="openLightbox(this.src)">` : ''}
           </div>`).join('');
       }
       document.getElementById('tradePanel').classList.remove('hidden');
@@ -481,6 +545,36 @@
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
+    /* ── Screenshot handling ── */
+    let pendingScreenshot = null;
+    const screenshotInput = document.getElementById('tradeScreenshot');
+    const screenshotInfo  = document.getElementById('screenshotInfo');
+
+    screenshotInput.addEventListener('change', () => {
+      const file = screenshotInput.files[0];
+      if (!file || !file.type.startsWith('image/')) { clearScreenshot(); return; }
+      const reader = new FileReader();
+      reader.onload = e => {
+        pendingScreenshot = e.target.result;
+        screenshotInfo.innerHTML =
+          `<img class="screenshot-preview" src="${pendingScreenshot}" alt="preview">` +
+          `<span class="screenshot-filename">${escHtml(file.name)}</span>` +
+          `<button class="screenshot-clear" onclick="clearScreenshot()" title="Remove">&times;</button>`;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function clearScreenshot() {
+      pendingScreenshot = null;
+      screenshotInput.value = '';
+      screenshotInfo.innerHTML = '';
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+
     function addTrade() {
       const descEl = document.getElementById('newDesc');
       const desc = descEl.value || 'Trade';
@@ -488,13 +582,17 @@
       const pnl = parseFloat(pnlStr);
       if (isNaN(pnl) || !activeDateKey) return;
 
+      const trade = { desc, pnl };
+      if (pendingScreenshot) trade.image = pendingScreenshot;
+
       const data = load();
       if (!data[activeDateKey]) data[activeDateKey] = { trades: [] };
-      data[activeDateKey].trades.push({ desc, pnl });
+      data[activeDateKey].trades.push(trade);
       save(data);
 
       descEl.selectedIndex = 0;
       document.getElementById('newPnl').value = '';
+      clearScreenshot();
       renderCalendar();
       renderPanel(activeDateKey);
     }
