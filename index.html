@@ -432,6 +432,45 @@
       color: var(--text-2);
     }
 
+    .about-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    .about-role {
+      font-size: 12px;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .about-role::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+      opacity: 0.55;
+    }
+
+    .about-pull-quote {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+
+    .about-pull-quote p {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
     /* ── FOOTER ── */
     footer {
       position: relative;
@@ -553,47 +592,56 @@
           <h2 class="about-h2">Hey, I'm <span>Jamal</span>.</h2>
           <div class="about-body">
             <p>
-              I trade Micro E-mini Nasdaq futures with a focus on structure, discipline, and protecting capital above everything else. My edge isn't a secret indicator — it's showing up prepared and executing the plan.
+              I've been trading for 5+ years, starting in forex before finding my edge in futures — specifically MNQ, where precision and speed meet.
             </p>
             <p>
-              This site is where I share the tools and frameworks I actually use. If you're a trader trying to stay consistent and protect your account, you're in the right place.
+              I'm self-taught. YouTube, screen time, and a lot of expensive lessons. Nobody handed me a system. I built one.
+            </p>
+            <p>
+              Trading pulled me in because of leverage — not just financial leverage, but the leverage of skill, discipline, and decision-making. It's one of the few arenas where results are purely yours. No excuses, no hiding. The market doesn't care about your feelings.
+            </p>
+            <p>
+              But the deeper obsession is this: most people approach trading completely wrong. They chase wins, blow accounts, and never build anything real. I've learned that trading done right is about structure, patience, and longevity — shifting from gambling to building a skillset that compounds over time.
+            </p>
+            <p>
+              The hardest lesson? Consistency isn't built from big wins. It's built from controlling losses. One moment of impatience can erase weeks of solid execution. Trading forced me to look at myself honestly — my emotions, my habits, my decision-making under pressure. And once you understand that, you realize trading is less about the market and more about mastering yourself.
             </p>
           </div>
           <div class="about-pills">
-            <span class="pill">Futures</span>
+            <span class="pill">5+ Years</span>
+            <span class="pill">Forex → Futures</span>
             <span class="pill">MNQ / NQ</span>
+            <span class="pill">Self-Taught</span>
             <span class="pill">PMax Strategy</span>
-            <span class="pill">Risk Management</span>
-            <span class="pill">Funded Accounts</span>
           </div>
         </div>
         <div class="about-right">
           <div class="about-stat-card">
+            <div class="about-stat-icon">📈</div>
+            <div>
+              <div class="about-stat-title">5+ Years in Futures</div>
+              <div class="about-stat-sub">Started in forex, found my edge in MNQ. Built the system from scratch — no shortcuts, just screen time and hard lessons.</div>
+            </div>
+          </div>
+          <div class="about-stat-card">
+            <div class="about-stat-icon">🏢</div>
+            <div>
+              <div class="about-stat-title">COO — TX3 Companies</div>
+              <div class="about-roles">
+                <span class="about-role">TX3 Funding</span>
+                <span class="about-role">TX3 Markets</span>
+                <span class="about-role">Market Memo</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-pull-quote">
+            <p>"Trading is less about the market and more about mastering yourself."</p>
+          </div>
+          <div class="about-stat-card">
             <div class="about-stat-icon">🎯</div>
             <div>
-              <div class="about-stat-title">Consistency Over Big Wins</div>
-              <div class="about-stat-sub">Small, repeatable results beat home runs every time.</div>
-            </div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-icon">🛡️</div>
-            <div>
-              <div class="about-stat-title">Risk Before Reward</div>
-              <div class="about-stat-sub">Know the max loss before entering any position.</div>
-            </div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-icon">📐</div>
-            <div>
-              <div class="about-stat-title">Rules-Based Execution</div>
-              <div class="about-stat-sub">If it's not in the plan, it's not a trade.</div>
-            </div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-icon">🔧</div>
-            <div>
-              <div class="about-stat-title">Always Building</div>
-              <div class="about-stat-sub">More tools and strategy content in progress.</div>
+              <div class="about-stat-title">Why PMax Precision</div>
+              <div class="about-stat-sub">Built to document the system, share the tools, and help serious traders build something that lasts.</div>
             </div>
           </div>
         </div>
