@@ -252,8 +252,8 @@
   <div class="page">
 
     <div class="page-eyebrow">Session Timer</div>
-    <h1 class="page-h1">Live ET Clock</h1>
-    <p class="page-sub">Track your active trading window in real time. Eastern Time only.</p>
+    <h1 class="page-h1">Live CT Clock</h1>
+    <p class="page-sub">Track your active trading window in real time. Central Time only.</p>
 
     <!-- Clock + Status -->
     <div class="card">
@@ -285,7 +285,7 @@
 
     <!-- 24-Hour Timeline -->
     <div class="card timeline-card">
-      <div class="card-title">24-Hour Session Timeline — Eastern Time</div>
+      <div class="card-title">24-Hour Session Timeline — Central Time</div>
       <div class="timeline-track-wrap">
         <div class="timeline-track">
           <div class="timeline-active"></div>
@@ -310,12 +310,12 @@
       <div class="rules-grid">
         <div class="rule-card active-rule">
           <div class="rule-status status-on">Active Window</div>
-          <div class="rule-time">7:00 AM – 3:10 PM ET</div>
+          <div class="rule-time">7:00 AM – 3:10 PM CT</div>
           <div class="rule-desc">London / NY crossover. Highest liquidity of the day. All setups valid within this window.</div>
         </div>
         <div class="rule-card blocked-rule">
           <div class="rule-status status-off">No Trade Zone</div>
-          <div class="rule-time">3:10 PM – 7:00 AM ET</div>
+          <div class="rule-time">3:10 PM – 7:00 AM CT</div>
           <div class="rule-desc">Low liquidity, unpredictable price action. No trades. Includes all weekends.</div>
         </div>
       </div>
@@ -325,20 +325,20 @@
 
   <footer>
     <span class="footer-name">Jamal Hollingsworth &nbsp;·&nbsp; PMax Precision</span>
-    <span class="footer-note">All times displayed in US Eastern Time (ET).</span>
+    <span class="footer-note">All times displayed in US Central Time (CT).</span>
   </footer>
 
   <script>
     const DAY_NAMES  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const MON_NAMES  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-    // Session: 7:00am – 3:10pm ET, Mon–Fri
+    // Session: 7:00am – 3:10pm CT, Mon–Fri
     const SESSION_OPEN_MINS  = 7 * 60;          // 420
     const SESSION_CLOSE_MINS = 15 * 60 + 10;    // 910
 
-    function getET() {
-      // Returns a Date object whose getHours/getMinutes/etc reflect ET local time
-      return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+    function getCT() {
+      // Returns a Date object whose getHours/getMinutes/etc reflect CT local time
+      return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
     }
 
     function pad2(n) { return String(n).padStart(2, '0'); }
@@ -363,7 +363,7 @@
       return totalMins(et) < SESSION_OPEN_MINS;
     }
 
-    // Returns seconds until next trading session open from given ET date
+    // Returns seconds until next trading session open from given CT date
     function secsUntilOpen(et) {
       // Build a candidate "open today"
       const candidate = new Date(et);
@@ -401,7 +401,7 @@
     }
 
     function tick() {
-      const et = getET();
+      const et = getCT();
 
       // ── Clock ──────────────────────────────────────────────
       const h12 = et.getHours() % 12 || 12;
@@ -409,7 +409,7 @@
       document.getElementById('clockTime').textContent =
         `${pad2(h12)}:${pad2(et.getMinutes())}:${pad2(et.getSeconds())} ${ampm}`;
       document.getElementById('clockDate').textContent =
-        `${DAY_NAMES[et.getDay()]}, ${MON_NAMES[et.getMonth()]} ${et.getDate()}, ${et.getFullYear()} — Eastern Time`;
+        `${DAY_NAMES[et.getDay()]}, ${MON_NAMES[et.getMonth()]} ${et.getDate()}, ${et.getFullYear()} — Central Time`;
 
       // ── Status badge ────────────────────────────────────────
       let badgeCls, badgeText, cdLabel, cdSecs;

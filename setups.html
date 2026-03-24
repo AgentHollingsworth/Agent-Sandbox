@@ -177,6 +177,102 @@
       font-size: 12px; color: var(--red); font-weight: 500;
     }
 
+    /* ── UPLOAD BUTTON ── */
+    .upload-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff; border: none; border-radius: 10px;
+      padding: 10px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: background 0.15s; margin-bottom: 28px;
+    }
+    .upload-btn:hover { background: #153fb3; }
+    .upload-btn svg { width: 16px; height: 16px; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.45); align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bg-card); border-radius: 16px; width: 480px; max-width: 92vw;
+      max-height: 90vh; overflow-y: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+    .modal-header {
+      padding: 20px 24px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-header h2 { font-size: 18px; font-weight: 800; }
+    .modal-close {
+      background: none; border: none; font-size: 22px; color: var(--text-3);
+      cursor: pointer; line-height: 1;
+    }
+    .modal-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--text-3);
+    }
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 12px; font-size: 13px; color: var(--text);
+      font-family: inherit; resize: vertical;
+    }
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--blue); }
+
+    .drop-zone {
+      border: 2px dashed var(--border); border-radius: 10px; padding: 28px;
+      text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    }
+    .drop-zone:hover, .drop-zone.dragover {
+      border-color: var(--blue); background: var(--blue-dim);
+    }
+    .drop-zone p { font-size: 13px; color: var(--text-2); margin-top: 6px; }
+    .drop-zone .drop-icon { font-size: 28px; color: var(--text-3); }
+    .drop-zone img {
+      max-width: 100%; max-height: 180px; border-radius: 8px; margin-top: 8px;
+    }
+
+    .submit-btn {
+      background: var(--blue); color: #fff; border: none; border-radius: 10px;
+      padding: 11px 0; font-size: 14px; font-weight: 700; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #153fb3; }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── USER SETUP CARD ── */
+    .setup-card .setup-img {
+      width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
+    }
+    .setup-card .setup-notes {
+      font-size: 13px; color: var(--text-2); line-height: 1.5;
+    }
+    .setup-card .setup-meta {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    }
+    .setup-card .setup-date {
+      font-size: 11px; color: var(--text-3); margin-left: auto;
+    }
+    .delete-setup {
+      background: none; border: 1px solid rgba(220,38,38,0.25); border-radius: 6px;
+      color: var(--red); font-size: 11px; font-weight: 600; padding: 4px 10px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .delete-setup:hover { background: var(--red-dim); }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-3); margin: 36px 0 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border); padding: 24px 40px;
@@ -213,6 +309,67 @@
     <div class="page-eyebrow">PMax Precision</div>
     <h1 class="page-h1">Setup Gallery</h1>
     <p class="page-sub">The two core setups — Trend Continuation and Counter Trend — across all timeframe pairs. Filter by type or bias.</p>
+
+    <!-- Upload Button -->
+    <button class="upload-btn" onclick="openModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Upload Setup
+    </button>
+
+    <!-- Upload Modal -->
+    <div class="modal-overlay" id="uploadModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Upload Setup</h2>
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Screenshot</label>
+            <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+              <div class="drop-icon">&#128247;</div>
+              <p>Click or drag &amp; drop an image</p>
+            </div>
+            <input type="file" id="fileInput" accept="image/*" style="display:none">
+          </div>
+          <div class="form-group">
+            <label>Setup Type</label>
+            <select id="setupType">
+              <option value="trend-continuation">Trend Continuation</option>
+              <option value="counter-trend">Counter Trend</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Timeframe Combo</label>
+            <select id="tfCombo">
+              <option value="3m / 30s">3m trend / 30s entry</option>
+              <option value="5m / 1m">5m trend / 1m entry</option>
+              <option value="15m / 3m">15m trend / 3m entry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Direction</label>
+            <select id="direction">
+              <option value="long">Long</option>
+              <option value="short">Short</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea id="setupNotes" rows="3" placeholder="What made this setup stand out?"></textarea>
+          </div>
+          <button class="submit-btn" id="submitBtn" onclick="saveSetup()" disabled>Save Setup</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Uploaded Setups -->
+    <div id="userSetupsSection" style="display:none;">
+      <div class="section-divider">My Setups</div>
+      <div class="setups-grid" id="userSetupsGrid"></div>
+    </div>
+
+    <div class="section-divider">Reference Setups</div>
 
     <!-- Filter Bar -->
     <div class="filter-bar">
@@ -474,14 +631,134 @@
   </footer>
 
   <script>
+    /* ── Filter (reference cards) ── */
     function setFilter(f, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelectorAll('.setup-card').forEach(card => {
+      document.querySelectorAll('#setupsGrid .setup-card').forEach(card => {
         const show = f === 'all' || card.dataset.type === f || card.dataset.bias === f;
         card.style.display = show ? '' : 'none';
       });
     }
+
+    /* ── Modal ── */
+    let pendingImage = null;
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+
+    function openModal() { document.getElementById('uploadModal').classList.add('open'); }
+    function closeModal() {
+      document.getElementById('uploadModal').classList.remove('open');
+      resetForm();
+    }
+
+    // Close modal on overlay click
+    document.getElementById('uploadModal').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+
+    /* ── Drag & Drop / File Select ── */
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault(); dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
+
+    function handleFile(file) {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        pendingImage = e.target.result;
+        dropZone.innerHTML = '<img src="' + pendingImage + '" alt="preview">';
+        document.getElementById('submitBtn').disabled = false;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetForm() {
+      pendingImage = null;
+      dropZone.innerHTML = '<div class="drop-icon">&#128247;</div><p>Click or drag & drop an image</p>';
+      document.getElementById('setupType').selectedIndex = 0;
+      document.getElementById('tfCombo').selectedIndex = 0;
+      document.getElementById('direction').selectedIndex = 0;
+      document.getElementById('setupNotes').value = '';
+      document.getElementById('submitBtn').disabled = true;
+      fileInput.value = '';
+    }
+
+    /* ── Save ── */
+    function saveSetup() {
+      if (!pendingImage) return;
+      const setups = JSON.parse(localStorage.getItem('pmaxSetups') || '[]');
+      setups.unshift({
+        id: Date.now(),
+        image: pendingImage,
+        type: document.getElementById('setupType').value,
+        tf: document.getElementById('tfCombo').value,
+        direction: document.getElementById('direction').value,
+        notes: document.getElementById('setupNotes').value.trim(),
+        date: new Date().toISOString()
+      });
+      localStorage.setItem('pmaxSetups', JSON.stringify(setups));
+      closeModal();
+      renderUserSetups();
+    }
+
+    /* ── Delete ── */
+    function deleteSetup(id) {
+      let setups = JSON.parse(localStorage.getItem('pmaxSetups') || '[]');
+      setups = setups.filter(s => s.id !== id);
+      localStorage.setItem('pmaxSetups', JSON.stringify(setups));
+      renderUserSetups();
+    }
+
+    /* ── Render ── */
+    function renderUserSetups() {
+      const setups = JSON.parse(localStorage.getItem('pmaxSetups') || '[]');
+      const section = document.getElementById('userSetupsSection');
+      const grid = document.getElementById('userSetupsGrid');
+
+      if (!setups.length) { section.style.display = 'none'; return; }
+      section.style.display = '';
+      grid.innerHTML = setups.map(s => {
+        const typeLabel = s.type === 'trend-continuation' ? 'Trend Continuation' : 'Counter Trend';
+        const tagClass  = s.type === 'trend-continuation' ? 'tag-tc' : 'tag-ct';
+        const dirLabel  = s.direction === 'long' ? '↑ Long' : '↓ Short';
+        const dirClass  = s.direction === 'long' ? 'tag-long' : 'tag-short';
+        const dateStr   = new Date(s.date).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+        const notesHtml = s.notes ? '<div class="setup-notes">' + escapeHtml(s.notes) + '</div>' : '';
+        return `
+          <div class="setup-card" data-type="${s.type}" data-bias="${s.direction}">
+            <img class="setup-img" src="${s.image}" alt="Setup screenshot">
+            <div class="setup-card-top">
+              <div class="setup-meta">
+                <span class="tag ${tagClass}">${typeLabel}</span>
+                <span class="tag ${dirClass}">${dirLabel}</span>
+                <span class="setup-date">${dateStr}</span>
+              </div>
+            </div>
+            <div class="setup-body">
+              <div>
+                <div class="setup-section-label">Timeframe</div>
+                <div class="tf-chips"><div class="tf-chip">${escapeHtml(s.tf)}</div></div>
+              </div>
+              ${notesHtml}
+              <button class="delete-setup" onclick="deleteSetup(${s.id})">Delete</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    // Init
+    renderUserSetups();
   </script>
 </body>
 </html>
