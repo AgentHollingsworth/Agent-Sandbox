@@ -323,7 +323,15 @@
       </div>
       <div class="trade-list" id="tradeList"></div>
       <div class="add-form">
-        <input type="text" id="newDesc" class="add-input add-desc" placeholder="Setup (e.g. TC Long 5m)">
+        <select id="newDesc" class="add-input add-desc">
+          <option value="" disabled selected>Select setup...</option>
+          <option value="Trend Continuation — Fast (3m/30s)">Trend Continuation — Fast (3m/30s)</option>
+          <option value="Trend Continuation — Medium (5m/1m)">Trend Continuation — Medium (5m/1m)</option>
+          <option value="Trend Continuation — Slow (15m/3m)">Trend Continuation — Slow (15m/3m)</option>
+          <option value="Counter Trend — Fast (3m/30s)">Counter Trend — Fast (3m/30s)</option>
+          <option value="Counter Trend — Medium (5m/1m)">Counter Trend — Medium (5m/1m)</option>
+          <option value="Counter Trend — Slow (15m/3m)">Counter Trend — Slow (15m/3m)</option>
+        </select>
         <input type="number" id="newPnl" class="add-input add-pnl" placeholder="P&amp;L (e.g. 250 or -150)" step="0.01">
         <button class="add-btn" onclick="addTrade()">+ Add Trade</button>
       </div>
@@ -474,7 +482,8 @@
     }
 
     function addTrade() {
-      const desc = (document.getElementById('newDesc').value.trim() || 'Trade');
+      const descEl = document.getElementById('newDesc');
+      const desc = descEl.value || 'Trade';
       const pnlStr = document.getElementById('newPnl').value;
       const pnl = parseFloat(pnlStr);
       if (isNaN(pnl) || !activeDateKey) return;
@@ -484,7 +493,7 @@
       data[activeDateKey].trades.push({ desc, pnl });
       save(data);
 
-      document.getElementById('newDesc').value = '';
+      descEl.selectedIndex = 0;
       document.getElementById('newPnl').value = '';
       renderCalendar();
       renderPanel(activeDateKey);
