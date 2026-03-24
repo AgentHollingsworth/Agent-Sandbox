@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MNQ Stop Loss Calculator | Topstep Funded</title>
+  <style>
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #0d1526;
+      --bg-card: #111d35;
+      --accent-blue: #1e90ff;
+      --accent-blue-light: #4dabff;
+      --accent-teal: #00d4d4;
+      --text-primary: #e8edf5;
+      --text-secondary: #8a9bb8;
+      --text-muted: #4a5a78;
+      --border: #1e2d4a;
+      --green: #00c896;
+      --yellow: #f5a623;
+      --red: #ff4757;
+      --orange: #ff6b35;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 28px 16px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .header .badge {
+      display: inline-block;
+      background: rgba(30, 144, 255, 0.12);
+      border: 1px solid rgba(30, 144, 255, 0.3);
+      color: var(--accent-blue-light);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .header h1 {
+      font-size: 30px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-blue-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    /* MNQ Spec Bar */
+    .info-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+
+    .info-item { text-align: center; }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-teal);
+    }
+
+    .info-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+    }
+
+    /* Balance Section */
+    .balance-display {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .balance-amount {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent-blue-light);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .balance-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+
+    .slider-wrapper { position: relative; padding: 6px 0; }
+
+    input[type=range] {
+      width: 100%;
+      -webkit-appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    input[type=range]:focus { outline: none; }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(
+        to right,
+        var(--accent-blue) 0%,
+        var(--accent-blue) var(--progress, 50%),
+        var(--border) var(--progress, 50%),
+        var(--border) 100%
+      );
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      border: 3px solid #ffffff;
+      margin-top: -8px;
+      box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .stat-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .tab-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-align: center;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: rgba(30, 144, 255, 0.12);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue-light);
+      box-shadow: 0 0 12px rgba(30, 144, 255, 0.15);
+    }
+
+    .tab-btn .pts {
+      display: block;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .tab-btn .sub {
+      display: block;
+      font-size: 11px;
+      margin-top: 3px;
+      opacity: 0.75;
+    }
+
+    /* Table */
+    .table-wrapper { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead tr { border-bottom: 2px solid var(--border); }
+
+    th {
+      padding: 10px 14px;
+      text-align: right;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    th:first-child { text-align: center; }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(30, 45, 74, 0.6);
+      transition: background 0.12s;
+    }
+
+    tbody tr:hover { background: rgba(30, 144, 255, 0.05); }
+
+    td {
+      padding: 11px 14px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    td:first-child { text-align: center; }
+
+    .contracts-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .dollar-risk {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Pct bar */
+    .pct-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .pct-bar {
+      width: 56px;
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .pct-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    /* Risk badges */
+    .risk-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .risk-conservative { background: rgba(0,200,150,0.12); color: var(--green); border: 1px solid rgba(0,200,150,0.25); }
+    .risk-moderate     { background: rgba(77,171,255,0.12); color: var(--accent-blue-light); border: 1px solid rgba(77,171,255,0.25); }
+    .risk-elevated     { background: rgba(245,166,35,0.12); color: var(--yellow); border: 1px solid rgba(245,166,35,0.25); }
+    .risk-high         { background: rgba(255,107,53,0.12); color: var(--orange); border: 1px solid rgba(255,107,53,0.25); }
+    .risk-danger       { background: rgba(255,71,87,0.12); color: var(--red); border: 1px solid rgba(255,71,87,0.25); }
+
+    .footnote {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .info-bar { grid-template-columns: repeat(2, 1fr); }
+      .stats-row { grid-template-columns: repeat(3, 1fr); }
+      .header h1 { font-size: 22px; }
+      .balance-amount { font-size: 36px; }
+      th, td { padding: 9px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="badge">Topstep Funded Accounts</div>
+      <h1>MNQ Stop Loss Calculator</h1>
+      <p>Micro E-mini Nasdaq-100 &bull; Position Risk Management</p>
+    </div>
+
+    <!-- MNQ Specs -->
+    <div class="info-bar">
+      <div class="info-item">
+        <div class="info-value">MNQ</div>
+        <div class="info-label">Symbol</div>
+      </div>
+      <div class="info-item">
+        <div class="info-value">$2.00</div>
+        <div class="info-label">Per Point</div>
+      </div>
+      <div class="info-item">
+        <div class="info-value">$0.50</div>
+        <div class="info-label">Per Tick</div>
+      </div>
+      <div class="info-item">
+        <div class="info-value">0.25 pts</div>
+        <div class="info-label">Tick Size</div>
+      </div>
+    </div>
+
+    <!-- Account Balance -->
+    <div class="card">
+      <div class="card-title">Account Balance</div>
+      <div class="balance-display">
+        <div class="balance-amount" id="balanceDisplay">$150,000</div>
+        <div class="balance-label">Topstep Funded Account Size</div>
+      </div>
+      <div class="slider-wrapper">
+        <input type="range" id="balanceSlider" min="100000" max="200000" step="5000" value="150000" oninput="updateAll()">
+        <div class="slider-labels">
+          <span>$100K</span>
+          <span>$125K</span>
+          <span>$150K</span>
+          <span>$175K</span>
+          <span>$200K</span>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-value" id="dailyLossDisplay" style="color: var(--red);">$3,000</div>
+          <div class="stat-label">Daily Loss Limit</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="drawdownDisplay" style="color: var(--yellow);">$4,500</div>
+          <div class="stat-label">Max Drawdown</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="onePercentDisplay" style="color: var(--green);">$1,500</div>
+          <div class="stat-label">1% Risk / Trade</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stop Loss Tabs + Table -->
+    <div class="card">
+      <div class="card-title">Stop Loss — Select Points</div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="setTab(25)" id="tab-25">
+          <span class="pts">25</span>
+          <span class="sub">pts &bull; $50/ct</span>
+        </button>
+        <button class="tab-btn" onclick="setTab(50)" id="tab-50">
+          <span class="pts">50</span>
+          <span class="sub">pts &bull; $100/ct</span>
+        </button>
+        <button class="tab-btn" onclick="setTab(75)" id="tab-75">
+          <span class="pts">75</span>
+          <span class="sub">pts &bull; $150/ct</span>
+        </button>
+        <button class="tab-btn" onclick="setTab(100)" id="tab-100">
+          <span class="pts">100</span>
+          <span class="sub">pts &bull; $200/ct</span>
+        </button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Contracts</th>
+              <th>$ at Risk</th>
+              <th>% of Balance</th>
+              <th>% of Daily Limit</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="footnote">
+        MNQ point value = $2.00 &nbsp;&bull;&nbsp;
+        Daily loss limit = 2% of account &nbsp;&bull;&nbsp;
+        Max trailing drawdown = 3% of account<br>
+        Risk levels: Conservative ≤0.5% &bull; Moderate ≤1% &bull; Elevated ≤2% &bull; High ≤3% &bull; Danger &gt;3%
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const MNQ_POINT_VALUE = 2.00;
+    const DAILY_LOSS_PCT  = 0.02;
+    const DRAWDOWN_PCT    = 0.03;
+    let activeStop = 25;
+
+    const CONTRACT_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 25];
+
+    function fmt(n) {
+      return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+
+    function fmtPct(n) {
+      return n.toFixed(1) + '%';
+    }
+
+    function getBalance() {
+      return parseInt(document.getElementById('balanceSlider').value);
+    }
+
+    function riskLevel(pctBal) {
+      if (pctBal <= 0.5) return { label: 'Conservative', cls: 'risk-conservative' };
+      if (pctBal <= 1.0) return { label: 'Moderate',     cls: 'risk-moderate'     };
+      if (pctBal <= 2.0) return { label: 'Elevated',     cls: 'risk-elevated'     };
+      if (pctBal <= 3.0) return { label: 'High',         cls: 'risk-high'         };
+      return               { label: 'Danger',       cls: 'risk-danger'       };
+    }
+
+    function barColor(pctBal) {
+      if (pctBal <= 0.5) return '#00c896';
+      if (pctBal <= 1.0) return '#4dabff';
+      if (pctBal <= 2.0) return '#f5a623';
+      if (pctBal <= 3.0) return '#ff6b35';
+      return '#ff4757';
+    }
+
+    function renderTable(balance, stopPts) {
+      const riskPerCt  = stopPts * MNQ_POINT_VALUE;
+      const dailyLimit = balance * DAILY_LOSS_PCT;
+      const tbody      = document.getElementById('tableBody');
+
+      tbody.innerHTML = CONTRACT_LIST.map(ct => {
+        const dollarRisk = ct * riskPerCt;
+        const pctBal     = (dollarRisk / balance) * 100;
+        const pctDaily   = (dollarRisk / dailyLimit) * 100;
+        const rl         = riskLevel(pctBal);
+        const color      = barColor(pctBal);
+        const barW       = Math.min(100, pctBal * 20); // 5% fills bar
+
+        return `
+          <tr>
+            <td><span class="contracts-num">${ct}</span></td>
+            <td><span class="dollar-risk">${fmt(dollarRisk)}</span></td>
+            <td>
+              <div class="pct-bar-wrap">
+                <div class="pct-bar">
+                  <div class="pct-bar-fill" style="width:${barW}%;background:${color};"></div>
+                </div>
+                <span style="color:${color};font-weight:600;">${fmtPct(pctBal)}</span>
+              </div>
+            </td>
+            <td style="color:var(--text-secondary);">${fmtPct(pctDaily)}</td>
+            <td><span class="risk-badge ${rl.cls}">${rl.label}</span></td>
+          </tr>`;
+      }).join('');
+    }
+
+    function updateAll() {
+      const balance    = getBalance();
+      const dailyLimit = balance * DAILY_LOSS_PCT;
+      const drawdown   = balance * DRAWDOWN_PCT;
+      const onePct     = balance * 0.01;
+
+      document.getElementById('balanceDisplay').textContent  = fmt(balance);
+      document.getElementById('dailyLossDisplay').textContent = fmt(dailyLimit);
+      document.getElementById('drawdownDisplay').textContent  = fmt(drawdown);
+      document.getElementById('onePercentDisplay').textContent = fmt(onePct);
+
+      // Slider fill track
+      const slider   = document.getElementById('balanceSlider');
+      const progress = ((balance - 100000) / (200000 - 100000)) * 100;
+      slider.style.setProperty('--progress', progress + '%');
+
+      renderTable(balance, activeStop);
+    }
+
+    function setTab(pts) {
+      activeStop = pts;
+      [25, 50, 75, 100].forEach(p => {
+        document.getElementById('tab-' + p).classList.toggle('active', p === pts);
+      });
+      renderTable(getBalance(), pts);
+    }
+
+    updateAll();
+  </script>
+</body>
+</html>
