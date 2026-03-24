@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading Rulebook — Jamal Hollingsworth</title>
+  <style>
+    :root {
+      --bg:           #080c14;
+      --bg-2:         #0c1220;
+      --bg-card:      #0f1a2e;
+      --bg-card-alt:  #0a1422;
+      --border:       #1a2a44;
+      --border-lit:   rgba(74, 158, 255, 0.35);
+      --blue:         #4a9eff;
+      --blue-dim:     rgba(74, 158, 255, 0.08);
+      --blue-glow:    rgba(74, 158, 255, 0.15);
+      --teal:         #00d4c8;
+      --green:        #00c896;
+      --green-dim:    rgba(0, 200, 150, 0.08);
+      --red:          #ff4757;
+      --red-dim:      rgba(255, 71, 87, 0.08);
+      --yellow:       #f5c842;
+      --yellow-dim:   rgba(245, 200, 66, 0.08);
+      --white-cloud:  #e8f0ff;
+      --black-cloud:  #a0b0cc;
+      --text:         #dde4f0;
+      --text-2:       #7a8fac;
+      --text-3:       #3d5070;
+      --white:        #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(74,158,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,158,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(8, 12, 20, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--white); }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 112px 24px 80px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-dim);
+      border: 1px solid var(--border-lit);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .page-h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .page-h1 span {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-sub {
+      font-size: 15px;
+      color: var(--text-2);
+      max-width: 520px;
+      margin-bottom: 52px;
+      line-height: 1.7;
+    }
+
+    /* ── SECTION BLOCKS ── */
+    .rulebook-section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .icon-blue   { background: var(--blue-dim);   border: 1px solid rgba(74,158,255,0.2); }
+    .icon-green  { background: var(--green-dim);  border: 1px solid rgba(0,200,150,0.2); }
+    .icon-red    { background: var(--red-dim);    border: 1px solid rgba(255,71,87,0.2); }
+    .icon-yellow { background: var(--yellow-dim); border: 1px solid rgba(245,200,66,0.2); }
+    .icon-teal   { background: rgba(0,212,200,0.08); border: 1px solid rgba(0,212,200,0.2); }
+
+    .section-heading {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .section-heading-sub {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* ── TIMEFRAMES ── */
+    .tf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .tf-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .tf-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+    .badge-fast   { background: rgba(0,200,150,0.1);  color: var(--green);  border: 1px solid rgba(0,200,150,0.25); }
+    .badge-medium { background: var(--blue-dim);       color: var(--blue);   border: 1px solid rgba(74,158,255,0.25); }
+    .badge-slow   { background: rgba(245,200,66,0.1); color: var(--yellow); border: 1px solid rgba(245,200,66,0.25); }
+
+    .tf-label {
+      font-size: 11px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+
+    .tf-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .tf-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 0;
+    }
+
+    .tf-entry-label {
+      font-size: 11px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+
+    .tf-entry-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-2);
+    }
+
+    /* ── CLOUD BIAS ── */
+    .cloud-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .cloud-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cloud-card.white-cloud { border-top: 3px solid var(--green); }
+    .cloud-card.black-cloud { border-top: 3px solid var(--red); }
+
+    .cloud-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cloud-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .cloud-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .dot-green { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .dot-red   { background: var(--red);   box-shadow: 0 0 8px var(--red); }
+
+    .cloud-condition {
+      font-size: 13px;
+      color: var(--text-2);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-family: 'Consolas', 'Courier New', monospace;
+    }
+
+    .cloud-rule {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .rule-long  { color: var(--green); }
+    .rule-short { color: var(--red); }
+
+    /* ── ENTRY RULES ── */
+    .entry-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .entry-block-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .entry-block-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .entry-block-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .entry-block-subtitle {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-left: auto;
+    }
+
+    .entry-steps {
+      padding: 6px 0;
+    }
+
+    .entry-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 13px 20px;
+      border-bottom: 1px solid rgba(26,42,68,0.5);
+    }
+    .entry-step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .num-blue  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(74,158,255,0.2); }
+    .num-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,200,150,0.2); }
+
+    .step-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .step-text strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .step-text .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: 4px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    .tag-blue   { background: var(--blue-dim);  color: var(--blue); }
+    .tag-green  { background: var(--green-dim); color: var(--green); }
+    .tag-yellow { background: var(--yellow-dim); color: var(--yellow); }
+
+    /* WARNING banner */
+    .warning-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,71,87,0.07);
+      border: 1px solid rgba(255,71,87,0.25);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: #ff8a93;
+      font-weight: 500;
+    }
+
+    .warning-icon { font-size: 16px; flex-shrink: 0; }
+
+    /* ── RISK MANAGEMENT ── */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .risk-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+      text-align: center;
+    }
+
+    .risk-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+
+    .risk-value.red    { color: var(--red); }
+    .risk-value.yellow { color: var(--yellow); }
+    .risk-value.blue   { color: var(--blue); }
+
+    .risk-label {
+      font-size: 12px;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+    }
+
+    .risk-desc {
+      font-size: 12px;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+
+    .risk-tool-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-lit);
+      border-radius: 10px;
+      padding: 14px 20px;
+      text-decoration: none;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .risk-tool-link:hover {
+      background: var(--blue-dim);
+      box-shadow: 0 4px 20px var(--blue-glow);
+    }
+
+    .risk-tool-link .arrow { transition: transform 0.2s; }
+    .risk-tool-link:hover .arrow { transform: translateX(4px); }
+
+    /* ── SESSION RULES ── */
+    .session-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .session-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+
+    .session-card.active-window {
+      border-color: rgba(0,200,150,0.3);
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0,200,150,0.04) 100%);
+    }
+
+    .session-card.blocked-window {
+      border-color: rgba(255,71,87,0.2);
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255,71,87,0.03) 100%);
+    }
+
+    .session-card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .session-status {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+
+    .status-on  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,200,150,0.25); }
+    .status-off { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(255,71,87,0.25); }
+
+    .session-time {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .session-desc {
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-3);
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 20px; }
+      .tf-grid { grid-template-columns: 1fr; }
+      .cloud-grid { grid-template-columns: 1fr; }
+      .risk-grid { grid-template-columns: 1fr; }
+      .session-grid { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">JH<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="strategy.html" class="active">Strategy</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <!-- PAGE HEADER -->
+    <div class="page-eyebrow">Trading Rulebook</div>
+    <h1 class="page-h1">The <span>rules</span> don't<br>change mid-trade.</h1>
+    <p class="page-sub">
+      Every entry, exit, and sizing decision follows this framework. Written down so there's nothing to interpret in the heat of the moment.
+    </p>
+
+    <!-- 1. TIMEFRAMES -->
+    <div class="rulebook-section">
+      <div class="section-header">
+        <div class="section-icon icon-blue">⏱</div>
+        <div>
+          <div class="section-heading">Timeframes</div>
+          <div class="section-heading-sub">Trend chart → Entry chart</div>
+        </div>
+      </div>
+      <div class="tf-grid">
+        <div class="tf-card">
+          <div class="tf-badge badge-fast">Fast</div>
+          <div class="tf-label">Trend Chart</div>
+          <div class="tf-value">3 min</div>
+          <div class="tf-divider"></div>
+          <div class="tf-entry-label">Entry Chart</div>
+          <div class="tf-entry-value">30 sec</div>
+        </div>
+        <div class="tf-card">
+          <div class="tf-badge badge-medium">Medium</div>
+          <div class="tf-label">Trend Chart</div>
+          <div class="tf-value">5 min</div>
+          <div class="tf-divider"></div>
+          <div class="tf-entry-label">Entry Chart</div>
+          <div class="tf-entry-value">1 min</div>
+        </div>
+        <div class="tf-card">
+          <div class="tf-badge badge-slow">Slow</div>
+          <div class="tf-label">Trend Chart</div>
+          <div class="tf-value">15 min</div>
+          <div class="tf-divider"></div>
+          <div class="tf-entry-label">Entry Chart</div>
+          <div class="tf-entry-value">3 min</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. TREND BIAS -->
+    <div class="rulebook-section">
+      <div class="section-header">
+        <div class="section-icon icon-teal">☁️</div>
+        <div>
+          <div class="section-heading">Trend Bias</div>
+          <div class="section-heading-sub">50 SMA vs 200 SMA — defines trade direction</div>
+        </div>
+      </div>
+      <div class="cloud-grid">
+        <div class="cloud-card white-cloud">
+          <div class="cloud-top">
+            <div class="cloud-name">White Cloud</div>
+            <div class="cloud-dot dot-green"></div>
+          </div>
+          <div class="cloud-condition">50 SMA &gt; 200 SMA</div>
+          <div class="cloud-rule rule-long">↑ Longs Only</div>
+        </div>
+        <div class="cloud-card black-cloud">
+          <div class="cloud-top">
+            <div class="cloud-name">Black Cloud</div>
+            <div class="cloud-dot dot-red"></div>
+          </div>
+          <div class="cloud-condition">50 SMA &lt; 200 SMA</div>
+          <div class="cloud-rule rule-short">↓ Shorts Only</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ENTRY RULES -->
+    <div class="rulebook-section">
+      <div class="section-header">
+        <div class="section-icon icon-green">🎯</div>
+        <div>
+          <div class="section-heading">Entry Rules</div>
+          <div class="section-heading-sub">Two setups — trend continuation and counter trend</div>
+        </div>
+      </div>
+
+      <!-- Trend Continuation -->
+      <div class="entry-block">
+        <div class="entry-block-header">
+          <div class="entry-block-dot" style="background:var(--green);box-shadow:0 0 6px var(--green);"></div>
+          <div class="entry-block-title">Trend Continuation</div>
+          <div class="entry-block-subtitle">With the cloud</div>
+        </div>
+        <div class="entry-steps">
+          <div class="entry-step">
+            <div class="step-num num-green">1</div>
+            <div class="step-text">
+              <strong>Higher TF cloud confirms direction.</strong> Trade with the cloud — longs in white cloud, shorts in black cloud.
+            </div>
+          </div>
+          <div class="entry-step">
+            <div class="step-num num-green">2</div>
+            <div class="step-text">
+              <strong>PMax crosses same direction on lower TF.</strong> Wait for the PMax signal on the entry chart to align with cloud bias.
+            </div>
+          </div>
+          <div class="entry-step">
+            <div class="step-num num-green">3</div>
+            <div class="step-text">
+              <strong>Stop = PMax line</strong> <span class="tag tag-blue">Blue ATR</span> — place stop at the blue PMax line at time of entry.
+            </div>
+          </div>
+          <div class="entry-step">
+            <div class="step-num num-green">4</div>
+            <div class="step-text">
+              <strong>Trail stop with PMax</strong> until the trend ends. Do not exit early — let the PMax line take you out.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Counter Trend -->
+      <div class="entry-block">
+        <div class="entry-block-header">
+          <div class="entry-block-dot" style="background:var(--yellow);box-shadow:0 0 6px var(--yellow);"></div>
+          <div class="entry-block-title">Counter Trend</div>
+          <div class="entry-block-subtitle">Against the cloud — stricter criteria</div>
+        </div>
+        <div class="entry-steps">
+          <div class="entry-step">
+            <div class="step-num num-blue">1</div>
+            <div class="step-text">
+              <strong>Price must be outside the cloud.</strong> Never take a counter trend trade while price is inside the cloud.
+            </div>
+          </div>
+          <div class="entry-step">
+            <div class="step-num num-blue">2</div>
+            <div class="step-text">
+              <strong>TDI divergence must be present.</strong> Confirm momentum divergence on the TDI before considering entry.
+            </div>
+          </div>
+          <div class="entry-step">
+            <div class="step-num num-blue">3</div>
+            <div class="step-text">
+              <strong>Price must close above/below the yellow PMax line</strong> <span class="tag tag-yellow">Yellow PMax</span> — the close confirms the reversal signal.
+            </div>
+          </div>
+          <div class="entry-step">
+            <div class="step-num num-blue">4</div>
+            <div class="step-text">
+              <strong>Stop = below/above the entry candle.</strong> Tight stop on the trigger candle.
+            </div>
+          </div>
+          <div class="entry-step">
+            <div class="step-num num-blue">5</div>
+            <div class="step-text">
+              <strong>Target 1 = 50 SMA &nbsp;/&nbsp; Target 2 = 200 SMA.</strong> Scale out at the 50, let runners go to the 200.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="warning-banner">
+        <span class="warning-icon">⚠️</span>
+        <span><strong>Hard Rule:</strong> Never take a counter trend trade if price is inside the cloud. All three conditions must be met before entry.</span>
+      </div>
+    </div>
+
+    <!-- 4. RISK MANAGEMENT -->
+    <div class="rulebook-section">
+      <div class="section-header">
+        <div class="section-icon icon-red">🛡️</div>
+        <div>
+          <div class="section-heading">Risk Management</div>
+          <div class="section-heading-sub">Non-negotiable limits</div>
+        </div>
+      </div>
+      <div class="risk-grid">
+        <div class="risk-card">
+          <div class="risk-value red">2%</div>
+          <div class="risk-label">Max Daily Loss</div>
+          <div class="risk-desc">Hard stop on the day. Hit this limit — screens off, no exceptions.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-value yellow">3</div>
+          <div class="risk-label">Max Trades / Day</div>
+          <div class="risk-desc">Three strikes and done. Quality over quantity, every session.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-value blue">Calc</div>
+          <div class="risk-label">Contract Sizing</div>
+          <div class="risk-desc">Sized by stop distance and account balance using the calculator tool.</div>
+        </div>
+      </div>
+      <a href="stop-loss-calculator.html" class="risk-tool-link">
+        Open MNQ Stop Loss Calculator <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <!-- 5. SESSION RULES -->
+    <div class="rulebook-section">
+      <div class="section-header">
+        <div class="section-icon icon-yellow">🕐</div>
+        <div>
+          <div class="section-heading">Session Rules</div>
+          <div class="section-heading-sub">Trade the window — protect the rest</div>
+        </div>
+      </div>
+      <div class="session-grid">
+        <div class="session-card active-window">
+          <div class="session-card-top">
+            <div class="session-status status-on">Active</div>
+          </div>
+          <div class="session-time">London / NY Crossover</div>
+          <div class="session-desc">Trade exclusively during the London–New York overlap. This is the highest liquidity window of the day.</div>
+        </div>
+        <div class="session-card blocked-window">
+          <div class="session-card-top">
+            <div class="session-status status-off">No Trading</div>
+          </div>
+          <div class="session-time">3:10 PM – 7:00 AM ET</div>
+          <div class="session-desc">No trades after 3:10 PM ET. No trades before 7:00 AM ET. Low liquidity, unpredictable price action.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Jamal Hollingsworth</span>
+    <span class="footer-note">Trading involves substantial risk of loss. This rulebook is for personal use only.</span>
+  </footer>
+
+</body>
+</html>
