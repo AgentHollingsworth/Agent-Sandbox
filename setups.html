@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setups | PMax Precision</title>
+  <style>
+    :root {
+      --bg:         #f0f4fc;
+      --bg-2:       #e4ebf7;
+      --bg-card:    #ffffff;
+      --border:     #cdd8ee;
+      --border-lit: rgba(26,80,220,0.28);
+      --blue:       #1a50dc;
+      --blue-dim:   rgba(26,80,220,0.07);
+      --teal:       #0087aa;
+      --green:      #059669;
+      --green-dim:  rgba(5,150,105,0.08);
+      --red:        #dc2626;
+      --red-dim:    rgba(220,38,38,0.07);
+      --yellow:     #b45309;
+      --yellow-dim: rgba(180,83,9,0.08);
+      --text:       #111827;
+      --text-2:     #3d5278;
+      --text-3:     #7a90b4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+      background: rgba(240,244,252,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); text-decoration: none; transition: color 0.18s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--blue); font-weight: 700; }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 1000px; margin: 0 auto; padding: 36px 20px 60px; }
+
+    /* ── PAGE HEADER ── */
+    .page-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-dim); border: 1px solid var(--border-lit);
+      border-radius: 20px; padding: 4px 14px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .page-h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .page-sub { font-size: 14px; color: var(--text-2); margin-bottom: 28px; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .filter-btn {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-2);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--border-lit); color: var(--text); }
+    .filter-btn.active {
+      background: var(--blue-dim); border-color: rgba(26,80,220,0.3);
+      color: var(--blue);
+    }
+
+    /* ── SETUP GRID ── */
+    .setups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── SETUP CARD ── */
+    .setup-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 0;
+      box-shadow: 0 2px 12px rgba(26,80,220,0.05);
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+
+    .setup-card-top {
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .setup-tags { display: flex; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
+
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px;
+    }
+    .tag-tc     { background: var(--blue-dim);  color: var(--blue);   border: 1px solid rgba(26,80,220,0.2); }
+    .tag-ct     { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(180,83,9,0.2); }
+    .tag-long   { background: var(--green-dim); color: var(--green);  border: 1px solid rgba(5,150,105,0.2); }
+    .tag-short  { background: var(--red-dim);   color: var(--red);    border: 1px solid rgba(220,38,38,0.2); }
+
+    .setup-title { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+
+    .setup-body { padding: 18px 22px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+
+    .setup-section-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-3); margin-bottom: 7px;
+    }
+
+    .cloud-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 7px; padding: 7px 12px;
+      font-family: 'Consolas', monospace; font-size: 13px; color: var(--text-2);
+    }
+    .cloud-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13px; color: var(--text-2); line-height: 1.45;
+    }
+    .check-icon {
+      width: 18px; height: 18px; border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; flex-shrink: 0; margin-top: 1px;
+    }
+    .check-blue  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(26,80,220,0.2); }
+    .check-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(5,150,105,0.2); }
+
+    .checklist li strong { color: var(--text); font-weight: 600; }
+
+    .inline-tag {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      padding: 1px 6px; border-radius: 3px; vertical-align: middle; margin-left: 3px;
+    }
+    .itag-blue   { background: var(--blue-dim);   color: var(--blue); }
+    .itag-yellow { background: var(--yellow-dim); color: var(--yellow); }
+
+    .stop-target-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .st-box {
+      background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;
+    }
+    .st-box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-3); margin-bottom: 4px; }
+    .st-box-val   { font-size: 13px; font-weight: 600; color: var(--text); }
+
+    .target-stack { display: flex; flex-direction: column; gap: 6px; }
+    .target-item {
+      display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2);
+    }
+    .target-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .t1-dot { background: var(--yellow); }
+    .t2-dot { background: var(--green); }
+
+    .tf-chips { display: flex; gap: 7px; flex-wrap: wrap; }
+    .tf-chip {
+      background: var(--bg-2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 5px 10px; font-size: 11px; font-weight: 600; color: var(--text-2);
+    }
+
+    .warning-strip {
+      display: flex; align-items: center; gap: 9px;
+      background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.2);
+      border-radius: 8px; padding: 10px 14px;
+      font-size: 12px; color: var(--red); font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 24px 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-name { font-size: 13px; font-weight: 600; color: var(--text-3); }
+    .footer-note { font-size: 12px; color: var(--text-3); }
+
+    @media (max-width: 700px) {
+      nav { padding: 0 16px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .setups-grid { grid-template-columns: 1fr; }
+      footer { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">PMax<span>Precision</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="strategy.html">Strategy</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="setups.html" class="active">Setups</a></li>
+      <li><a href="session-timer.html">Timer</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-eyebrow">PMax Precision</div>
+    <h1 class="page-h1">Setup Gallery</h1>
+    <p class="page-sub">The two core setups — Trend Continuation and Counter Trend — across all timeframe pairs. Filter by type or bias.</p>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all', this)">All Setups</button>
+      <button class="filter-btn" onclick="setFilter('trend-continuation', this)">Trend Continuation</button>
+      <button class="filter-btn" onclick="setFilter('counter-trend', this)">Counter Trend</button>
+      <button class="filter-btn" onclick="setFilter('long', this)">Long</button>
+      <button class="filter-btn" onclick="setFilter('short', this)">Short</button>
+    </div>
+
+    <div class="setups-grid" id="setupsGrid">
+
+      <!-- TC LONG -->
+      <div class="setup-card" data-type="trend-continuation" data-bias="long">
+        <div class="setup-card-top">
+          <div class="setup-tags">
+            <span class="tag tag-tc">Trend Continuation</span>
+            <span class="tag tag-long">↑ Long</span>
+          </div>
+          <div class="setup-title">Trend Continuation — Long</div>
+        </div>
+        <div class="setup-body">
+
+          <div>
+            <div class="setup-section-label">Cloud Condition</div>
+            <div class="cloud-badge">
+              <div class="cloud-dot" style="background:#059669;box-shadow:0 0 5px rgba(5,150,105,0.5);"></div>
+              White Cloud &nbsp;·&nbsp; 50 SMA &gt; 200 SMA
+            </div>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Entry Requirements</div>
+            <ul class="checklist">
+              <li>
+                <div class="check-icon check-green">✓</div>
+                <span><strong>Higher TF cloud confirms bullish.</strong> 50 SMA above 200 SMA on trend chart.</span>
+              </li>
+              <li>
+                <div class="check-icon check-green">✓</div>
+                <span><strong>PMax crosses bullish</strong> <span class="inline-tag itag-blue">Blue ATR</span> on the entry chart — signal aligns with cloud direction.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Stop &amp; Trail</div>
+            <div class="stop-target-grid">
+              <div class="st-box">
+                <div class="st-box-label">Stop</div>
+                <div class="st-box-val">Blue PMax line at entry</div>
+              </div>
+              <div class="st-box">
+                <div class="st-box-label">Trail</div>
+                <div class="st-box-val">Follow PMax up — let it take you out</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Valid Timeframe Pairs</div>
+            <div class="tf-chips">
+              <div class="tf-chip">3m trend / 30s entry</div>
+              <div class="tf-chip">5m trend / 1m entry</div>
+              <div class="tf-chip">15m trend / 3m entry</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TC SHORT -->
+      <div class="setup-card" data-type="trend-continuation" data-bias="short">
+        <div class="setup-card-top">
+          <div class="setup-tags">
+            <span class="tag tag-tc">Trend Continuation</span>
+            <span class="tag tag-short">↓ Short</span>
+          </div>
+          <div class="setup-title">Trend Continuation — Short</div>
+        </div>
+        <div class="setup-body">
+
+          <div>
+            <div class="setup-section-label">Cloud Condition</div>
+            <div class="cloud-badge">
+              <div class="cloud-dot" style="background:#dc2626;box-shadow:0 0 5px rgba(220,38,38,0.5);"></div>
+              Black Cloud &nbsp;·&nbsp; 50 SMA &lt; 200 SMA
+            </div>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Entry Requirements</div>
+            <ul class="checklist">
+              <li>
+                <div class="check-icon check-green">✓</div>
+                <span><strong>Higher TF cloud confirms bearish.</strong> 50 SMA below 200 SMA on trend chart.</span>
+              </li>
+              <li>
+                <div class="check-icon check-green">✓</div>
+                <span><strong>PMax crosses bearish</strong> <span class="inline-tag itag-blue">Blue ATR</span> on the entry chart — signal aligns with cloud direction.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Stop &amp; Trail</div>
+            <div class="stop-target-grid">
+              <div class="st-box">
+                <div class="st-box-label">Stop</div>
+                <div class="st-box-val">Blue PMax line at entry</div>
+              </div>
+              <div class="st-box">
+                <div class="st-box-label">Trail</div>
+                <div class="st-box-val">Follow PMax down — let it take you out</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Valid Timeframe Pairs</div>
+            <div class="tf-chips">
+              <div class="tf-chip">3m trend / 30s entry</div>
+              <div class="tf-chip">5m trend / 1m entry</div>
+              <div class="tf-chip">15m trend / 3m entry</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CT LONG -->
+      <div class="setup-card" data-type="counter-trend" data-bias="long">
+        <div class="setup-card-top">
+          <div class="setup-tags">
+            <span class="tag tag-ct">Counter Trend</span>
+            <span class="tag tag-long">↑ Long</span>
+          </div>
+          <div class="setup-title">Counter Trend — Long</div>
+        </div>
+        <div class="setup-body">
+
+          <div>
+            <div class="setup-section-label">Cloud Condition</div>
+            <div class="cloud-badge">
+              <div class="cloud-dot" style="background:#dc2626;box-shadow:0 0 5px rgba(220,38,38,0.5);"></div>
+              Black Cloud — price extended <strong style="color:var(--text)"> below</strong> the cloud
+            </div>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Entry Requirements (all 3 required)</div>
+            <ul class="checklist">
+              <li>
+                <div class="check-icon check-blue">1</div>
+                <span><strong>Price is outside the cloud</strong> — must be below both SMAs. Never enter if inside.</span>
+              </li>
+              <li>
+                <div class="check-icon check-blue">2</div>
+                <span><strong>TDI divergence present</strong> — momentum divergence confirmed before entry.</span>
+              </li>
+              <li>
+                <div class="check-icon check-blue">3</div>
+                <span><strong>Price closes above the Yellow PMax line</strong> <span class="inline-tag itag-yellow">Yellow PMax</span> — candle close confirms reversal.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Stop &amp; Targets</div>
+            <div class="stop-target-grid">
+              <div class="st-box">
+                <div class="st-box-label">Stop</div>
+                <div class="st-box-val">Below the entry candle low</div>
+              </div>
+              <div class="st-box">
+                <div class="st-box-label">Targets</div>
+                <div class="target-stack">
+                  <div class="target-item"><div class="target-dot t1-dot"></div><span>T1 — 50 SMA</span></div>
+                  <div class="target-item"><div class="target-dot t2-dot"></div><span>T2 — 200 SMA</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-strip">
+            ⚠ <span>Never counter trend if price is inside the cloud. All 3 conditions required.</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CT SHORT -->
+      <div class="setup-card" data-type="counter-trend" data-bias="short">
+        <div class="setup-card-top">
+          <div class="setup-tags">
+            <span class="tag tag-ct">Counter Trend</span>
+            <span class="tag tag-short">↓ Short</span>
+          </div>
+          <div class="setup-title">Counter Trend — Short</div>
+        </div>
+        <div class="setup-body">
+
+          <div>
+            <div class="setup-section-label">Cloud Condition</div>
+            <div class="cloud-badge">
+              <div class="cloud-dot" style="background:#059669;box-shadow:0 0 5px rgba(5,150,105,0.5);"></div>
+              White Cloud — price extended <strong style="color:var(--text)"> above</strong> the cloud
+            </div>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Entry Requirements (all 3 required)</div>
+            <ul class="checklist">
+              <li>
+                <div class="check-icon check-blue">1</div>
+                <span><strong>Price is outside the cloud</strong> — must be above both SMAs. Never enter if inside.</span>
+              </li>
+              <li>
+                <div class="check-icon check-blue">2</div>
+                <span><strong>TDI divergence present</strong> — momentum divergence confirmed before entry.</span>
+              </li>
+              <li>
+                <div class="check-icon check-blue">3</div>
+                <span><strong>Price closes below the Yellow PMax line</strong> <span class="inline-tag itag-yellow">Yellow PMax</span> — candle close confirms reversal.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="setup-section-label">Stop &amp; Targets</div>
+            <div class="stop-target-grid">
+              <div class="st-box">
+                <div class="st-box-label">Stop</div>
+                <div class="st-box-val">Above the entry candle high</div>
+              </div>
+              <div class="st-box">
+                <div class="st-box-label">Targets</div>
+                <div class="target-stack">
+                  <div class="target-item"><div class="target-dot t1-dot"></div><span>T1 — 50 SMA</span></div>
+                  <div class="target-item"><div class="target-dot t2-dot"></div><span>T2 — 200 SMA</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-strip">
+            ⚠ <span>Never counter trend if price is inside the cloud. All 3 conditions required.</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /setups-grid -->
+  </div>
+
+  <footer>
+    <span class="footer-name">Jamal Hollingsworth &nbsp;·&nbsp; PMax Precision</span>
+    <span class="footer-note">Trading involves substantial risk of loss.</span>
+  </footer>
+
+  <script>
+    function setFilter(f, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.setup-card').forEach(card => {
+        const show = f === 'all' || card.dataset.type === f || card.dataset.bias === f;
+        card.style.display = show ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session Timer | PMax Precision</title>
+  <style>
+    :root {
+      --bg:         #f0f4fc;
+      --bg-2:       #e4ebf7;
+      --bg-card:    #ffffff;
+      --border:     #cdd8ee;
+      --border-lit: rgba(26,80,220,0.28);
+      --blue:       #1a50dc;
+      --blue-dim:   rgba(26,80,220,0.07);
+      --teal:       #0087aa;
+      --green:      #059669;
+      --green-dim:  rgba(5,150,105,0.08);
+      --red:        #dc2626;
+      --red-dim:    rgba(220,38,38,0.07);
+      --yellow:     #b45309;
+      --text:       #111827;
+      --text-2:     #3d5278;
+      --text-3:     #7a90b4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+      background: rgba(240,244,252,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); text-decoration: none; transition: color 0.18s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--blue); font-weight: 700; }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 860px; margin: 0 auto; padding: 36px 20px 60px; }
+
+    /* ── PAGE HEADER ── */
+    .page-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-dim); border: 1px solid var(--border-lit);
+      border-radius: 20px; padding: 4px 14px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .page-h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-bottom: 4px; }
+    .page-sub { font-size: 14px; color: var(--text-2); margin-bottom: 28px; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 24px; margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(26,80,220,0.05);
+    }
+    .card-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--text-3); margin-bottom: 16px;
+    }
+
+    /* ── CLOCK ── */
+    .clock-wrap { text-align: center; padding: 16px 0 24px; }
+
+    .clock-time {
+      font-size: clamp(52px, 11vw, 96px);
+      font-weight: 800;
+      letter-spacing: -3px;
+      color: var(--text);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 10px;
+    }
+
+    .clock-date {
+      font-size: 15px; color: var(--text-2); font-weight: 500; margin-bottom: 24px;
+    }
+
+    /* ── STATUS BADGE ── */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 28px; border-radius: 32px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .status-badge .pulse-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .badge-active {
+      background: var(--green-dim);
+      border: 1px solid rgba(5,150,105,0.3);
+      color: var(--green);
+    }
+    .badge-active .pulse-dot {
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(5,150,105,0.2);
+      animation: ping 1.5s ease-in-out infinite;
+    }
+    .badge-closed {
+      background: var(--red-dim);
+      border: 1px solid rgba(220,38,38,0.25);
+      color: var(--red);
+    }
+    .badge-closed .pulse-dot { background: var(--red); }
+    .badge-pre {
+      background: rgba(180,83,9,0.07);
+      border: 1px solid rgba(180,83,9,0.25);
+      color: var(--yellow);
+    }
+    .badge-pre .pulse-dot { background: var(--yellow); }
+
+    @keyframes ping {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(5,150,105,0.2); }
+      50%       { box-shadow: 0 0 0 7px rgba(5,150,105,0.0); }
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-wrap { margin-top: 28px; }
+    .countdown-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-3); margin-bottom: 10px;
+    }
+    .countdown-digits {
+      display: flex; align-items: flex-end; justify-content: center; gap: 4px;
+    }
+    .countdown-unit {
+      text-align: center;
+    }
+    .countdown-num {
+      font-size: clamp(32px, 7vw, 56px);
+      font-weight: 800; letter-spacing: -2px; line-height: 1;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+    }
+    .countdown-sep {
+      font-size: 40px; font-weight: 700; color: var(--text-3);
+      padding-bottom: 8px; line-height: 1;
+    }
+    .countdown-lbl {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--text-3); margin-top: 2px;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-card { padding: 24px; }
+
+    .timeline-track-wrap { position: relative; margin: 16px 0 32px; }
+    .timeline-track {
+      height: 14px; background: var(--bg-2); border-radius: 7px; overflow: visible;
+      position: relative; border: 1px solid var(--border);
+    }
+    .timeline-active {
+      position: absolute; top: 0; height: 100%;
+      background: rgba(5,150,105,0.18);
+      border-left: 2px solid var(--green);
+      border-right: 2px solid var(--green);
+      border-radius: 0;
+      /* 7am = 29.17%, 3:10pm = 63.19% */
+      left: 29.17%; width: 34.02%;
+    }
+    .timeline-now-marker {
+      position: absolute; top: -6px; bottom: -6px;
+      width: 3px; border-radius: 2px;
+      background: var(--blue);
+      box-shadow: 0 0 6px rgba(26,80,220,0.4);
+    }
+
+    .timeline-labels {
+      display: flex; position: relative; height: 20px; margin-top: 6px;
+    }
+    .tl-label {
+      position: absolute;
+      font-size: 10px; font-weight: 600; color: var(--text-3);
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    .tl-label.tl-green { color: var(--green); }
+    .tl-label.tl-blue  { color: var(--blue); }
+
+    /* ── SESSION RULES GRID ── */
+    .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .rule-card {
+      border-radius: 12px; padding: 18px 20px;
+      border: 1px solid var(--border);
+    }
+    .rule-card.active-rule {
+      background: var(--green-dim);
+      border-color: rgba(5,150,105,0.25);
+    }
+    .rule-card.blocked-rule {
+      background: var(--red-dim);
+      border-color: rgba(220,38,38,0.18);
+    }
+
+    .rule-status {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .status-on  { background: rgba(5,150,105,0.12); color: var(--green); border: 1px solid rgba(5,150,105,0.25); }
+    .status-off { background: var(--red-dim); color: var(--red); border: 1px solid rgba(220,38,38,0.22); }
+
+    .rule-time { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .rule-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 24px 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-name { font-size: 13px; font-weight: 600; color: var(--text-3); }
+    .footer-note { font-size: 12px; color: var(--text-3); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .rules-grid { grid-template-columns: 1fr; }
+      footer { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">PMax<span>Precision</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="strategy.html">Strategy</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="setups.html">Setups</a></li>
+      <li><a href="session-timer.html" class="active">Timer</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-eyebrow">Session Timer</div>
+    <h1 class="page-h1">Live ET Clock</h1>
+    <p class="page-sub">Track your active trading window in real time. Eastern Time only.</p>
+
+    <!-- Clock + Status -->
+    <div class="card">
+      <div class="clock-wrap">
+        <div class="clock-time" id="clockTime">--:--:-- --</div>
+        <div class="clock-date" id="clockDate">Loading...</div>
+        <div id="statusBadge"></div>
+        <div class="countdown-wrap">
+          <div class="countdown-label" id="countdownLabel">—</div>
+          <div class="countdown-digits">
+            <div class="countdown-unit">
+              <div class="countdown-num" id="cdHours">--</div>
+              <div class="countdown-lbl">hr</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-num" id="cdMins">--</div>
+              <div class="countdown-lbl">min</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-num" id="cdSecs">--</div>
+              <div class="countdown-lbl">sec</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 24-Hour Timeline -->
+    <div class="card timeline-card">
+      <div class="card-title">24-Hour Session Timeline — Eastern Time</div>
+      <div class="timeline-track-wrap">
+        <div class="timeline-track">
+          <div class="timeline-active"></div>
+          <div class="timeline-now-marker" id="nowMarker"></div>
+        </div>
+        <div class="timeline-labels">
+          <span class="tl-label" style="left:0%">12am</span>
+          <span class="tl-label" style="left:25%">6am</span>
+          <span class="tl-label tl-green" style="left:29.17%">7am</span>
+          <span class="tl-label" style="left:50%">12pm</span>
+          <span class="tl-label tl-green" style="left:63.19%">3:10pm</span>
+          <span class="tl-label" style="left:75%">6pm</span>
+          <span class="tl-label" style="left:100%">12am</span>
+          <span class="tl-label tl-blue" id="nowTimeLabel" style="left:0%; top: 16px;"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Rules -->
+    <div class="card">
+      <div class="card-title">Session Rules</div>
+      <div class="rules-grid">
+        <div class="rule-card active-rule">
+          <div class="rule-status status-on">Active Window</div>
+          <div class="rule-time">7:00 AM – 3:10 PM ET</div>
+          <div class="rule-desc">London / NY crossover. Highest liquidity of the day. All setups valid within this window.</div>
+        </div>
+        <div class="rule-card blocked-rule">
+          <div class="rule-status status-off">No Trade Zone</div>
+          <div class="rule-time">3:10 PM – 7:00 AM ET</div>
+          <div class="rule-desc">Low liquidity, unpredictable price action. No trades. Includes all weekends.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="footer-name">Jamal Hollingsworth &nbsp;·&nbsp; PMax Precision</span>
+    <span class="footer-note">All times displayed in US Eastern Time (ET).</span>
+  </footer>
+
+  <script>
+    const DAY_NAMES  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const MON_NAMES  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    // Session: 7:00am – 3:10pm ET, Mon–Fri
+    const SESSION_OPEN_MINS  = 7 * 60;          // 420
+    const SESSION_CLOSE_MINS = 15 * 60 + 10;    // 910
+
+    function getET() {
+      // Returns a Date object whose getHours/getMinutes/etc reflect ET local time
+      return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+    }
+
+    function pad2(n) { return String(n).padStart(2, '0'); }
+
+    function totalMins(et) {
+      return et.getHours() * 60 + et.getMinutes();
+    }
+
+    function isWeekday(et) {
+      const d = et.getDay();
+      return d >= 1 && d <= 5;
+    }
+
+    function isActive(et) {
+      if (!isWeekday(et)) return false;
+      const m = totalMins(et);
+      return m >= SESSION_OPEN_MINS && m < SESSION_CLOSE_MINS;
+    }
+
+    function isPreSession(et) {
+      if (!isWeekday(et)) return false;
+      return totalMins(et) < SESSION_OPEN_MINS;
+    }
+
+    // Returns seconds until next trading session open from given ET date
+    function secsUntilOpen(et) {
+      // Build a candidate "open today"
+      const candidate = new Date(et);
+      candidate.setHours(7, 0, 0, 0);
+
+      // If today is a weekday and we're before open, use today
+      if (isWeekday(et) && totalMins(et) < SESSION_OPEN_MINS) {
+        return Math.round((candidate.getTime() - et.getTime()) / 1000);
+      }
+
+      // Otherwise find next Monday (or next weekday)
+      let daysAhead = 1;
+      let nextDay = (et.getDay() + 1) % 7;
+      while (nextDay === 0 || nextDay === 6) { // skip weekend
+        daysAhead++;
+        nextDay = (et.getDay() + daysAhead) % 7;
+      }
+      candidate.setDate(candidate.getDate() + daysAhead);
+      return Math.round((candidate.getTime() - et.getTime()) / 1000);
+    }
+
+    // Returns seconds until session closes today
+    function secsUntilClose(et) {
+      const close = new Date(et);
+      close.setHours(15, 10, 0, 0);
+      return Math.round((close.getTime() - et.getTime()) / 1000);
+    }
+
+    function fmtHMS(totalSecs) {
+      const s = Math.max(0, totalSecs);
+      const h = Math.floor(s / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sc = s % 60;
+      return { h: pad2(h), m: pad2(m), s: pad2(sc) };
+    }
+
+    function tick() {
+      const et = getET();
+
+      // ── Clock ──────────────────────────────────────────────
+      const h12 = et.getHours() % 12 || 12;
+      const ampm = et.getHours() < 12 ? 'AM' : 'PM';
+      document.getElementById('clockTime').textContent =
+        `${pad2(h12)}:${pad2(et.getMinutes())}:${pad2(et.getSeconds())} ${ampm}`;
+      document.getElementById('clockDate').textContent =
+        `${DAY_NAMES[et.getDay()]}, ${MON_NAMES[et.getMonth()]} ${et.getDate()}, ${et.getFullYear()} — Eastern Time`;
+
+      // ── Status badge ────────────────────────────────────────
+      let badgeCls, badgeText, cdLabel, cdSecs;
+      const active = isActive(et);
+      const pre    = isPreSession(et);
+
+      if (active) {
+        badgeCls  = 'status-badge badge-active';
+        badgeText = '🟢 &nbsp;Active Session — London / NY Crossover';
+        cdLabel   = 'Session closes in';
+        cdSecs    = secsUntilClose(et);
+      } else if (pre) {
+        badgeCls  = 'status-badge badge-pre';
+        badgeText = '🕐 &nbsp;Pre-Session — Opens Soon';
+        cdLabel   = 'Session opens in';
+        cdSecs    = secsUntilOpen(et);
+      } else {
+        badgeCls  = 'status-badge badge-closed';
+        badgeText = '🚫 &nbsp;No Trade Zone';
+        cdLabel   = 'Session opens in';
+        cdSecs    = secsUntilOpen(et);
+      }
+
+      document.getElementById('statusBadge').className = badgeCls;
+      document.getElementById('statusBadge').innerHTML = badgeText;
+      document.getElementById('countdownLabel').textContent = cdLabel;
+
+      const { h, m, s } = fmtHMS(cdSecs);
+      document.getElementById('cdHours').textContent = h;
+      document.getElementById('cdMins').textContent  = m;
+      document.getElementById('cdSecs').textContent  = s;
+
+      // ── Timeline marker ─────────────────────────────────────
+      const fracOfDay = (et.getHours() * 3600 + et.getMinutes() * 60 + et.getSeconds()) / 86400;
+      const pct = fracOfDay * 100;
+      document.getElementById('nowMarker').style.left = pct + '%';
+      const nowLbl = document.getElementById('nowTimeLabel');
+      nowLbl.style.left = pct + '%';
+      nowLbl.textContent = `${pad2(h12)}:${pad2(et.getMinutes())} ${ampm}`;
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
