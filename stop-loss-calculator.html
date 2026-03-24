@@ -664,7 +664,7 @@
           <div class="eod-amount" id="eodDisplay">$150,000</div>
           <div class="eod-input-wrap">
             <span class="eod-input-prefix">$</span>
-            <input type="number" id="eodInput" class="eod-input" value="150000" step="500">
+            <input type="number" id="eodInput" class="eod-input" value="150000" step="1">
           </div>
         </div>
         <div class="eod-label">Current / EOD Balance — drag slider or type exact amount</div>
@@ -818,7 +818,7 @@
       const sMax    = sliderMax(plan);
       slider.min    = sMin;
       slider.max    = sMax;
-      slider.step   = 500;
+      slider.step   = 1;
       slider.value  = plan;
       document.getElementById('eodInput').value = plan;
       setSliderPct(slider);
@@ -853,9 +853,10 @@
     }
 
     // ── Update drawdown tracker ──────────────────────────────────
-    function updateDD() {
+    function updateDD(overrideEod) {
       const slider = document.getElementById('eodSlider');
-      const eod    = parseFloat(slider.value);
+      const eod    = (overrideEod !== undefined) ? overrideEod : parseFloat(slider.value);
+      if (overrideEod !== undefined) slider.value = eod;
       setSliderPct(slider);
 
       const dd      = planBalance * DD_PCT;
@@ -985,8 +986,7 @@
       const val = parseFloat(this.value);
       if (isNaN(val)) return;
       const clamped = Math.min(parseFloat(slider.max), Math.max(parseFloat(slider.min), val));
-      slider.value = clamped;
-      updateDD();
+      updateDD(clamped);
     });
 
     // ── Init ─────────────────────────────────────────────────────
