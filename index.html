@@ -3,26 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jamal Hollingsworth — Trading Strategy & Tools</title>
+  <title>PMax Precision — Trading Strategy & Tools</title>
   <style>
     :root {
-      --bg:          #080c14;
-      --bg-2:        #0c1220;
-      --bg-card:     #0f1a2e;
-      --border:      #1a2a44;
-      --border-lit:  rgba(74, 158, 255, 0.35);
-      --blue:        #4a9eff;
-      --blue-dim:    rgba(74, 158, 255, 0.08);
-      --blue-glow:   rgba(74, 158, 255, 0.15);
-      --teal:        #00d4c8;
-      --text:        #dde4f0;
-      --text-2:      #7a8fac;
-      --text-3:      #3d5070;
+      --bg:          #f0f4fc;
+      --bg-2:        #e4ebf7;
+      --bg-card:     #ffffff;
+      --border:      #cdd8ee;
+      --border-lit:  rgba(26, 80, 220, 0.28);
+      --blue:        #1a50dc;
+      --blue-dim:    rgba(26, 80, 220, 0.07);
+      --blue-glow:   rgba(26, 80, 220, 0.1);
+      --teal:        #0087aa;
+      --text:        #111827;
+      --text-2:      #3d5278;
+      --text-3:      #7a90b4;
       --white:       #ffffff;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -33,14 +32,13 @@
       overflow-x: hidden;
     }
 
-    /* ── Grid overlay ── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(74,158,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(74,158,255,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(26,80,220,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,80,220,0.04) 1px, transparent 1px);
       background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
@@ -56,19 +54,18 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 64px;
-      background: rgba(8, 12, 20, 0.85);
+      background: rgba(240, 244, 252, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
       font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--white);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--text);
       text-decoration: none;
     }
-
     .nav-logo span { color: var(--blue); }
 
     .nav-links {
@@ -76,7 +73,6 @@
       gap: 32px;
       list-style: none;
     }
-
     .nav-links a {
       font-size: 13px;
       font-weight: 500;
@@ -86,14 +82,10 @@
       text-decoration: none;
       transition: color 0.18s;
     }
-
-    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover { color: var(--text); }
 
     /* ── SECTIONS ── */
-    section {
-      position: relative;
-      z-index: 1;
-    }
+    section { position: relative; z-index: 1; }
 
     .section-inner {
       max-width: 1000px;
@@ -112,7 +104,6 @@
       color: var(--blue);
       margin-bottom: 16px;
     }
-
     .section-label::before {
       content: '';
       display: block;
@@ -133,7 +124,7 @@
     .hero-inner {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 80px 24px 80px;
+      padding: 80px 24px;
     }
 
     .hero-eyebrow {
@@ -169,7 +160,7 @@
       font-weight: 800;
       line-height: 1.08;
       letter-spacing: -0.02em;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 10px;
     }
 
@@ -206,12 +197,11 @@
       border-radius: 8px;
       text-decoration: none;
       transition: all 0.2s;
-      box-shadow: 0 0 20px rgba(74,158,255,0.25);
+      box-shadow: 0 4px 18px rgba(26,80,220,0.28);
     }
-
     .btn-primary:hover {
-      background: #6ab2ff;
-      box-shadow: 0 0 30px rgba(74,158,255,0.4);
+      background: #2b63f0;
+      box-shadow: 0 6px 24px rgba(26,80,220,0.38);
       transform: translateY(-1px);
     }
 
@@ -229,13 +219,12 @@
       text-decoration: none;
       transition: all 0.2s;
     }
-
     .btn-ghost:hover {
       border-color: var(--border-lit);
-      color: var(--white);
+      color: var(--text);
+      background: var(--bg-card);
     }
 
-    /* Hero stats strip */
     .hero-stats {
       display: flex;
       gap: 40px;
@@ -248,7 +237,7 @@
     .hero-stat-value {
       font-size: 28px;
       font-weight: 700;
-      color: var(--white);
+      color: var(--text);
       letter-spacing: -0.02em;
     }
 
@@ -260,20 +249,18 @@
       margin-top: 2px;
     }
 
-    /* ── TOOLS SECTION ── */
+    /* ── TOOLS ── */
     #tools {
       padding: 100px 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(74,158,255,0.03) 50%, transparent 100%);
+      background: linear-gradient(180deg, transparent 0%, rgba(26,80,220,0.03) 50%, transparent 100%);
     }
 
-    .tools-header {
-      margin-bottom: 48px;
-    }
+    .tools-header { margin-bottom: 48px; }
 
     .tools-h2 {
       font-size: clamp(26px, 4vw, 38px);
       font-weight: 700;
-      color: var(--white);
+      color: var(--text);
       letter-spacing: -0.02em;
       margin-bottom: 10px;
     }
@@ -315,14 +302,12 @@
     .tool-card:hover {
       border-color: var(--border-lit);
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border-lit);
+      box-shadow: 0 12px 40px rgba(26,80,220,0.1), 0 0 0 1px var(--border-lit);
     }
-
     .tool-card:hover::before { opacity: 1; }
 
     .tool-card-icon {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       background: var(--blue-dim);
       border: 1px solid var(--border-lit);
       border-radius: 12px;
@@ -340,8 +325,8 @@
       letter-spacing: 1.2px;
       text-transform: uppercase;
       color: var(--teal);
-      background: rgba(0, 212, 200, 0.08);
-      border: 1px solid rgba(0, 212, 200, 0.2);
+      background: rgba(0,135,170,0.08);
+      border: 1px solid rgba(0,135,170,0.2);
       border-radius: 4px;
       padding: 2px 8px;
       margin-bottom: 10px;
@@ -350,7 +335,7 @@
     .tool-card-title {
       font-size: 18px;
       font-weight: 700;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 8px;
       letter-spacing: -0.01em;
     }
@@ -370,17 +355,11 @@
       font-weight: 600;
       color: var(--blue);
     }
-
-    .tool-card-footer .arrow {
-      transition: transform 0.2s;
-    }
-
+    .tool-card-footer .arrow { transition: transform 0.2s; }
     .tool-card:hover .arrow { transform: translateX(4px); }
 
-    /* ── ABOUT SECTION ── */
-    #about {
-      padding: 100px 0;
-    }
+    /* ── ABOUT ── */
+    #about { padding: 100px 0; }
 
     .about-grid {
       display: grid;
@@ -392,11 +371,10 @@
     .about-h2 {
       font-size: clamp(26px, 4vw, 38px);
       font-weight: 700;
-      color: var(--white);
+      color: var(--text);
       letter-spacing: -0.02em;
       margin-bottom: 20px;
     }
-
     .about-h2 span { color: var(--blue); }
 
     .about-body {
@@ -404,7 +382,6 @@
       color: var(--text-2);
       line-height: 1.75;
     }
-
     .about-body p + p { margin-top: 16px; }
 
     .about-pills {
@@ -419,7 +396,7 @@
       font-weight: 600;
       padding: 6px 14px;
       border-radius: 20px;
-      background: var(--bg-card);
+      background: var(--bg-2);
       border: 1px solid var(--border);
       color: var(--text-2);
       letter-spacing: 0.3px;
@@ -441,15 +418,12 @@
       gap: 16px;
     }
 
-    .about-stat-icon {
-      font-size: 22px;
-      flex-shrink: 0;
-    }
+    .about-stat-icon { font-size: 22px; flex-shrink: 0; }
 
     .about-stat-title {
       font-size: 14px;
       font-weight: 600;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 2px;
     }
 
@@ -482,7 +456,6 @@
       color: var(--text-3);
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       nav { padding: 0 20px; }
       .nav-links { gap: 20px; }
@@ -494,9 +467,8 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-logo">JH<span>.</span></a>
+    <a href="#hero" class="nav-logo">PMax<span>Precision</span></a>
     <ul class="nav-links">
       <li><a href="#tools">Tools</a></li>
       <li><a href="strategy.html">Strategy</a></li>
@@ -504,7 +476,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-inner">
       <div class="hero-eyebrow">
@@ -520,10 +491,7 @@
         A personal hub for futures trading strategy, risk management tools, and the systematic mindset behind consistent execution.
       </p>
       <div class="hero-cta-row">
-        <a href="#tools" class="btn-primary">
-          Explore Tools
-          <span>↓</span>
-        </a>
+        <a href="#tools" class="btn-primary">Explore Tools <span>↓</span></a>
         <a href="#about" class="btn-ghost">About Me</a>
       </div>
       <div class="hero-stats">
@@ -532,8 +500,8 @@
           <div class="hero-stat-label">Primary Instrument</div>
         </div>
         <div>
-          <div class="hero-stat-value">Topstep</div>
-          <div class="hero-stat-label">Funded Platform</div>
+          <div class="hero-stat-value">PMax</div>
+          <div class="hero-stat-label">Core Strategy</div>
         </div>
         <div>
           <div class="hero-stat-value">Risk First</div>
@@ -543,12 +511,11 @@
     </div>
   </section>
 
-  <!-- TOOLS -->
   <section id="tools">
     <div class="section-inner">
       <div class="tools-header">
         <div class="section-label">Tools</div>
-        <h2 class="tools-h2">Built for funded traders.</h2>
+        <h2 class="tools-h2">Built for precision traders.</h2>
         <p class="tools-desc">Practical calculators and resources designed around real trading rules — not hypotheticals.</p>
       </div>
       <div class="tools-grid">
@@ -557,17 +524,27 @@
           <div class="tool-card-tag">Risk Management</div>
           <div class="tool-card-title">MNQ Stop Loss Calculator</div>
           <div class="tool-card-desc">
-            Know your dollar risk before you enter. Dial in contracts, stop distance, and account size to stay inside Topstep's daily loss and drawdown limits.
+            Know your dollar risk before you enter. Dial in contracts, stop distance, and account size to stay within your daily loss and drawdown limits.
           </div>
           <div class="tool-card-footer">
             Open Calculator <span class="arrow">→</span>
+          </div>
+        </a>
+        <a href="strategy.html" class="tool-card">
+          <div class="tool-card-icon">📐</div>
+          <div class="tool-card-tag">Strategy</div>
+          <div class="tool-card-title">PMax Precision Rulebook</div>
+          <div class="tool-card-desc">
+            The full trading framework — timeframes, cloud bias, entry rules for both trend continuation and counter trend setups, and session rules.
+          </div>
+          <div class="tool-card-footer">
+            Read the Rules <span class="arrow">→</span>
           </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="section-inner">
       <div class="about-grid">
@@ -579,13 +556,13 @@
               I trade Micro E-mini Nasdaq futures with a focus on structure, discipline, and protecting capital above everything else. My edge isn't a secret indicator — it's showing up prepared and executing the plan.
             </p>
             <p>
-              This site is where I share the tools and frameworks I actually use. If you're a funded trader trying to stay consistent and protect your account, you're in the right place.
+              This site is where I share the tools and frameworks I actually use. If you're a trader trying to stay consistent and protect your account, you're in the right place.
             </p>
           </div>
           <div class="about-pills">
             <span class="pill">Futures</span>
             <span class="pill">MNQ / NQ</span>
-            <span class="pill">Topstep</span>
+            <span class="pill">PMax Strategy</span>
             <span class="pill">Risk Management</span>
             <span class="pill">Funded Accounts</span>
           </div>
@@ -624,9 +601,8 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <span class="footer-name">Jamal Hollingsworth</span>
+    <span class="footer-name">Jamal Hollingsworth &nbsp;·&nbsp; PMax Precision</span>
     <span class="footer-note">Trading involves substantial risk of loss. Tools are for informational purposes only.</span>
   </footer>
 
