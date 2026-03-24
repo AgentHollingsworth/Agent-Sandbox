@@ -19,6 +19,9 @@
       --text-2:      #3d5278;
       --text-3:      #7a90b4;
       --white:       #ffffff;
+      --gold:        #f5c542;
+      --gold-dim:    rgba(245,197,66,0.12);
+      --gold-glow:   rgba(245,197,66,0.35);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -172,10 +175,9 @@
       background: radial-gradient(circle, rgba(0,135,170,0.2) 0%, transparent 70%);
     }
     .hero-glow--3 {
-      width: 300px; height: 300px;
-      top: 40%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(168,205,251,0.15) 0%, transparent 70%);
+      width: 400px; height: 400px;
+      top: 20%; right: 10%;
+      background: radial-gradient(circle, rgba(245,197,66,0.12) 0%, transparent 70%);
     }
 
     .hero-inner {
@@ -191,15 +193,15 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(245,197,66,0.08);
+      border: 1px solid rgba(245,197,66,0.3);
       border-radius: 20px;
       padding: 5px 14px;
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
+      color: #f5c542;
       margin-bottom: 28px;
       backdrop-filter: blur(8px);
     }
@@ -207,9 +209,9 @@
     .hero-eyebrow .dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: #4af7cf;
+      background: #f5c542;
       animation: pulse 2s ease-in-out infinite;
-      box-shadow: 0 0 8px rgba(74,247,207,0.6);
+      box-shadow: 0 0 8px rgba(245,197,66,0.7);
     }
 
     @keyframes pulse {
@@ -228,7 +230,7 @@
     }
 
     .hero-h1 .accent {
-      background: linear-gradient(135deg, #a8cdfb 0%, #4af7cf 100%);
+      background: linear-gradient(135deg, #f5c542 0%, #fce08a 50%, #a8cdfb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -295,7 +297,7 @@
       gap: 40px;
       margin-top: 64px;
       padding-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.15);
+      border-top: 1px solid rgba(245,197,66,0.25);
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -303,7 +305,7 @@
     .hero-stat-value {
       font-size: 28px;
       font-weight: 700;
-      color: #ffffff;
+      color: #f5c542;
       letter-spacing: -0.02em;
     }
 
