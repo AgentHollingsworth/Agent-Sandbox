@@ -243,12 +243,55 @@
       margin-bottom: 20px;
     }
 
+    .eod-amount-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
     .eod-amount {
       font-size: 44px;
       font-weight: 800;
       color: var(--blue);
       line-height: 1;
       letter-spacing: -2px;
+    }
+
+    .eod-input-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 12px;
+      transition: border-color 0.15s;
+    }
+    .eod-input-wrap:focus-within {
+      border-color: var(--blue);
+    }
+    .eod-input-prefix {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-2);
+      margin-right: 2px;
+    }
+    .eod-input {
+      width: 120px;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 8px 0;
+      font-family: inherit;
+      -moz-appearance: textfield;
+    }
+    .eod-input::-webkit-inner-spin-button,
+    .eod-input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
 
     .eod-label {
@@ -617,8 +660,14 @@
       <div class="card-title">Trailing Drawdown Tracker</div>
 
       <div class="eod-display">
-        <div class="eod-amount" id="eodDisplay">$150,000</div>
-        <div class="eod-label">Current / EOD Balance — drag to simulate</div>
+        <div class="eod-amount-row">
+          <div class="eod-amount" id="eodDisplay">$150,000</div>
+          <div class="eod-input-wrap">
+            <span class="eod-input-prefix">$</span>
+            <input type="number" id="eodInput" class="eod-input" value="150000" step="500">
+          </div>
+        </div>
+        <div class="eod-label">Current / EOD Balance — drag slider or type exact amount</div>
       </div>
 
       <div class="slider-wrapper">
@@ -771,6 +820,7 @@
       slider.max    = sMax;
       slider.step   = 500;
       slider.value  = plan;
+      document.getElementById('eodInput').value = plan;
       setSliderPct(slider);
 
       updatePlanStats();
@@ -814,8 +864,10 @@
       const locked  = isLocked(planBalance, eod);
       const atFloor = room <= 0;
 
-      // EOD display
+      // EOD display + sync input
       document.getElementById('eodDisplay').textContent = fmt(eod);
+      const eodInput = document.getElementById('eodInput');
+      if (document.activeElement !== eodInput) eodInput.value = eod;
 
       // Stats
       document.getElementById('ddFloorDisplay').textContent = fmt(floor);
@@ -926,6 +978,16 @@
       );
       renderTable(parseFloat(document.getElementById('eodSlider').value), pts);
     }
+
+    // ── EOD manual input sync ────────────────────────────────────
+    document.getElementById('eodInput').addEventListener('input', function() {
+      const slider = document.getElementById('eodSlider');
+      const val = parseFloat(this.value);
+      if (isNaN(val)) return;
+      const clamped = Math.min(parseFloat(slider.max), Math.max(parseFloat(slider.min), val));
+      slider.value = clamped;
+      updateDD();
+    });
 
     // ── Init ─────────────────────────────────────────────────────
     selectPlan(150000);
