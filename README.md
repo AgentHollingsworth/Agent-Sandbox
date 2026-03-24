@@ -1,3 +1,3 @@
-# agent-sandbox
+# Agent-Sandbox
 
-A sandbox environment for agent experimentation.
+Learning sandbox for GitHub, Vercel, and Supabase stack
