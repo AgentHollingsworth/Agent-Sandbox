@@ -6,27 +6,28 @@
   <title>MNQ Stop Loss Calculator | PMax Precision</title>
   <style>
     :root {
-      --bg-primary:        #f0f4fc;
-      --bg-secondary:      #e4ebf7;
-      --bg-card:           #ffffff;
-      --accent-blue:       #1a50dc;
-      --accent-blue-light: #2b63f0;
-      --accent-teal:       #0087aa;
-      --text-primary:      #111827;
-      --text-secondary:    #3d5278;
-      --text-muted:        #7a90b4;
-      --border:            #cdd8ee;
-      --green:             #059669;
-      --yellow:            #d97706;
-      --red:               #dc2626;
-      --orange:            #ea580c;
+      --bg:          #f0f4fc;
+      --bg-2:        #e4ebf7;
+      --bg-card:     #ffffff;
+      --border:      #cdd8ee;
+      --border-lit:  rgba(26, 80, 220, 0.28);
+      --blue:        #1a50dc;
+      --blue-dim:    rgba(26, 80, 220, 0.07);
+      --teal:        #0087aa;
+      --text:        #111827;
+      --text-2:      #3d5278;
+      --text-muted:  #7a90b4;
+      --green:       #059669;
+      --yellow:      #d97706;
+      --red:         #dc2626;
+      --orange:      #ea580c;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg-primary);
-      color: var(--text-primary);
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Segoe UI', system-ui, sans-serif;
       min-height: 100vh;
     }
@@ -50,10 +51,10 @@
       font-size: 15px;
       font-weight: 800;
       letter-spacing: -0.01em;
-      color: var(--text-primary);
+      color: var(--text);
       text-decoration: none;
     }
-    .nav-logo span { color: var(--accent-blue); }
+    .nav-logo span { color: var(--blue); }
 
     .nav-links {
       display: flex;
@@ -65,11 +66,11 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--text-secondary);
+      color: var(--text-2);
       text-decoration: none;
       transition: color 0.18s;
     }
-    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover { color: var(--text); }
 
     /* ── LAYOUT ── */
     .container {
@@ -78,7 +79,7 @@
       padding: 36px 16px 60px;
     }
 
-    /* Header */
+    /* ── HEADER ── */
     .header {
       text-align: center;
       margin-bottom: 32px;
@@ -86,9 +87,9 @@
 
     .header .badge {
       display: inline-block;
-      background: rgba(26, 80, 220, 0.07);
+      background: var(--blue-dim);
       border: 1px solid rgba(26, 80, 220, 0.22);
-      color: var(--accent-blue);
+      color: var(--blue);
       padding: 4px 14px;
       border-radius: 20px;
       font-size: 11px;
@@ -101,24 +102,20 @@
     .header h1 {
       font-size: 30px;
       font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: 6px;
       letter-spacing: -0.02em;
+      margin-bottom: 6px;
     }
 
     .header h1 span {
-      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-teal) 100%);
+      background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .header p {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
+    .header p { color: var(--text-2); font-size: 14px; }
 
-    /* Cards */
+    /* ── CARDS ── */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -137,7 +134,7 @@
       margin-bottom: 18px;
     }
 
-    /* MNQ Spec Bar */
+    /* ── MNQ SPEC BAR ── */
     .info-bar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -155,7 +152,7 @@
     .info-value {
       font-size: 15px;
       font-weight: 700;
-      color: var(--accent-teal);
+      color: var(--teal);
     }
 
     .info-label {
@@ -166,23 +163,97 @@
       margin-top: 3px;
     }
 
-    /* Balance Section */
-    .balance-display {
-      text-align: center;
+    /* ── PLAN SELECTOR ── */
+    .plan-btns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       margin-bottom: 22px;
     }
 
-    .balance-amount {
-      font-size: 48px;
+    .plan-btn {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 10px;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-align: center;
+    }
+
+    .plan-btn:hover {
+      border-color: rgba(26,80,220,0.3);
+    }
+
+    .plan-btn.active {
+      background: var(--blue-dim);
+      border-color: rgba(26,80,220,0.35);
+      box-shadow: 0 2px 12px rgba(26,80,220,0.1);
+    }
+
+    .plan-btn-label {
+      font-size: 24px;
       font-weight: 800;
-      color: var(--accent-blue);
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .plan-btn.active .plan-btn-label { color: var(--blue); }
+
+    .plan-btn-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── STAT BOXES ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .stat-box {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 3px;
+      color: var(--text);
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
+    }
+
+    /* ── EOD BALANCE SLIDER ── */
+    .eod-display {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .eod-amount {
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--blue);
       line-height: 1;
       letter-spacing: -2px;
     }
 
-    .balance-label {
+    .eod-label {
       font-size: 12px;
-      color: var(--text-secondary);
+      color: var(--text-2);
       margin-top: 5px;
     }
 
@@ -194,7 +265,6 @@
       background: transparent;
       cursor: pointer;
     }
-
     input[type=range]:focus { outline: none; }
 
     input[type=range]::-webkit-slider-runnable-track {
@@ -202,9 +272,9 @@
       border-radius: 3px;
       background: linear-gradient(
         to right,
-        var(--accent-blue) 0%,
-        var(--accent-blue) var(--progress, 50%),
-        var(--border) var(--progress, 50%),
+        var(--blue) 0%,
+        var(--blue) var(--pct, 0%),
+        var(--border) var(--pct, 0%),
         var(--border) 100%
       );
     }
@@ -214,50 +284,128 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: var(--accent-blue);
+      background: var(--blue);
       border: 3px solid var(--bg-card);
       margin-top: -8px;
-      box-shadow: 0 0 0 2px var(--accent-blue), 0 2px 8px rgba(26,80,220,0.3);
+      box-shadow: 0 0 0 2px var(--blue), 0 2px 8px rgba(26,80,220,0.3);
     }
 
     .slider-labels {
       display: flex;
       justify-content: space-between;
       margin-top: 8px;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-muted);
     }
 
-    /* Stats Row */
-    .stats-row {
+    /* ── DRAWDOWN STATS ── */
+    .dd-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
       margin-top: 22px;
+      margin-bottom: 20px;
     }
 
-    .stat-box {
-      background: var(--bg-secondary);
+    .dd-stat {
+      background: var(--bg-2);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 14px 12px;
+      padding: 16px 12px;
       text-align: center;
     }
 
-    .stat-value {
+    .dd-stat-value {
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 3px;
     }
 
-    .stat-label {
+    .dd-stat-label {
       font-size: 10px;
-      color: var(--text-secondary);
+      color: var(--text-2);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    /* Tabs */
+    /* ── DRAWDOWN METER ── */
+    .dd-meter-wrap {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+
+    .dd-meter-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .dd-meter-bar-bg {
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .dd-meter-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.3s, background 0.3s;
+    }
+
+    .dd-meter-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .dd-meter-note { color: var(--text-muted); }
+
+    .dd-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .dd-status-badge .pulse {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+
+    .status-trailing {
+      background: rgba(26,80,220,0.08);
+      color: var(--blue);
+      border: 1px solid rgba(26,80,220,0.22);
+    }
+    .status-trailing .pulse { background: var(--blue); }
+
+    .status-locked {
+      background: rgba(5,150,105,0.08);
+      color: var(--green);
+      border: 1px solid rgba(5,150,105,0.22);
+    }
+    .status-locked .pulse { background: var(--green); }
+
+    .status-danger {
+      background: rgba(220,38,38,0.08);
+      color: var(--red);
+      border: 1px solid rgba(220,38,38,0.22);
+    }
+    .status-danger .pulse { background: var(--red); }
+
+    /* ── STOP LOSS TABS ── */
     .tabs {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -266,11 +414,11 @@
     }
 
     .tab-btn {
-      background: var(--bg-secondary);
+      background: var(--bg-2);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 14px 8px;
-      color: var(--text-secondary);
+      color: var(--text-2);
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
@@ -278,39 +426,22 @@
       text-align: center;
     }
 
-    .tab-btn:hover {
-      border-color: rgba(26,80,220,0.3);
-      color: var(--text-primary);
-    }
+    .tab-btn:hover { border-color: rgba(26,80,220,0.3); color: var(--text); }
 
     .tab-btn.active {
-      background: rgba(26, 80, 220, 0.07);
+      background: var(--blue-dim);
       border-color: rgba(26,80,220,0.3);
-      color: var(--accent-blue);
+      color: var(--blue);
       box-shadow: 0 2px 12px rgba(26,80,220,0.1);
     }
 
-    .tab-btn .pts {
-      display: block;
-      font-size: 22px;
-      font-weight: 700;
-    }
+    .tab-btn .pts { display: block; font-size: 22px; font-weight: 700; }
+    .tab-btn .sub { display: block; font-size: 11px; margin-top: 3px; opacity: 0.7; }
 
-    .tab-btn .sub {
-      display: block;
-      font-size: 11px;
-      margin-top: 3px;
-      opacity: 0.7;
-    }
-
-    /* Table */
+    /* ── TABLE ── */
     .table-wrapper { overflow-x: auto; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
 
     thead tr { border-bottom: 2px solid var(--border); }
 
@@ -324,44 +455,28 @@
       color: var(--text-muted);
       white-space: nowrap;
     }
-
     th:first-child { text-align: center; }
 
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.12s;
-    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.12s; }
+    tbody tr:hover { background: rgba(26,80,220,0.03); }
 
-    tbody tr:hover { background: rgba(26, 80, 220, 0.03); }
-
-    td {
-      padding: 11px 14px;
-      text-align: right;
-      white-space: nowrap;
-    }
-
+    td { padding: 11px 14px; text-align: right; white-space: nowrap; }
     td:first-child { text-align: center; }
 
     .contracts-num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 8px;
-      background: var(--bg-secondary);
+      background: var(--bg-2);
       border: 1px solid var(--border);
       font-size: 15px;
       font-weight: 700;
-      color: var(--text-primary);
     }
 
-    .dollar-risk {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
+    .dollar-risk { font-weight: 600; }
 
-    /* Pct bar */
     .pct-bar-wrap {
       display: flex;
       align-items: center;
@@ -370,20 +485,15 @@
     }
 
     .pct-bar {
-      width: 56px;
-      height: 5px;
+      width: 56px; height: 5px;
       background: var(--border);
       border-radius: 3px;
       overflow: hidden;
       flex-shrink: 0;
     }
 
-    .pct-bar-fill {
-      height: 100%;
-      border-radius: 3px;
-    }
+    .pct-bar-fill { height: 100%; border-radius: 3px; }
 
-    /* Risk badges */
     .risk-badge {
       display: inline-block;
       padding: 3px 10px;
@@ -409,13 +519,15 @@
       line-height: 1.6;
     }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       nav { padding: 0 20px; }
       .nav-links { gap: 20px; }
       .info-bar { grid-template-columns: repeat(2, 1fr); }
-      .stats-row { grid-template-columns: repeat(3, 1fr); }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .dd-stats  { grid-template-columns: repeat(3, 1fr); }
       .header h1 { font-size: 22px; }
-      .balance-amount { font-size: 36px; }
+      .eod-amount { font-size: 34px; }
       th, td { padding: 9px 8px; }
     }
   </style>
@@ -433,12 +545,14 @@
 
   <div class="container">
 
+    <!-- Header -->
     <div class="header">
       <div class="badge">PMax Precision</div>
       <h1><span>MNQ Stop Loss Calculator</span></h1>
       <p>Micro E-mini Nasdaq-100 &bull; Position Risk Management</p>
     </div>
 
+    <!-- MNQ Specs -->
     <div class="info-bar">
       <div class="info-item">
         <div class="info-value">MNQ</div>
@@ -458,38 +572,96 @@
       </div>
     </div>
 
+    <!-- Account Plan -->
     <div class="card">
-      <div class="card-title">Account Balance</div>
-      <div class="balance-display">
-        <div class="balance-amount" id="balanceDisplay">$150,000</div>
-        <div class="balance-label">Funded Account Size</div>
-      </div>
-      <div class="slider-wrapper">
-        <input type="range" id="balanceSlider" min="100000" max="200000" step="5000" value="150000" oninput="updateAll()">
-        <div class="slider-labels">
-          <span>$100K</span>
-          <span>$125K</span>
-          <span>$150K</span>
-          <span>$175K</span>
-          <span>$200K</span>
-        </div>
+      <div class="card-title">Account Plan</div>
+      <div class="plan-btns">
+        <button class="plan-btn" onclick="selectPlan(50000)" id="plan-50000">
+          <div class="plan-btn-label">$50K</div>
+          <div class="plan-btn-sub">DD: $1,500</div>
+        </button>
+        <button class="plan-btn" onclick="selectPlan(100000)" id="plan-100000">
+          <div class="plan-btn-label">$100K</div>
+          <div class="plan-btn-sub">DD: $3,000</div>
+        </button>
+        <button class="plan-btn active" onclick="selectPlan(150000)" id="plan-150000">
+          <div class="plan-btn-label">$150K</div>
+          <div class="plan-btn-sub">DD: $4,500</div>
+        </button>
       </div>
       <div class="stats-row">
         <div class="stat-box">
-          <div class="stat-value" id="dailyLossDisplay" style="color: var(--red);">$3,000</div>
-          <div class="stat-label">Daily Loss Limit</div>
+          <div class="stat-value" id="planBalDisplay">$150,000</div>
+          <div class="stat-label">Initial Balance</div>
         </div>
         <div class="stat-box">
-          <div class="stat-value" id="drawdownDisplay" style="color: var(--yellow);">$4,500</div>
-          <div class="stat-label">Max Drawdown</div>
+          <div class="stat-value" id="dailyLimitDisplay" style="color:var(--red);">$3,000</div>
+          <div class="stat-label">Daily Loss Limit (2%)</div>
         </div>
         <div class="stat-box">
-          <div class="stat-value" id="onePercentDisplay" style="color: var(--green);">$1,500</div>
+          <div class="stat-value" id="maxDDDisplay" style="color:var(--yellow);">$4,500</div>
+          <div class="stat-label">Max Drawdown (3%)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="onePercentDisplay" style="color:var(--green);">$1,500</div>
           <div class="stat-label">1% Risk / Trade</div>
         </div>
       </div>
     </div>
 
+    <!-- Trailing Drawdown Tracker -->
+    <div class="card">
+      <div class="card-title">Trailing Drawdown Tracker</div>
+
+      <div class="eod-display">
+        <div class="eod-amount" id="eodDisplay">$150,000</div>
+        <div class="eod-label">Current / EOD Balance — drag to simulate</div>
+      </div>
+
+      <div class="slider-wrapper">
+        <input type="range" id="eodSlider" oninput="updateDD()">
+        <div class="slider-labels">
+          <span id="sliderLabelFloor">$145,500 (floor)</span>
+          <span id="sliderLabelInitial">$150,000</span>
+          <span id="sliderLabelLock">$154,500 (locks)</span>
+          <span id="sliderLabelMax">$180,000</span>
+        </div>
+      </div>
+
+      <div class="dd-stats">
+        <div class="dd-stat">
+          <div class="dd-stat-value" id="ddFloorDisplay" style="color:var(--red);">$145,500</div>
+          <div class="dd-stat-label">Drawdown Floor</div>
+        </div>
+        <div class="dd-stat">
+          <div class="dd-stat-value" id="ddRoomDisplay" style="color:var(--green);">$4,500</div>
+          <div class="dd-stat-label">Room to Floor</div>
+        </div>
+        <div class="dd-stat">
+          <div class="dd-stat-value" id="ddLockAtDisplay" style="color:var(--blue);">$154,500</div>
+          <div class="dd-stat-label">Floor Locks At EOD</div>
+        </div>
+      </div>
+
+      <div class="dd-meter-wrap">
+        <div class="dd-meter-labels">
+          <span id="meterLabelLeft">← Floor $145,500</span>
+          <span id="meterLabelRight">Locked at $150,000 →</span>
+        </div>
+        <div class="dd-meter-bar-bg">
+          <div class="dd-meter-bar-fill" id="ddMeterFill" style="width:100%;background:#059669;"></div>
+        </div>
+        <div class="dd-meter-footer">
+          <span class="dd-meter-note" id="ddMeterNote">Full cushion — $4,500 of $4,500 available</span>
+          <span class="dd-status-badge status-trailing" id="ddStatusBadge">
+            <span class="pulse"></span>
+            <span id="ddStatusText">Trailing</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stop Loss Tabs + Table -->
     <div class="card">
       <div class="card-title">Stop Loss — Select Points</div>
       <div class="tabs">
@@ -528,8 +700,8 @@
 
       <div class="footnote">
         MNQ point value = $2.00 &nbsp;&bull;&nbsp;
-        Daily loss limit = 2% of account &nbsp;&bull;&nbsp;
-        Max trailing drawdown = 3% of account<br>
+        Daily limit = 2% of initial plan balance &nbsp;&bull;&nbsp;
+        Trailing drawdown = 3% of initial plan balance (trails up, locks at initial)<br>
         Risk levels: Conservative ≤0.5% &bull; Moderate ≤1% &bull; Elevated ≤2% &bull; High ≤3% &bull; Danger &gt;3%
       </div>
     </div>
@@ -539,97 +711,221 @@
   <script>
     const MNQ_POINT_VALUE = 2.00;
     const DAILY_LOSS_PCT  = 0.02;
-    const DRAWDOWN_PCT    = 0.03;
-    let activeStop = 25;
+    const DD_PCT          = 0.03;
+    const CONTRACT_LIST   = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 25];
 
-    const CONTRACT_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 25];
+    let planBalance = 150000;
+    let activeStop  = 25;
 
-    function fmt(n) {
-      return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    // ── Formatters ──────────────────────────────────────────────
+    const fmt    = n => '$' + Math.round(n).toLocaleString('en-US');
+    const fmtPct = n => n.toFixed(1) + '%';
+
+    // ── Trailing drawdown core logic ─────────────────────────────
+    // Floor starts at planBalance - ddAmount.
+    // As EOD grows, floor trails up (floor = EOD - ddAmount).
+    // Floor is capped at planBalance — once it reaches that, it locks.
+    function calcFloor(plan, eod) {
+      const dd     = plan * DD_PCT;
+      const minFloor = plan - dd;            // starting floor, never goes below this
+      const trailing = eod - dd;             // where trailing wants to put the floor
+      return Math.min(plan, Math.max(minFloor, trailing));
     }
 
-    function fmtPct(n) {
-      return n.toFixed(1) + '%';
+    function isLocked(plan, eod) {
+      return (eod - plan * DD_PCT) >= plan;  // floor has reached initial balance
     }
 
-    function getBalance() {
-      return parseInt(document.getElementById('balanceSlider').value);
+    function lockPoint(plan) {
+      return plan + plan * DD_PCT;           // EOD at which floor locks
     }
 
-    function riskLevel(pctBal) {
-      if (pctBal <= 0.5) return { label: 'Conservative', cls: 'risk-conservative' };
-      if (pctBal <= 1.0) return { label: 'Moderate',     cls: 'risk-moderate'     };
-      if (pctBal <= 2.0) return { label: 'Elevated',     cls: 'risk-elevated'     };
-      if (pctBal <= 3.0) return { label: 'High',         cls: 'risk-high'         };
+    // ── Slider helpers ───────────────────────────────────────────
+    function sliderMin(plan)  { return plan * DD_PCT === 0 ? plan : plan - plan * DD_PCT; }
+    function sliderMax(plan)  { return plan * 1.20; }
+
+    function setSliderPct(slider) {
+      const min = parseFloat(slider.min);
+      const max = parseFloat(slider.max);
+      const val = parseFloat(slider.value);
+      slider.style.setProperty('--pct', ((val - min) / (max - min) * 100) + '%');
+    }
+
+    // ── Plan selection ───────────────────────────────────────────
+    function selectPlan(plan) {
+      planBalance = plan;
+
+      // Highlight active plan button
+      [50000, 100000, 150000].forEach(p => {
+        document.getElementById('plan-' + p).classList.toggle('active', p === plan);
+      });
+
+      // Reset EOD slider to initial plan balance
+      const slider  = document.getElementById('eodSlider');
+      const sMin    = sliderMin(plan);
+      const sMax    = sliderMax(plan);
+      slider.min    = sMin;
+      slider.max    = sMax;
+      slider.step   = 500;
+      slider.value  = plan;
+      setSliderPct(slider);
+
+      updatePlanStats();
+      updateDD();
+    }
+
+    // ── Update plan stats card ───────────────────────────────────
+    function updatePlanStats() {
+      const dd      = planBalance * DD_PCT;
+      const daily   = planBalance * DAILY_LOSS_PCT;
+      const onePct  = planBalance * 0.01;
+
+      document.getElementById('planBalDisplay').textContent   = fmt(planBalance);
+      document.getElementById('dailyLimitDisplay').textContent = fmt(daily);
+      document.getElementById('maxDDDisplay').textContent     = fmt(dd);
+      document.getElementById('onePercentDisplay').textContent = fmt(onePct);
+
+      // Update slider labels
+      const floor   = planBalance - dd;
+      const lock    = lockPoint(planBalance);
+      const maxEOD  = sliderMax(planBalance);
+
+      document.getElementById('sliderLabelFloor').textContent   = fmt(floor) + ' (floor)';
+      document.getElementById('sliderLabelInitial').textContent = fmt(planBalance);
+      document.getElementById('sliderLabelLock').textContent    = fmt(lock) + ' (locks)';
+      document.getElementById('sliderLabelMax').textContent     = fmt(maxEOD);
+
+      document.getElementById('ddLockAtDisplay').textContent = fmt(lock);
+      document.getElementById('meterLabelRight').textContent = 'Locked at ' + fmt(planBalance) + ' →';
+    }
+
+    // ── Update drawdown tracker ──────────────────────────────────
+    function updateDD() {
+      const slider = document.getElementById('eodSlider');
+      const eod    = parseFloat(slider.value);
+      setSliderPct(slider);
+
+      const dd      = planBalance * DD_PCT;
+      const floor   = calcFloor(planBalance, eod);
+      const room    = eod - floor;
+      const locked  = isLocked(planBalance, eod);
+      const atFloor = room <= 0;
+
+      // EOD display
+      document.getElementById('eodDisplay').textContent = fmt(eod);
+
+      // Stats
+      document.getElementById('ddFloorDisplay').textContent = fmt(floor);
+      document.getElementById('ddRoomDisplay').textContent  = fmt(Math.max(0, room));
+      document.getElementById('ddLockAtDisplay').textContent = fmt(lockPoint(planBalance));
+
+      // Meter
+      const roomPct = Math.min(100, Math.max(0, (room / dd) * 100));
+      const fill    = document.getElementById('ddMeterFill');
+      fill.style.width = roomPct + '%';
+
+      let barColor, noteText, statusClass, statusText;
+
+      if (atFloor) {
+        barColor    = '#dc2626';
+        noteText    = '⚠ At the floor — no room left';
+        statusClass = 'status-danger';
+        statusText  = 'At Floor';
+      } else if (locked) {
+        barColor    = '#059669';
+        noteText    = '✓ Floor locked at initial balance — ' + fmt(room) + ' of cushion above';
+        statusClass = 'status-locked';
+        statusText  = 'Locked';
+      } else if (roomPct < 30) {
+        barColor    = '#dc2626';
+        noteText    = fmt(room) + ' remaining — approaching floor';
+        statusClass = 'status-danger';
+        statusText  = 'Low Room';
+      } else if (roomPct < 60) {
+        barColor    = '#d97706';
+        noteText    = fmt(room) + ' of ' + fmt(dd) + ' drawdown cushion remaining';
+        statusClass = 'status-trailing';
+        statusText  = 'Trailing';
+      } else {
+        barColor    = '#059669';
+        noteText    = fmt(room) + ' of ' + fmt(dd) + ' drawdown cushion remaining';
+        statusClass = 'status-trailing';
+        statusText  = 'Trailing';
+      }
+
+      fill.style.background = barColor;
+
+      document.getElementById('ddMeterNote').textContent = noteText;
+      document.getElementById('ddRoomDisplay').style.color =
+        atFloor ? 'var(--red)' : locked ? 'var(--green)' : roomPct < 30 ? 'var(--red)' : roomPct < 60 ? 'var(--yellow)' : 'var(--green)';
+
+      const badge = document.getElementById('ddStatusBadge');
+      badge.className = 'dd-status-badge ' + statusClass;
+      badge.querySelector('.pulse').style.background =
+        atFloor || roomPct < 30 ? '#dc2626' : locked ? '#059669' : '#1a50dc';
+      document.getElementById('ddStatusText').textContent = statusText;
+
+      document.getElementById('meterLabelLeft').textContent = '← Floor ' + fmt(floor);
+
+      // Also refresh the stop loss table (uses EOD balance)
+      renderTable(eod, activeStop);
+    }
+
+    // ── Stop loss table ──────────────────────────────────────────
+    function riskLevel(pct) {
+      if (pct <= 0.5) return { label: 'Conservative', cls: 'risk-conservative' };
+      if (pct <= 1.0) return { label: 'Moderate',     cls: 'risk-moderate'     };
+      if (pct <= 2.0) return { label: 'Elevated',     cls: 'risk-elevated'     };
+      if (pct <= 3.0) return { label: 'High',         cls: 'risk-high'         };
       return               { label: 'Danger',       cls: 'risk-danger'       };
     }
 
-    function barColor(pctBal) {
-      if (pctBal <= 0.5) return '#059669';
-      if (pctBal <= 1.0) return '#1a50dc';
-      if (pctBal <= 2.0) return '#d97706';
-      if (pctBal <= 3.0) return '#ea580c';
+    function barColor(pct) {
+      if (pct <= 0.5) return '#059669';
+      if (pct <= 1.0) return '#1a50dc';
+      if (pct <= 2.0) return '#d97706';
+      if (pct <= 3.0) return '#ea580c';
       return '#dc2626';
     }
 
-    function renderTable(balance, stopPts) {
+    function renderTable(eodBal, stopPts) {
       const riskPerCt  = stopPts * MNQ_POINT_VALUE;
-      const dailyLimit = balance * DAILY_LOSS_PCT;
-      const tbody      = document.getElementById('tableBody');
+      const dailyLimit = planBalance * DAILY_LOSS_PCT;   // fixed to plan
 
-      tbody.innerHTML = CONTRACT_LIST.map(ct => {
+      document.getElementById('tableBody').innerHTML = CONTRACT_LIST.map(ct => {
         const dollarRisk = ct * riskPerCt;
-        const pctBal     = (dollarRisk / balance) * 100;
+        const pctBal     = (dollarRisk / eodBal) * 100;
         const pctDaily   = (dollarRisk / dailyLimit) * 100;
         const rl         = riskLevel(pctBal);
         const color      = barColor(pctBal);
         const barW       = Math.min(100, pctBal * 20);
 
-        return `
-          <tr>
-            <td><span class="contracts-num">${ct}</span></td>
-            <td><span class="dollar-risk">${fmt(dollarRisk)}</span></td>
-            <td>
-              <div class="pct-bar-wrap">
-                <div class="pct-bar">
-                  <div class="pct-bar-fill" style="width:${barW}%;background:${color};"></div>
-                </div>
-                <span style="color:${color};font-weight:600;">${fmtPct(pctBal)}</span>
-              </div>
-            </td>
-            <td style="color:var(--text-secondary);">${fmtPct(pctDaily)}</td>
-            <td><span class="risk-badge ${rl.cls}">${rl.label}</span></td>
-          </tr>`;
+        return `<tr>
+          <td><span class="contracts-num">${ct}</span></td>
+          <td><span class="dollar-risk">${fmt(dollarRisk)}</span></td>
+          <td>
+            <div class="pct-bar-wrap">
+              <div class="pct-bar"><div class="pct-bar-fill" style="width:${barW}%;background:${color};"></div></div>
+              <span style="color:${color};font-weight:600;">${fmtPct(pctBal)}</span>
+            </div>
+          </td>
+          <td style="color:var(--text-2);">${fmtPct(pctDaily)}</td>
+          <td><span class="risk-badge ${rl.cls}">${rl.label}</span></td>
+        </tr>`;
       }).join('');
     }
 
-    function updateAll() {
-      const balance    = getBalance();
-      const dailyLimit = balance * DAILY_LOSS_PCT;
-      const drawdown   = balance * DRAWDOWN_PCT;
-      const onePct     = balance * 0.01;
-
-      document.getElementById('balanceDisplay').textContent   = fmt(balance);
-      document.getElementById('dailyLossDisplay').textContent = fmt(dailyLimit);
-      document.getElementById('drawdownDisplay').textContent  = fmt(drawdown);
-      document.getElementById('onePercentDisplay').textContent = fmt(onePct);
-
-      const slider   = document.getElementById('balanceSlider');
-      const progress = ((balance - 100000) / (200000 - 100000)) * 100;
-      slider.style.setProperty('--progress', progress + '%');
-
-      renderTable(balance, activeStop);
-    }
-
+    // ── Tab selection ────────────────────────────────────────────
     function setTab(pts) {
       activeStop = pts;
-      [25, 50, 75, 100].forEach(p => {
-        document.getElementById('tab-' + p).classList.toggle('active', p === pts);
-      });
-      renderTable(getBalance(), pts);
+      [25, 50, 75, 100].forEach(p =>
+        document.getElementById('tab-' + p).classList.toggle('active', p === pts)
+      );
+      renderTable(parseFloat(document.getElementById('eodSlider').value), pts);
     }
 
-    updateAll();
+    // ── Init ─────────────────────────────────────────────────────
+    selectPlan(150000);
   </script>
 </body>
 </html>
