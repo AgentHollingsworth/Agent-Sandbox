@@ -5,49 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PMax Precision Rulebook — Jamal Hollingsworth</title>
   <style>
-    :root {
-      --bg:           #f0f4fc;
-      --bg-2:         #e4ebf7;
-      --bg-card:      #ffffff;
-      --border:       #cdd8ee;
-      --border-lit:   rgba(26, 80, 220, 0.28);
-      --blue:         #1a50dc;
-      --blue-dim:     rgba(26, 80, 220, 0.07);
-      --blue-glow:    rgba(26, 80, 220, 0.1);
-      --teal:         #0087aa;
-      --green:        #059669;
-      --green-dim:    rgba(5, 150, 105, 0.08);
-      --red:          #dc2626;
-      --red-dim:      rgba(220, 38, 38, 0.07);
-      --yellow:       #b45309;
-      --yellow-dim:   rgba(180, 83, 9, 0.08);
-      --text:         #111827;
-      --text-2:       #3d5278;
-      --text-3:       #7a90b4;
-      --white:        #ffffff;
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      font-family: -apple-system, 'Inter', system-ui, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(26,80,220,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26,80,220,0.04) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* ── NAV ── */
@@ -60,19 +28,20 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 64px;
-      background: rgba(240, 244, 252, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .nav-logo {
       font-size: 15px;
       font-weight: 800;
       letter-spacing: -0.01em;
-      color: var(--text);
+      color: #f5f5f5;
       text-decoration: none;
     }
-    .nav-logo span { color: var(--blue); }
+    .nav-logo span { color: #2563eb; }
 
     .nav-links {
       display: flex;
@@ -84,12 +53,12 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--text-2);
+      color: rgba(255, 255, 255, 0.55);
       text-decoration: none;
-      transition: color 0.18s;
+      transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a.active { color: var(--blue); font-weight: 700; }
+    .nav-links a:hover { color: #f5f5f5; }
+    .nav-links a.active { color: #2563eb; font-weight: 700; }
 
     /* ── PAGE SHELL ── */
     .page {
@@ -105,29 +74,29 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--blue-dim);
-      border: 1px solid var(--border-lit);
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.15);
       border-radius: 20px;
       padding: 5px 14px;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 1.2px;
       text-transform: uppercase;
-      color: var(--blue);
+      color: #2563eb;
       margin-bottom: 20px;
     }
 
     .page-h1 {
       font-size: clamp(28px, 5vw, 48px);
       font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text);
+      letter-spacing: -0.03em;
+      color: #f5f5f5;
       margin-bottom: 12px;
       line-height: 1.1;
     }
 
     .page-h1 span {
-      background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -135,7 +104,7 @@
 
     .page-sub {
       font-size: 15px;
-      color: var(--text-2);
+      color: rgba(255, 255, 255, 0.55);
       max-width: 520px;
       margin-bottom: 52px;
       line-height: 1.7;
@@ -153,30 +122,26 @@
 
     .section-icon {
       width: 42px; height: 42px;
-      border-radius: 10px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
       flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
-
-    .icon-blue   { background: var(--blue-dim);   border: 1px solid rgba(26,80,220,0.18); }
-    .icon-green  { background: var(--green-dim);  border: 1px solid rgba(5,150,105,0.2); }
-    .icon-red    { background: var(--red-dim);    border: 1px solid rgba(220,38,38,0.18); }
-    .icon-yellow { background: var(--yellow-dim); border: 1px solid rgba(180,83,9,0.2); }
-    .icon-teal   { background: rgba(0,135,170,0.08); border: 1px solid rgba(0,135,170,0.2); }
 
     .section-heading {
       font-size: 20px;
       font-weight: 700;
-      color: var(--text);
+      color: #f5f5f5;
       letter-spacing: -0.01em;
     }
 
     .section-heading-sub {
       font-size: 12px;
-      color: var(--text-3);
+      color: rgba(255, 255, 255, 0.3);
       margin-top: 2px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -190,10 +155,10 @@
     }
 
     .tf-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 22px;
     }
 
     .tf-badge {
@@ -206,13 +171,13 @@
       border-radius: 4px;
       margin-bottom: 14px;
     }
-    .badge-fast   { background: rgba(5,150,105,0.1);  color: var(--green);  border: 1px solid rgba(5,150,105,0.25); }
-    .badge-medium { background: var(--blue-dim);       color: var(--blue);   border: 1px solid rgba(26,80,220,0.2); }
-    .badge-slow   { background: var(--yellow-dim);    color: var(--yellow); border: 1px solid rgba(180,83,9,0.25); }
+    .badge-fast   { background: rgba(34, 197, 94, 0.1);  color: #22c55e; }
+    .badge-medium { background: rgba(37, 99, 235, 0.1);  color: #2563eb; }
+    .badge-slow   { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
 
     .tf-label {
       font-size: 11px;
-      color: var(--text-3);
+      color: rgba(255, 255, 255, 0.3);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 4px;
@@ -221,20 +186,20 @@
     .tf-value {
       font-size: 22px;
       font-weight: 700;
-      color: var(--text);
+      color: #f5f5f5;
       letter-spacing: -0.01em;
       margin-bottom: 12px;
     }
 
     .tf-divider {
       height: 1px;
-      background: var(--border);
+      background: rgba(255, 255, 255, 0.06);
       margin: 12px 0;
     }
 
     .tf-entry-label {
       font-size: 11px;
-      color: var(--text-3);
+      color: rgba(255, 255, 255, 0.3);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 4px;
@@ -243,7 +208,7 @@
     .tf-entry-value {
       font-size: 16px;
       font-weight: 600;
-      color: var(--text-2);
+      color: rgba(255, 255, 255, 0.55);
     }
 
     /* ── CLOUD BIAS ── */
@@ -254,17 +219,17 @@
     }
 
     .cloud-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
       padding: 24px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .cloud-card.white-cloud { border-top: 3px solid var(--green); }
-    .cloud-card.black-cloud { border-top: 3px solid var(--red); }
+    .cloud-card.white-cloud { border-top: 3px solid #22c55e; }
+    .cloud-card.black-cloud { border-top: 3px solid #ef4444; }
 
     .cloud-top {
       display: flex;
@@ -275,21 +240,21 @@
     .cloud-name {
       font-size: 16px;
       font-weight: 700;
-      color: var(--text);
+      color: #f5f5f5;
     }
 
     .cloud-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-green { background: var(--green); box-shadow: 0 0 8px rgba(5,150,105,0.4); }
-    .dot-red   { background: var(--red);   box-shadow: 0 0 8px rgba(220,38,38,0.4); }
+    .dot-green { background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+    .dot-red   { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
 
     .cloud-condition {
       font-size: 13px;
-      color: var(--text-2);
-      background: var(--bg-2);
-      border: 1px solid var(--border);
+      color: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 7px;
       padding: 8px 12px;
-      font-family: 'Consolas', 'Courier New', monospace;
+      font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
     }
 
     .cloud-rule {
@@ -297,14 +262,14 @@
       font-weight: 700;
       letter-spacing: 0.5px;
     }
-    .rule-long  { color: var(--green); }
-    .rule-short { color: var(--red); }
+    .rule-long  { color: #22c55e; }
+    .rule-short { color: #ef4444; }
 
     /* ── ENTRY RULES ── */
     .entry-block {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
       overflow: hidden;
       margin-bottom: 14px;
     }
@@ -314,25 +279,21 @@
       align-items: center;
       gap: 12px;
       padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .entry-block-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .entry-block.trend-cont { border-left: 3px solid #22c55e; }
+    .entry-block.counter-trend { border-left: 3px solid #f59e0b; }
 
     .entry-block-title {
       font-size: 14px;
       font-weight: 700;
-      color: var(--text);
+      color: #f5f5f5;
     }
 
     .entry-block-subtitle {
       font-size: 12px;
-      color: var(--text-3);
+      color: rgba(255, 255, 255, 0.3);
       margin-left: auto;
     }
 
@@ -343,13 +304,13 @@
       align-items: flex-start;
       gap: 14px;
       padding: 13px 20px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
     .entry-step:last-child { border-bottom: none; }
 
     .step-num {
-      width: 22px; height: 22px;
-      border-radius: 6px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -357,16 +318,17 @@
       font-weight: 700;
       flex-shrink: 0;
       margin-top: 1px;
+      background: rgba(255, 255, 255, 0.03);
     }
-    .num-blue  { background: var(--blue-dim);  color: var(--blue);  border: 1px solid rgba(26,80,220,0.2); }
-    .num-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(5,150,105,0.2); }
+    .num-green { color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
+    .num-blue  { color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.3); }
 
     .step-text {
       font-size: 14px;
-      color: var(--text-2);
+      color: rgba(255, 255, 255, 0.55);
       line-height: 1.5;
     }
-    .step-text strong { color: var(--text); font-weight: 600; }
+    .step-text strong { color: #f5f5f5; font-weight: 600; }
 
     .step-text .tag {
       display: inline-block;
@@ -377,21 +339,21 @@
       margin-left: 4px;
       vertical-align: middle;
     }
-    .tag-blue   { background: var(--blue-dim);  color: var(--blue); }
-    .tag-green  { background: var(--green-dim); color: var(--green); }
-    .tag-yellow { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-blue   { background: rgba(37, 99, 235, 0.12);  color: #2563eb; }
+    .tag-green  { background: rgba(34, 197, 94, 0.12);  color: #22c55e; }
+    .tag-yellow { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
 
     .warning-banner {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: var(--red-dim);
-      border: 1px solid rgba(220,38,38,0.22);
-      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.15);
+      border-radius: 10px;
       padding: 12px 16px;
       margin-top: 14px;
       font-size: 13px;
-      color: var(--red);
+      color: #ef4444;
       font-weight: 500;
     }
     .warning-icon { font-size: 16px; flex-shrink: 0; }
@@ -404,28 +366,28 @@
     }
 
     .risk-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 20px;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 24px 20px;
       text-align: center;
     }
 
     .risk-value {
       font-size: 32px;
       font-weight: 800;
-      color: var(--text);
+      color: #f5f5f5;
       letter-spacing: -0.02em;
       margin-bottom: 4px;
       line-height: 1;
     }
-    .risk-value.red    { color: var(--red); }
-    .risk-value.yellow { color: var(--yellow); }
-    .risk-value.blue   { color: var(--blue); }
+    .risk-value.red    { color: #ef4444; }
+    .risk-value.yellow { color: #f59e0b; }
+    .risk-value.blue   { color: #2563eb; }
 
     .risk-label {
       font-size: 12px;
-      color: var(--text-2);
+      color: rgba(255, 255, 255, 0.55);
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 10px;
@@ -433,7 +395,7 @@
 
     .risk-desc {
       font-size: 12px;
-      color: var(--text-3);
+      color: rgba(255, 255, 255, 0.3);
       line-height: 1.5;
     }
 
@@ -443,20 +405,19 @@
       justify-content: center;
       gap: 6px;
       margin-top: 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-lit);
-      border-radius: 10px;
+      background: #111111;
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: 12px;
       padding: 14px 20px;
       text-decoration: none;
-      color: var(--blue);
+      color: #2563eb;
       font-size: 13px;
       font-weight: 600;
       transition: all 0.2s;
-      box-shadow: 0 2px 10px rgba(26,80,220,0.07);
     }
     .risk-tool-link:hover {
-      background: var(--blue-dim);
-      box-shadow: 0 4px 20px rgba(26,80,220,0.12);
+      background: rgba(37, 99, 235, 0.08);
+      border-color: rgba(37, 99, 235, 0.35);
     }
     .risk-tool-link .arrow { transition: transform 0.2s; }
     .risk-tool-link:hover .arrow { transform: translateX(4px); }
@@ -469,20 +430,18 @@
     }
 
     .session-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 20px;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 24px 20px;
     }
 
     .session-card.active-window {
-      border-color: rgba(5,150,105,0.3);
-      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(5,150,105,0.03) 100%);
+      border-color: rgba(34, 197, 94, 0.15);
     }
 
     .session-card.blocked-window {
-      border-color: rgba(220,38,38,0.2);
-      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(220,38,38,0.02) 100%);
+      border-color: rgba(239, 68, 68, 0.12);
     }
 
     .session-card-top {
@@ -500,27 +459,27 @@
       padding: 3px 9px;
       border-radius: 4px;
     }
-    .status-on  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(5,150,105,0.25); }
-    .status-off { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(220,38,38,0.22); }
+    .status-on  { background: rgba(34, 197, 94, 0.1);  color: #22c55e; }
+    .status-off { background: rgba(239, 68, 68, 0.1);  color: #ef4444; }
 
     .session-time {
       font-size: 26px;
       font-weight: 700;
-      color: var(--text);
+      color: #f5f5f5;
       letter-spacing: -0.02em;
       margin-bottom: 4px;
     }
 
     .session-desc {
       font-size: 13px;
-      color: var(--text-2);
+      color: rgba(255, 255, 255, 0.55);
     }
 
     /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       padding: 28px 40px;
       display: flex;
       align-items: center;
@@ -528,8 +487,8 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .footer-name { font-size: 13px; font-weight: 600; color: var(--text-3); }
-    .footer-note { font-size: 12px; color: var(--text-3); }
+    .footer-name { font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.3); }
+    .footer-note { font-size: 12px; color: rgba(255, 255, 255, 0.3); }
 
     @media (max-width: 640px) {
       nav { padding: 0 20px; }
@@ -567,7 +526,7 @@
     <!-- 1. TIMEFRAMES -->
     <div class="rulebook-section">
       <div class="section-header">
-        <div class="section-icon icon-blue">⏱</div>
+        <div class="section-icon">⏱</div>
         <div>
           <div class="section-heading">Timeframes</div>
           <div class="section-heading-sub">Trend chart → Entry chart</div>
@@ -604,7 +563,7 @@
     <!-- 2. TREND BIAS -->
     <div class="rulebook-section">
       <div class="section-header">
-        <div class="section-icon icon-teal">☁️</div>
+        <div class="section-icon">☁️</div>
         <div>
           <div class="section-heading">Trend Bias</div>
           <div class="section-heading-sub">50 SMA vs 200 SMA — defines trade direction</div>
@@ -633,16 +592,15 @@
     <!-- 3. ENTRY RULES -->
     <div class="rulebook-section">
       <div class="section-header">
-        <div class="section-icon icon-green">🎯</div>
+        <div class="section-icon">🎯</div>
         <div>
           <div class="section-heading">Entry Rules</div>
           <div class="section-heading-sub">Two setups — trend continuation and counter trend</div>
         </div>
       </div>
 
-      <div class="entry-block">
+      <div class="entry-block trend-cont">
         <div class="entry-block-header">
-          <div class="entry-block-dot" style="background:var(--green);box-shadow:0 0 6px rgba(5,150,105,0.4);"></div>
           <div class="entry-block-title">Trend Continuation</div>
           <div class="entry-block-subtitle">With the cloud</div>
         </div>
@@ -674,9 +632,8 @@
         </div>
       </div>
 
-      <div class="entry-block">
+      <div class="entry-block counter-trend">
         <div class="entry-block-header">
-          <div class="entry-block-dot" style="background:var(--yellow);box-shadow:0 0 6px rgba(180,83,9,0.4);"></div>
           <div class="entry-block-title">Counter Trend</div>
           <div class="entry-block-subtitle">Against the cloud — stricter criteria</div>
         </div>
@@ -723,7 +680,7 @@
     <!-- 4. RISK MANAGEMENT -->
     <div class="rulebook-section">
       <div class="section-header">
-        <div class="section-icon icon-red">🛡️</div>
+        <div class="section-icon">🛡️</div>
         <div>
           <div class="section-heading">Risk Management</div>
           <div class="section-heading-sub">Non-negotiable limits</div>
@@ -754,7 +711,7 @@
     <!-- 5. SESSION RULES -->
     <div class="rulebook-section">
       <div class="section-header">
-        <div class="section-icon icon-yellow">🕐</div>
+        <div class="section-icon">🕐</div>
         <div>
           <div class="section-heading">Session Rules</div>
           <div class="section-heading-sub">Trade the window — protect the rest</div>

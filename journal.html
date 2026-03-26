@@ -6,23 +6,23 @@
   <title>Trade Journal | PMax Precision</title>
   <style>
     :root {
-      --bg:         #f0f4fc;
-      --bg-2:       #e4ebf7;
-      --bg-card:    #ffffff;
-      --border:     #cdd8ee;
-      --border-lit: rgba(26,80,220,0.28);
-      --blue:       #1a50dc;
-      --blue-dim:   rgba(26,80,220,0.07);
-      --teal:       #0087aa;
-      --green:      #059669;
-      --green-dim:  rgba(5,150,105,0.08);
-      --green-bg:   rgba(5,150,105,0.06);
-      --red:        #dc2626;
-      --red-dim:    rgba(220,38,38,0.07);
-      --red-bg:     rgba(220,38,38,0.05);
-      --text:       #111827;
-      --text-2:     #3d5278;
-      --text-3:     #7a90b4;
+      --bg:         #0a0a0a;
+      --bg-2:       #141414;
+      --bg-card:    #111111;
+      --border:     rgba(255,255,255,0.06);
+      --border-lit: #2563eb;
+      --blue:       #2563eb;
+      --blue-dim:   rgba(37,99,235,0.1);
+      --teal:       #06b6d4;
+      --green:      #22c55e;
+      --green-dim:  rgba(34,197,94,0.1);
+      --green-bg:   rgba(34,197,94,0.06);
+      --red:        #ef4444;
+      --red-dim:    rgba(239,68,68,0.08);
+      --red-bg:     rgba(239,68,68,0.05);
+      --text:       #f5f5f5;
+      --text-2:     rgba(255,255,255,0.55);
+      --text-3:     rgba(255,255,255,0.3);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +30,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-family: -apple-system, 'Inter', system-ui, sans-serif;
       min-height: 100vh;
     }
 
@@ -39,9 +39,9 @@
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px; height: 64px;
-      background: rgba(240,244,252,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .nav-logo { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
     .nav-logo span { color: var(--blue); }
@@ -57,7 +57,7 @@
     .page-header { margin-bottom: 28px; }
     .page-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue-dim); border: 1px solid var(--border-lit);
+      background: var(--blue-dim); border: 1px solid rgba(37,99,235,0.2);
       border-radius: 20px; padding: 4px 14px;
       font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
       text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
@@ -69,7 +69,6 @@
     .card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 14px; padding: 24px; margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(26,80,220,0.05);
     }
     .card-title {
       font-size: 11px; font-weight: 700; text-transform: uppercase;
@@ -87,7 +86,7 @@
       color: var(--text-2); display: flex; align-items: center; justify-content: center;
       transition: all 0.15s;
     }
-    .month-nav-btn:hover { border-color: var(--border-lit); color: var(--blue); }
+    .month-nav-btn:hover { border-color: var(--blue); color: var(--blue); }
     .month-label { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
 
     /* ── MONTHLY STATS ── */
@@ -119,23 +118,23 @@
     }
     .cal-day {
       min-height: 76px; border-radius: 9px; padding: 8px;
-      border: 1px solid var(--border); background: var(--bg-card);
+      border: 1px solid var(--border); background: var(--bg-2);
       cursor: pointer; transition: all 0.15s;
       display: flex; flex-direction: column; position: relative;
     }
-    .cal-day:hover { border-color: var(--border-lit); background: var(--blue-dim); }
+    .cal-day:hover { border-color: rgba(37,99,235,0.3); background: var(--blue-dim); }
     .cal-empty {
       min-height: 76px; border-radius: 9px;
-      background: rgba(228,235,247,0.4); border: 1px solid transparent;
+      background: transparent; border: 1px solid transparent;
     }
-    .cal-weekend { background: var(--bg-2); cursor: default; }
-    .cal-weekend:hover { background: var(--bg-2); border-color: var(--border); }
+    .cal-weekend { background: #0e0e0e; cursor: default; }
+    .cal-weekend:hover { background: #0e0e0e; border-color: var(--border); }
     .cal-today { border-color: var(--blue) !important; border-width: 2px; }
     .cal-selected { border-color: var(--blue) !important; background: var(--blue-dim) !important; }
-    .cal-green { background: var(--green-bg); border-color: rgba(5,150,105,0.25); }
-    .cal-green:hover { background: rgba(5,150,105,0.1); }
-    .cal-red   { background: var(--red-bg);   border-color: rgba(220,38,38,0.2); }
-    .cal-red:hover   { background: rgba(220,38,38,0.08); }
+    .cal-green { background: rgba(34,197,94,0.06); border-color: rgba(34,197,94,0.2); }
+    .cal-green:hover { background: rgba(34,197,94,0.1); }
+    .cal-red   { background: rgba(239,68,68,0.05); border-color: rgba(239,68,68,0.18); }
+    .cal-red:hover   { background: rgba(239,68,68,0.08); }
     .cal-flat  { background: var(--bg-2); }
 
     .cal-day-num {
@@ -154,14 +153,13 @@
       background: var(--bg-2); display: flex; align-items: center;
       justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-3);
     }
-    .week-pos { color: var(--green); background: var(--green-bg); border-color: rgba(5,150,105,0.2); }
-    .week-neg { color: var(--red);   background: var(--red-bg);   border-color: rgba(220,38,38,0.15); }
+    .week-pos { color: var(--green); background: var(--green-bg); border-color: rgba(34,197,94,0.15); }
+    .week-neg { color: var(--red);   background: var(--red-bg);   border-color: rgba(239,68,68,0.12); }
 
     /* ── TRADE PANEL ── */
     .trade-panel {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 14px; padding: 24px; margin-top: 0;
-      box-shadow: 0 2px 12px rgba(26,80,220,0.05);
     }
     .trade-panel.hidden { display: none; }
     .panel-header {
@@ -224,11 +222,12 @@
       display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
     }
     .add-input {
-      background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px;
+      background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
       padding: 9px 12px; font-size: 13px; color: var(--text); outline: none;
       transition: border-color 0.15s; font-family: inherit;
     }
-    .add-input:focus { border-color: var(--border-lit); }
+    .add-input:focus { border-color: #2563eb; }
+    .add-input option { background: #1a1a1a; color: var(--text); }
     .add-desc { flex: 1; min-width: 160px; }
     .add-pnl  { width: 140px; }
     .add-btn {
@@ -236,7 +235,7 @@
       padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer;
       transition: all 0.15s; white-space: nowrap;
     }
-    .add-btn:hover { background: #2b63f0; }
+    .add-btn:hover { background: #3b82f6; }
 
     .screenshot-upload {
       display: flex; align-items: center; gap: 10px;
@@ -246,7 +245,7 @@
       padding: 8px 14px; font-size: 12px; font-weight: 600; color: var(--text-2);
       cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px;
     }
-    .screenshot-upload-btn:hover { border-color: var(--border-lit); color: var(--blue); }
+    .screenshot-upload-btn:hover { border-color: var(--blue); color: var(--blue); }
     .screenshot-upload-btn svg { width: 14px; height: 14px; }
     .screenshot-preview {
       height: 36px; border-radius: 4px; border: 1px solid var(--border);
@@ -263,7 +262,7 @@
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border); padding: 24px 40px;
+      border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 40px;
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
     }
     .footer-name { font-size: 13px; font-weight: 600; color: var(--text-3); }
@@ -310,14 +309,14 @@
     <div class="card">
       <div class="month-nav">
         <button class="month-nav-btn" onclick="prevMonth()">&#8592;</button>
-        <span class="month-label" id="monthLabel">—</span>
+        <span class="month-label" id="monthLabel">&mdash;</span>
         <button class="month-nav-btn" onclick="nextMonth()">&#8594;</button>
       </div>
 
       <!-- Monthly stats -->
       <div class="stats-strip">
         <div class="stat-box">
-          <div class="stat-value" id="statTotal">—</div>
+          <div class="stat-value" id="statTotal">&mdash;</div>
           <div class="stat-label">Monthly P&amp;L</div>
         </div>
         <div class="stat-box">
@@ -329,15 +328,15 @@
           <div class="stat-label">Loss Days</div>
         </div>
         <div class="stat-box">
-          <div class="stat-value" id="statWinRate">—</div>
+          <div class="stat-value" id="statWinRate">&mdash;</div>
           <div class="stat-label">Win Rate</div>
         </div>
         <div class="stat-box">
-          <div class="stat-value" id="statBest" style="color:var(--green);">—</div>
+          <div class="stat-value" id="statBest" style="color:var(--green);">&mdash;</div>
           <div class="stat-label">Best Day</div>
         </div>
         <div class="stat-box">
-          <div class="stat-value" id="statWorst" style="color:var(--red);">—</div>
+          <div class="stat-value" id="statWorst" style="color:var(--red);">&mdash;</div>
           <div class="stat-label">Worst Day</div>
         </div>
       </div>
@@ -362,7 +361,7 @@
     <div class="trade-panel hidden" id="tradePanel">
       <div class="panel-header">
         <div>
-          <div class="panel-date" id="panelDate">—</div>
+          <div class="panel-date" id="panelDate">&mdash;</div>
         </div>
         <div class="panel-total" id="panelTotal">$0</div>
         <button class="panel-close" onclick="closePanel()" title="Close">&#x2715;</button>
@@ -396,7 +395,7 @@
   </div>
 
   <footer>
-    <span class="footer-name">Jamal Hollingsworth &nbsp;·&nbsp; PMax Precision</span>
+    <span class="footer-name">Jamal Hollingsworth &nbsp;&middot;&nbsp; PMax Precision</span>
     <span class="footer-note">Journal data is saved locally in your browser.</span>
   </footer>
 
@@ -453,13 +452,13 @@
       }
 
       const el = id => document.getElementById(id);
-      el('statTotal').textContent = days ? fmtMoney(mTotal) : '—';
+      el('statTotal').textContent = days ? fmtMoney(mTotal) : '\u2014';
       el('statTotal').style.color = mTotal >= 0 ? 'var(--green)' : 'var(--red)';
       el('statWin').textContent = wins;
       el('statLoss').textContent = losses;
-      el('statWinRate').textContent = days ? Math.round(wins/days*100) + '%' : '—';
-      el('statBest').textContent  = best  !== null ? fmtMoney(best)  : '—';
-      el('statWorst').textContent = worst !== null ? fmtMoney(worst) : '—';
+      el('statWinRate').textContent = days ? Math.round(wins/days*100) + '%' : '\u2014';
+      el('statBest').textContent  = best  !== null ? fmtMoney(best)  : '\u2014';
+      el('statWorst').textContent = worst !== null ? fmtMoney(worst) : '\u2014';
 
       // Render rows
       let html = '';
@@ -494,7 +493,7 @@
         });
 
         const wtCls = 'cal-week-total' + (wHas ? (wTotal >= 0 ? ' week-pos' : ' week-neg') : '');
-        rowHtml += `<div class="${wtCls}">${wHas ? fmtMoney(wTotal) : '—'}</div>`;
+        rowHtml += `<div class="${wtCls}">${wHas ? fmtMoney(wTotal) : '\u2014'}</div>`;
         html += `<div class="cal-row">${rowHtml}</div>`;
       });
 
@@ -526,7 +525,7 @@
 
       const tl = document.getElementById('tradeList');
       if (!dd.trades.length) {
-        tl.innerHTML = '<div class="no-trades">No trades logged — add one below.</div>';
+        tl.innerHTML = '<div class="no-trades">No trades logged \u2014 add one below.</div>';
       } else {
         tl.innerHTML = dd.trades.map((t, i) => `
           <div class="trade-item">
