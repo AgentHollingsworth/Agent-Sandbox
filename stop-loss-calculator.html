@@ -451,9 +451,10 @@
     /* ── RISK CALCULATOR INPUTS ── */
     .calc-inputs {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 16px;
       margin-bottom: 24px;
+      max-width: 320px;
     }
 
     .calc-input-group label {
@@ -515,65 +516,106 @@
     }
 
     /* ── RISK TABLE ── */
-    .risk-table { width: 100%; border-collapse: collapse; }
+    .risk-table-wrap {
+      overflow-x: auto;
+      margin: 0 -4px;
+    }
 
-    .risk-table thead tr { border-bottom: 2px solid var(--border); }
+    .risk-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 540px;
+    }
+
+    .risk-table thead tr { background: var(--bg-2); }
 
     .risk-table th {
-      padding: 12px 16px;
+      padding: 14px 12px;
       text-align: center;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.6px;
       color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg-2);
+    }
+
+    .risk-table th:first-child {
+      text-align: left;
+      padding-left: 18px;
+      border-top-left-radius: 8px;
+    }
+    .risk-table th:last-child {
+      border-top-right-radius: 8px;
+    }
+
+    .risk-table th .col-pct {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      display: block;
+    }
+
+    .risk-table th .col-pct.green  { color: var(--green); }
+    .risk-table th .col-pct.blue   { color: var(--blue); }
+    .risk-table th .col-pct.yellow { color: var(--yellow); }
+    .risk-table th .col-pct.orange { color: var(--orange); }
+
+    .risk-table th .col-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-top: 3px;
     }
 
     .risk-table tbody tr {
-      border-bottom: 1px solid var(--border);
       transition: background 0.12s;
     }
-    .risk-table tbody tr:hover { background: rgba(26,80,220,0.03); }
+    .risk-table tbody tr:nth-child(odd)  { background: var(--bg-card); }
+    .risk-table tbody tr:nth-child(even) { background: rgba(26,80,220,0.025); }
+    .risk-table tbody tr:hover { background: rgba(26,80,220,0.06); }
 
     .risk-table td {
-      padding: 16px;
+      padding: 14px 12px;
       text-align: center;
       vertical-align: middle;
+      border-bottom: 1px solid var(--border);
     }
 
-    .risk-pct-label {
-      font-size: 18px;
+    .risk-table td:first-child {
+      text-align: left;
+      padding-left: 18px;
       font-weight: 800;
+      color: var(--text);
+      font-size: 16px;
       letter-spacing: -0.01em;
     }
 
-    .risk-pct-label.green  { color: var(--green); }
-    .risk-pct-label.blue   { color: var(--blue); }
-    .risk-pct-label.yellow { color: var(--yellow); }
-    .risk-pct-label.orange { color: var(--orange); }
-
-    .risk-pct-sub {
+    .stop-cell-sub {
       font-size: 10px;
+      font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-top: 2px;
     }
 
-    .risk-dollar {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-2);
-    }
-
     .contracts-result {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 52px;
-      height: 44px;
-      border-radius: 10px;
-      font-size: 22px;
+      min-width: 44px;
+      height: 38px;
+      padding: 0 10px;
+      border-radius: 8px;
+      font-size: 17px;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
@@ -582,20 +624,14 @@
     .contracts-result.blue   { background: rgba(26,80,220,0.08); color: #1a50dc; border: 1px solid rgba(26,80,220,0.22); }
     .contracts-result.yellow { background: rgba(217,119,6,0.1);  color: #d97706; border: 1px solid rgba(217,119,6,0.25); }
     .contracts-result.orange { background: rgba(234,88,12,0.1);  color: #ea580c; border: 1px solid rgba(234,88,12,0.25); }
+    .contracts-result.zero   { background: var(--bg-2); color: var(--text-muted); border: 1px solid var(--border); }
 
-    .risk-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 12px;
+    .contracts-dollar {
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
-
-    .risk-conservative { background: rgba(5,150,105,0.1);  color: #059669; border: 1px solid rgba(5,150,105,0.25); }
-    .risk-moderate     { background: rgba(26,80,220,0.08); color: #1a50dc; border: 1px solid rgba(26,80,220,0.22); }
-    .risk-elevated     { background: rgba(217,119,6,0.1);  color: #d97706; border: 1px solid rgba(217,119,6,0.25); }
-    .risk-high         { background: rgba(234,88,12,0.1);  color: #ea580c; border: 1px solid rgba(234,88,12,0.25); }
 
     .footnote {
       text-align: center;
@@ -760,7 +796,7 @@
 
     <!-- Risk Calculator -->
     <div class="card">
-      <div class="card-title">Risk Calculator</div>
+      <div class="card-title">Risk Calculator — Contracts by Stop Loss</div>
 
       <div class="calc-inputs">
         <div class="calc-input-group">
@@ -770,31 +806,27 @@
             <input type="text" id="calcBalance" class="calc-input" value="150,000" inputmode="numeric">
           </div>
         </div>
-        <div class="calc-input-group">
-          <label>Stop Loss</label>
-          <div class="calc-field">
-            <input type="text" id="calcStop" class="calc-input" value="25" inputmode="numeric">
-            <span class="calc-field-suffix">points</span>
-          </div>
-        </div>
       </div>
 
-      <table class="risk-table">
-        <thead>
-          <tr>
-            <th>Risk Level</th>
-            <th>$ at Risk</th>
-            <th>Contracts</th>
-            <th>Rating</th>
-          </tr>
-        </thead>
-        <tbody id="riskTableBody"></tbody>
-      </table>
+      <div class="risk-table-wrap">
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Stop Loss</th>
+              <th><span class="col-pct green">0.5%</span><span class="col-tag">Conservative</span></th>
+              <th><span class="col-pct blue">1.0%</span><span class="col-tag">Moderate</span></th>
+              <th><span class="col-pct yellow">1.5%</span><span class="col-tag">Elevated</span></th>
+              <th><span class="col-pct orange">2.0%</span><span class="col-tag">High</span></th>
+            </tr>
+          </thead>
+          <tbody id="riskTableBody"></tbody>
+        </table>
+      </div>
 
       <div class="footnote">
         MNQ point value = $2.00 per point per contract &nbsp;&bull;&nbsp;
         Contracts = (Balance × Risk%) ÷ (Stop Points × $2)<br>
-        Values rounded down to whole contracts for safety
+        Each cell shows whole contracts (rounded down) and the actual dollar risk for that stop
       </div>
     </div>
 
@@ -957,30 +989,39 @@
     }
 
     // ── Risk Calculator Table ────────────────────────────────────
+    const STOP_PRESETS = [25, 50, 75, 100, 125, 150, 175, 200];
+
     function renderRiskTable() {
       const balance = parseNum(document.getElementById('calcBalance').value);
-      const stop    = parseNum(document.getElementById('calcStop').value);
 
-      if (!balance || !stop) {
+      if (!balance) {
         document.getElementById('riskTableBody').innerHTML =
-          '<tr><td colspan="4" style="color:var(--text-muted);padding:24px;">Enter balance and stop loss to calculate</td></tr>';
+          '<tr><td colspan="5" style="color:var(--text-muted);padding:24px;text-align:center;">Enter an account balance to calculate</td></tr>';
         return;
       }
 
-      const costPerContract = stop * MNQ_POINT_VALUE;
+      document.getElementById('riskTableBody').innerHTML = STOP_PRESETS.map(stop => {
+        const costPerContract = stop * MNQ_POINT_VALUE;
+        const stopDollar      = costPerContract;
 
-      document.getElementById('riskTableBody').innerHTML = RISK_TIERS.map(tier => {
-        const riskDollar  = balance * tier.pct;
-        const contracts   = Math.floor(riskDollar / costPerContract);
+        const cells = RISK_TIERS.map(tier => {
+          const riskDollar = balance * tier.pct;
+          const contracts  = Math.floor(riskDollar / costPerContract);
+          const actualRisk = contracts * costPerContract;
+          const cls        = contracts === 0 ? 'zero' : tier.color;
+
+          return `<td>
+            <span class="contracts-result ${cls}">${contracts}</span>
+            <div class="contracts-dollar">${contracts > 0 ? fmt(actualRisk) : '—'}</div>
+          </td>`;
+        }).join('');
 
         return `<tr>
           <td>
-            <div class="risk-pct-label ${tier.color}">${tier.label}</div>
-            <div class="risk-pct-sub">${tier.tag}</div>
+            ${stop} pts
+            <div class="stop-cell-sub">${fmt(stopDollar)} / contract</div>
           </td>
-          <td><span class="risk-dollar">${fmt(riskDollar)}</span></td>
-          <td><span class="contracts-result ${tier.color}">${contracts}</span></td>
-          <td><span class="risk-badge ${tier.cls}">${tier.tag}</span></td>
+          ${cells}
         </tr>`;
       }).join('');
     }
@@ -988,7 +1029,6 @@
     // ── Balance input formatting ─────────────────────────────────
     const calcBalanceEl = document.getElementById('calcBalance');
     calcBalanceEl.addEventListener('input', function() {
-      // Store cursor position relative to digits
       const raw = this.value.replace(/[^0-9]/g, '');
       const num = parseInt(raw, 10);
       if (!isNaN(num) && num > 0) {
@@ -996,9 +1036,6 @@
       }
       renderRiskTable();
     });
-
-    const calcStopEl = document.getElementById('calcStop');
-    calcStopEl.addEventListener('input', renderRiskTable);
 
     // ── EOD manual input sync ────────────────────────────────────
     document.getElementById('eodInput').addEventListener('input', function() {
