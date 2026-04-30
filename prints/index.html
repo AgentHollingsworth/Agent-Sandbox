@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lengendaryish Prints — Custom 3D Prints</title>
+<meta name="description" content="Made-to-order 3D prints. Functional parts, tabletop minis, cosplay props, and one-off ideas — printed in PLA, PETG, resin, and more." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --blue: #0058a3;
+    --blue-ink: #003e76;
+    --yellow: #ffdb00;
+    --ink: #111111;
+    --paper: #ffffff;
+    --bone: #f5f3f0;
+    --line: #e6e3de;
+    --muted: #6b6b6b;
+    --radius: 14px;
+    --radius-pill: 999px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+    --shadow-card: 0 1px 0 rgba(17,17,17,.04);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.45;
+    font-size:16px;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+
+  /* Layout */
+  .container{max-width:1320px;margin:0 auto;padding:0 28px}
+  @media (max-width:720px){.container{padding:0 18px}}
+
+  /* Nav */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    font-weight:900;letter-spacing:-0.02em;font-size:20px;
+  }
+  .brand-mark{
+    width:30px;height:30px;border-radius:8px;
+    background:var(--blue);color:var(--yellow);
+    display:grid;place-items:center;font-weight:900;
+  }
+  .nav-links{
+    display:flex;align-items:center;gap:6px;
+  }
+  .nav-link{
+    padding:10px 14px;border-radius:var(--radius-pill);
+    font-weight:500;color:#222;
+    transition:background-color .18s var(--ease);
+  }
+  .nav-link:hover{background:var(--bone)}
+  .nav-cta{
+    margin-left:8px;
+    padding:10px 18px;border-radius:var(--radius-pill);
+    background:var(--blue);color:#fff;font-weight:600;
+    border:none;
+    transition:background-color .18s var(--ease), transform .18s var(--ease);
+  }
+  .nav-cta:hover{background:var(--blue-ink)}
+  @media (max-width:780px){
+    .nav-links .nav-link:not(:last-child){display:none}
+  }
+
+  /* Hero */
+  .hero{
+    padding:64px 0 48px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--bone);color:#222;
+    padding:6px 12px;border-radius:var(--radius-pill);
+    font-size:13px;font-weight:500;
+  }
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:#0a8c46}
+  h1.hero-title{
+    margin:18px 0 18px;
+    font-weight:900;letter-spacing:-0.035em;
+    font-size:clamp(44px, 7vw, 96px);
+    line-height:.95;
+  }
+  .hero-title em{font-style:normal;background:var(--yellow);padding:0 .15em;border-radius:6px}
+  .hero-lead{
+    font-size:18px;color:#333;max-width:520px;margin:0 0 28px;
+  }
+  .hero-ctas{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 22px;border-radius:var(--radius-pill);
+    font-weight:600;font-size:15px;border:1px solid transparent;
+    transition:background-color .18s var(--ease), transform .18s var(--ease), border-color .18s var(--ease);
+  }
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-ink)}
+  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:#fff}
+  .btn .arrow{transition:transform .18s var(--ease)}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  .hero-art{
+    position:relative;aspect-ratio:5/6;
+    background:var(--bone);border-radius:24px;overflow:hidden;
+  }
+  .hero-art img{width:100%;height:100%;object-fit:cover}
+  .hero-art .price-tag{
+    position:absolute;left:18px;bottom:18px;
+    background:var(--yellow);color:var(--ink);
+    padding:10px 14px;border-radius:12px;
+    font-weight:800;font-size:14px;letter-spacing:.02em;
+  }
+  .hero-art .price-tag small{display:block;font-weight:500;font-size:11px;opacity:.7;margin-bottom:2px}
+
+  .hero-stats{
+    margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .stat{padding:24px 0;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat .num{font-size:28px;font-weight:800;letter-spacing:-.02em}
+  .stat .lbl{color:var(--muted);font-size:13px;margin-top:4px}
+
+  @media (max-width:880px){
+    .hero{padding:36px 0 24px}
+    .hero-grid{grid-template-columns:1fr;gap:28px}
+    .hero-stats{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2){border-right:none}
+  }
+
+  /* Section */
+  section{padding:80px 0}
+  .section-head{
+    display:flex;align-items:end;justify-content:space-between;gap:24px;
+    margin-bottom:36px;
+  }
+  .section-head h2{
+    margin:0;font-weight:900;letter-spacing:-.025em;
+    font-size:clamp(32px,4.5vw,56px);line-height:1;
+  }
+  .section-head p{margin:8px 0 0;color:var(--muted);max-width:520px}
+  .see-all{
+    color:var(--blue);font-weight:600;display:inline-flex;align-items:center;gap:6px;
+    border-bottom:2px solid transparent;padding-bottom:2px;
+  }
+  .see-all:hover{border-color:var(--blue)}
+
+  /* Product grid */
+  .grid{
+    display:grid;gap:24px;
+    grid-template-columns:repeat(4,1fr);
+  }
+  @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.grid{grid-template-columns:1fr}}
+
+  .card{
+    display:flex;flex-direction:column;gap:14px;
+    background:var(--paper);border-radius:18px;
+    padding:14px;border:1px solid transparent;
+    transition:border-color .2s var(--ease), transform .2s var(--ease);
+  }
+  .card:hover{border-color:var(--line);transform:translateY(-2px)}
+  .thumb{
+    aspect-ratio:1/1;background:var(--bone);border-radius:14px;overflow:hidden;
+    position:relative;
+  }
+  .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+  .card:hover .thumb img{transform:scale(1.03)}
+  .badge{
+    position:absolute;top:12px;left:12px;
+    background:#fff;color:var(--ink);
+    font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+    padding:6px 10px;border-radius:var(--radius-pill);
+  }
+  .badge.new{background:var(--yellow)}
+  .card h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .card .meta{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .price{font-weight:800;font-size:16px;letter-spacing:-.01em}
+  .price .from{font-weight:500;color:var(--muted);font-size:12px;margin-right:4px}
+  .add{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--blue);color:#fff;border:none;
+    display:grid;place-items:center;font-size:18px;
+    transition:background-color .18s var(--ease), transform .18s var(--ease);
+  }
+  .add:hover{background:var(--blue-ink);transform:scale(1.05)}
+  .swatches{display:flex;gap:6px}
+  .sw{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
+
+  /* Categories */
+  .cats{
+    display:grid;gap:16px;grid-template-columns:repeat(6,1fr);
+  }
+  @media (max-width:980px){.cats{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:520px){.cats{grid-template-columns:repeat(2,1fr)}}
+  .cat{
+    aspect-ratio:1/1;border-radius:18px;background:var(--bone);
+    padding:18px;display:flex;flex-direction:column;justify-content:space-between;
+    overflow:hidden;position:relative;
+    transition:transform .2s var(--ease);
+  }
+  .cat:hover{transform:translateY(-2px)}
+  .cat .label{font-weight:700;font-size:15px;letter-spacing:-.01em}
+  .cat .arrow-circle{
+    width:32px;height:32px;border-radius:50%;background:#fff;
+    display:grid;place-items:center;align-self:flex-end;
+    transition:background-color .18s var(--ease), color .18s var(--ease);
+  }
+  .cat:hover .arrow-circle{background:var(--blue);color:#fff}
+  .cat-functional{background:#e6efff}
+  .cat-decor{background:#fef3cd}
+  .cat-tabletop{background:#e9f5e7}
+  .cat-cosplay{background:#fde6e6}
+  .cat-organizers{background:#efe6fd}
+  .cat-custom{background:var(--ink);color:#fff}
+  .cat-custom .arrow-circle{background:var(--yellow);color:var(--ink)}
+
+  /* Materials */
+  .materials-wrap{background:var(--bone);border-radius:28px;padding:48px}
+  .materials-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px}
+  @media (max-width:980px){.materials-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.materials-grid{grid-template-columns:1fr}}
+  .mat{
+    background:#fff;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px;
+  }
+  .mat .name{font-weight:800;font-size:18px;letter-spacing:-.01em}
+  .mat .desc{color:var(--muted);font-size:14px}
+  .mat .row{display:flex;justify-content:space-between;font-size:13px;border-top:1px solid var(--line);padding-top:10px}
+  .mat .row b{font-weight:700}
+  .mat .colors{display:flex;gap:6px;flex-wrap:wrap}
+  .mat .colors .sw{width:18px;height:18px}
+
+  /* Process */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  @media (max-width:880px){.process{grid-template-columns:repeat(2,1fr)}}
+  .step{padding:32px 24px;border-right:1px solid var(--line);position:relative}
+  .step:last-child{border-right:none}
+  @media (max-width:880px){.step:nth-child(2){border-right:none}}
+  .step .n{
+    width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;
+    display:grid;place-items:center;font-weight:800;font-size:14px;margin-bottom:14px;
+  }
+  .step h4{margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+  .step p{margin:0;color:var(--muted);font-size:14px}
+
+  /* Quote form */
+  .quote{
+    background:var(--blue);color:#fff;border-radius:28px;padding:56px;
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;
+  }
+  @media (max-width:880px){.quote{grid-template-columns:1fr;padding:32px;border-radius:20px}}
+  .quote h2{margin:0 0 12px;font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-.025em;line-height:1}
+  .quote p{color:rgba(255,255,255,.85);max-width:420px}
+  .quote .perks{margin-top:24px;display:flex;flex-direction:column;gap:8px;color:#fff;font-size:14px}
+  .quote .perks span::before{content:"✓";display:inline-block;width:20px;color:var(--yellow);font-weight:800}
+  form.quote-form{
+    background:#fff;color:var(--ink);border-radius:18px;padding:24px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:13px;font-weight:600;color:#333}
+  .field input, .field select, .field textarea{
+    border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    font:inherit;font-size:14px;background:#fff;
+    transition:border-color .15s var(--ease);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none;border-color:var(--blue);
+  }
+  .field textarea{min-height:96px;resize:vertical}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .submit{
+    background:var(--ink);color:#fff;border:none;
+    padding:14px;border-radius:var(--radius-pill);font-weight:700;
+    transition:background-color .18s var(--ease);
+  }
+  .submit:hover{background:#000}
+
+  /* Gallery */
+  .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+  @media (max-width:880px){.gallery{grid-template-columns:repeat(3,1fr)}}
+  .gallery .g{
+    aspect-ratio:1/1;background:var(--bone);border-radius:10px;overflow:hidden;
+  }
+  .gallery .g img{width:100%;height:100%;object-fit:cover;transition:transform .35s var(--ease)}
+  .gallery .g:hover img{transform:scale(1.05)}
+  .gallery .g.tall{grid-row:span 2;aspect-ratio:1/2}
+
+  /* Marquee */
+  .marquee{
+    background:var(--ink);color:#fff;padding:18px 0;overflow:hidden;
+    border-radius:0;
+  }
+  .marquee-track{
+    display:flex;gap:48px;white-space:nowrap;
+    animation:scroll 28s linear infinite;
+    font-weight:800;letter-spacing:-.01em;font-size:18px;
+  }
+  .marquee-track span{display:flex;align-items:center;gap:48px}
+  .marquee-track i{font-style:normal;color:var(--yellow);font-weight:900}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* Footer */
+  footer{
+    border-top:1px solid var(--line);padding:64px 0 36px;background:var(--paper);
+  }
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+  @media (max-width:880px){.foot-grid{grid-template-columns:1fr 1fr}}
+  .foot h5{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .foot a:hover{color:var(--blue)}
+  .foot .brand{margin-bottom:14px}
+  .foot p.tag{color:var(--muted);max-width:340px;font-size:14px}
+  .foot-bottom{
+    margin-top:48px;padding-top:24px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;color:var(--muted);font-size:13px;
+  }
+
+  /* Utility */
+  .pill-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--bone);padding:6px 12px;border-radius:var(--radius-pill);
+    font-size:12px;font-weight:600;
+  }
+</style>
+</head>
+<body>
+  <!-- Nav -->
+  <header class="nav">
+    <div class="container nav-row">
+      <a class="brand" href="#">
+        <span class="brand-mark">L</span>
+        Lengendaryish Prints
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="#catalog">Catalog</a>
+        <a class="nav-link" href="#materials">Materials</a>
+        <a class="nav-link" href="#process">How it works</a>
+        <a class="nav-link" href="#gallery">Gallery</a>
+        <button class="nav-cta">Get a quote →</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Now booking April prints</span>
+          <h1 class="hero-title">Made-to-spec <em>3D prints</em>, ready in days.</h1>
+          <p class="hero-lead">Functional parts, tabletop minis, cosplay props, replacement bits, and one-off ideas — printed to order on calibrated machines in PLA, PETG, resin, and TPU.</p>
+          <div class="hero-ctas">
+            <button class="btn btn-primary">Browse the catalog <span class="arrow">→</span></button>
+            <button class="btn btn-ghost">Upload your STL <span class="arrow">→</span></button>
+          </div>
+        </div>
+        <div class="hero-art">
+          <img src="https://picsum.photos/seed/hero3dp/900/1100" alt="Freshly printed object on a build plate" />
+          <div class="price-tag">
+            <small>From</small>
+            $4.50
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><div class="num">600+</div><div class="lbl">prints shipped</div></div>
+        <div class="stat"><div class="num">0.1mm</div><div class="lbl">layer precision</div></div>
+        <div class="stat"><div class="num">48h</div><div class="lbl">avg. turnaround</div></div>
+        <div class="stat"><div class="num">12</div><div class="lbl">filament colors in stock</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured catalog -->
+  <section id="catalog">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Featured prints</h2>
+          <p>A starter set of designs you can order today. Pick a color, pick a size — we take it from there.</p>
+        </div>
+        <a class="see-all" href="#">View full catalog →</a>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="thumb"><span class="badge new">New</span><img src="https://picsum.photos/seed/cable-organizer/600/600" alt="Cable organizer" /></div>
+          <h3>Desk cable organizer</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#111"></span>
+              <span class="sw" style="background:#fff;border-color:#ddd"></span>
+              <span class="sw" style="background:#0058a3"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">from</span>$8.00</div>
+            <span class="pill-tag">PLA</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb"><img src="https://picsum.photos/seed/planter/600/600" alt="Geometric planter" /></div>
+          <h3>Faceted planter, 4&quot;</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#f5f3f0"></span>
+              <span class="sw" style="background:#cfa97d"></span>
+              <span class="sw" style="background:#0a8c46"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">from</span>$14.00</div>
+            <span class="pill-tag">PETG</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb"><span class="badge">Popular</span><img src="https://picsum.photos/seed/dragon-mini/600/600" alt="Tabletop dragon mini" /></div>
+          <h3>Dragon mini, 32mm scale</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#7a7a7a"></span>
+              <span class="sw" style="background:#1f1f1f"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">from</span>$6.00</div>
+            <span class="pill-tag">Resin</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb"><img src="https://picsum.photos/seed/hex-tray/600/600" alt="Hex storage tray" /></div>
+          <h3>Hex storage tray (set of 3)</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#111"></span>
+              <span class="sw" style="background:#ffdb00"></span>
+              <span class="sw" style="background:#0058a3"></span>
+              <span class="sw" style="background:#e25c4c"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">from</span>$22.00</div>
+            <span class="pill-tag">PLA</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb"><span class="badge new">New</span><img src="https://picsum.photos/seed/lampshade/600/600" alt="Spiral lampshade" /></div>
+          <h3>Spiral lampshade, E26</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#fff;border-color:#ddd"></span>
+              <span class="sw" style="background:#f5f3f0"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">from</span>$28.00</div>
+            <span class="pill-tag">PLA Silk</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb"><img src="https://picsum.photos/seed/phone-stand/600/600" alt="Adjustable phone stand" /></div>
+          <h3>Adjustable phone stand</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#111"></span>
+              <span class="sw" style="background:#fff;border-color:#ddd"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">from</span>$10.00</div>
+            <span class="pill-tag">PETG</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb"><img src="https://picsum.photos/seed/keycap/600/600" alt="Custom artisan keycap" /></div>
+          <h3>Artisan keycap, MX</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#0058a3"></span>
+              <span class="sw" style="background:#e25c4c"></span>
+              <span class="sw" style="background:#0a8c46"></span>
+              <span class="sw" style="background:#ffdb00"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">from</span>$12.00</div>
+            <span class="pill-tag">Resin</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb"><span class="badge">Custom</span><img src="https://picsum.photos/seed/replacement/600/600" alt="Replacement part" /></div>
+          <h3>Replacement bracket, custom</h3>
+          <div class="meta">
+            <div class="swatches">
+              <span class="sw" style="background:#111"></span>
+            </div>
+            <button class="add" aria-label="Add to order">+</button>
+          </div>
+          <div class="meta">
+            <div class="price"><span class="from">quote</span>—</div>
+            <span class="pill-tag">PETG / TPU</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Shop by use case</h2>
+          <p>Whether it&rsquo;s a one-off prototype or a small batch, start with a category that fits.</p>
+        </div>
+      </div>
+      <div class="cats">
+        <a class="cat cat-functional" href="#">
+          <div class="label">Functional parts</div>
+          <div class="arrow-circle">→</div>
+        </a>
+        <a class="cat cat-decor" href="#">
+          <div class="label">Decor &amp; planters</div>
+          <div class="arrow-circle">→</div>
+        </a>
+        <a class="cat cat-tabletop" href="#">
+          <div class="label">Tabletop &amp; minis</div>
+          <div class="arrow-circle">→</div>
+        </a>
+        <a class="cat cat-cosplay" href="#">
+          <div class="label">Cosplay &amp; props</div>
+          <div class="arrow-circle">→</div>
+        </a>
+        <a class="cat cat-organizers" href="#">
+          <div class="label">Organizers</div>
+          <div class="arrow-circle">→</div>
+        </a>
+        <a class="cat cat-custom" href="#">
+          <div class="label">Custom job</div>
+          <div class="arrow-circle">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>FAST TURNAROUND <i>•</i> 0.1MM PRECISION <i>•</i> COLOR-MATCHED FILAMENT <i>•</i> FLAT-RATE SHIPPING <i>•</i> CUSTOM JOBS WELCOME <i>•</i></span>
+      <span>FAST TURNAROUND <i>•</i> 0.1MM PRECISION <i>•</i> COLOR-MATCHED FILAMENT <i>•</i> FLAT-RATE SHIPPING <i>•</i> CUSTOM JOBS WELCOME <i>•</i></span>
+    </div>
+  </div>
+
+  <!-- Materials -->
+  <section id="materials">
+    <div class="container">
+      <div class="materials-wrap">
+        <div class="section-head" style="margin-bottom:8px">
+          <div>
+            <h2>Materials &amp; finishes</h2>
+            <p>Pick the right material for the job. Not sure? Tell us how it&rsquo;ll be used and we&rsquo;ll recommend.</p>
+          </div>
+          <a class="see-all" href="#">Material guide →</a>
+        </div>
+        <div class="materials-grid">
+          <div class="mat">
+            <div class="name">PLA</div>
+            <div class="desc">Crisp detail, easy to print, great for decor and indoor use. Not heat-resistant.</div>
+            <div class="colors">
+              <span class="sw" style="background:#111"></span>
+              <span class="sw" style="background:#fff;border-color:#ddd"></span>
+              <span class="sw" style="background:#0058a3"></span>
+              <span class="sw" style="background:#ffdb00"></span>
+              <span class="sw" style="background:#e25c4c"></span>
+              <span class="sw" style="background:#0a8c46"></span>
+              <span class="sw" style="background:#cfa97d"></span>
+            </div>
+            <div class="row"><span>Layer height</span><b>0.12 – 0.28mm</b></div>
+            <div class="row"><span>From</span><b>$0.10/g</b></div>
+          </div>
+
+          <div class="mat">
+            <div class="name">PETG</div>
+            <div class="desc">Tougher and more flexible than PLA. Outdoor-friendly, food-safe options available.</div>
+            <div class="colors">
+              <span class="sw" style="background:#111"></span>
+              <span class="sw" style="background:#fff;border-color:#ddd"></span>
+              <span class="sw" style="background:#7a7a7a"></span>
+              <span class="sw" style="background:#0058a3"></span>
+              <span class="sw" style="background:#e25c4c"></span>
+            </div>
+            <div class="row"><span>Layer height</span><b>0.16 – 0.28mm</b></div>
+            <div class="row"><span>From</span><b>$0.14/g</b></div>
+          </div>
+
+          <div class="mat">
+            <div class="name">Resin (SLA)</div>
+            <div class="desc">Microfine detail for minis, jewelry, and prototypes. Cured under UV after print.</div>
+            <div class="colors">
+              <span class="sw" style="background:#7a7a7a"></span>
+              <span class="sw" style="background:#1f1f1f"></span>
+              <span class="sw" style="background:#f5f3f0"></span>
+            </div>
+            <div class="row"><span>Layer height</span><b>0.025 – 0.05mm</b></div>
+            <div class="row"><span>From</span><b>$0.30/g</b></div>
+          </div>
+
+          <div class="mat">
+            <div class="name">TPU (flexible)</div>
+            <div class="desc">Rubbery and shock-absorbing. Great for grips, gaskets, phone cases, and dampers.</div>
+            <div class="colors">
+              <span class="sw" style="background:#111"></span>
+              <span class="sw" style="background:#fff;border-color:#ddd"></span>
+              <span class="sw" style="background:#e25c4c"></span>
+            </div>
+            <div class="row"><span>Shore</span><b>95A</b></div>
+            <div class="row"><span>From</span><b>$0.22/g</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>How it works</h2>
+          <p>Four steps from idea to delivered print. No surprise fees.</p>
+        </div>
+      </div>
+      <div class="process">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Send the brief</h4>
+          <p>Pick from the catalog or upload your STL/OBJ. Tell us material, color, and size.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>Get a quote</h4>
+          <p>You&rsquo;ll get a fixed price and lead time within 24 hours, with a print preview.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>We print &amp; finish</h4>
+          <p>Calibrated machines, supports removed, sanded if needed, light bead-blasting on resin.</p>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <h4>Ship or pick up</h4>
+          <p>Padded packaging, tracked shipping, or local pickup. Most orders ship within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote / order -->
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="quote">
+        <div>
+          <h2>Get a quote in 24h.</h2>
+          <p>Drop in a few details and we&rsquo;ll come back with pricing, lead time, and a render so you know exactly what you&rsquo;re getting.</p>
+          <div class="perks">
+            <span>Fixed pricing — no per-minute meters</span>
+            <span>Free design tweaks for printability</span>
+            <span>Re-print on us if it ships damaged</span>
+          </div>
+        </div>
+        <form class="quote-form" onsubmit="event.preventDefault(); alert('Thanks! This is a placeholder form — wire it up to email or a backend.');">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="material">Material</label>
+              <select id="material">
+                <option>PLA</option>
+                <option>PETG</option>
+                <option>Resin (SLA)</option>
+                <option>TPU</option>
+                <option>Not sure — recommend one</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="qty">Quantity</label>
+              <input id="qty" type="number" min="1" value="1" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="brief">What do you want printed?</label>
+            <textarea id="brief" placeholder="A short description, dimensions, color preference, and any deadline."></textarea>
+          </div>
+          <button class="submit" type="submit">Send brief →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Recent prints</h2>
+          <p>A peek at what came off the build plate this month.</p>
+        </div>
+        <a class="see-all" href="#">See more on Instagram →</a>
+      </div>
+      <div class="gallery">
+        <div class="g tall"><img src="https://picsum.photos/seed/g1/600/1200" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g2/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g3/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g4/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g5/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g6/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g7/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g8/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g9/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g10/600/600" alt="" /></div>
+        <div class="g"><img src="https://picsum.photos/seed/g11/600/600" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot">
+          <a class="brand" href="#"><span class="brand-mark">L</span>Lengendaryish Prints</a>
+          <p class="tag">A small 3D-printing studio. Made-to-order, made well, made nearby.</p>
+        </div>
+        <div class="foot">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="#catalog">Catalog</a></li>
+            <li><a href="#materials">Materials</a></li>
+            <li><a href="#">Custom orders</a></li>
+            <li><a href="#">Gift cards</a></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <h5>Studio</h5>
+          <ul>
+            <li><a href="#process">How it works</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <h5>Follow</h5>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">Etsy</a></li>
+            <li><a href="#">Email list</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="yr"></span> Lengendaryish Prints</span>
+        <span>Made with one printer, lots of coffee.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
