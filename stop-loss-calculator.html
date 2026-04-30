@@ -800,7 +800,7 @@
 
       <div class="calc-inputs">
         <div class="calc-input-group">
-          <label>Account Balance</label>
+          <label>Account Balance <span style="text-transform:none;font-weight:500;color:var(--text-muted);letter-spacing:0;font-size:11px;">— synced with EOD balance above</span></label>
           <div class="calc-field">
             <span class="calc-field-prefix">$</span>
             <input type="text" id="calcBalance" class="calc-input" value="150,000" inputmode="numeric">
@@ -946,6 +946,10 @@
       const eodInput = document.getElementById('eodInput');
       if (document.activeElement !== eodInput) eodInput.value = eod;
 
+      // Sync risk calculator balance with EOD balance
+      const calcBal = document.getElementById('calcBalance');
+      if (document.activeElement !== calcBal) calcBal.value = fmtExact(eod);
+
       document.getElementById('ddFloorDisplay').textContent  = fmt(floor);
       document.getElementById('ddRoomDisplay').textContent   = fmt(Math.max(0, room));
       document.getElementById('ddLockAtDisplay').textContent = fmt(lockPoint(planBalance));
@@ -1026,15 +1030,20 @@
       }).join('');
     }
 
-    // ── Balance input formatting ─────────────────────────────────
+    // ── Balance input formatting + sync with EOD ─────────────────
     const calcBalanceEl = document.getElementById('calcBalance');
     calcBalanceEl.addEventListener('input', function() {
       const raw = this.value.replace(/[^0-9]/g, '');
       const num = parseInt(raw, 10);
       if (!isNaN(num) && num > 0) {
         this.value = num.toLocaleString('en-US');
+        // Push the typed balance back into the EOD slider/tracker
+        const slider  = document.getElementById('eodSlider');
+        const clamped = Math.min(parseFloat(slider.max), Math.max(parseFloat(slider.min), num));
+        updateDD(clamped);
+      } else {
+        renderRiskTable();
       }
-      renderRiskTable();
     });
 
     // ── EOD manual input sync ────────────────────────────────────
