@@ -1,0 +1,11 @@
+/* ---------- training checklist extras (same palette) ---------- */
+.ck{margin:6px 0 14px;padding:0;list-style:none}
+.ck li{display:flex;gap:10px;font-size:15.5px;margin:0 0 9px;align-items:flex-start}
+.ck li .box{flex:0 0 auto;color:var(--navy);font-size:16px;line-height:1.45}
+.ck li .who{flex:0 0 auto;font:700 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.08em;color:var(--gold-ink);background:var(--gold-bg);border:1px solid var(--gold);
+  border-radius:4px;padding:3px 6px;margin-top:3px}
+.ck li .who.mgr{color:#fff;background:var(--navy);border-color:var(--navy)}
+.ck li .txt{flex:1 1 auto}
+.ck li .txt small{display:block;color:var(--soft);font-size:13.5px;margin-top:2px}
+.done .box{color:#2e7d32}

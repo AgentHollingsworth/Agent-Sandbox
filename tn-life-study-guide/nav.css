@@ -1,0 +1,29 @@
+/* ---------- shared site nav (same palette as the guides) ---------- */
+.sitenav{position:sticky;top:0;z-index:40;background:var(--navy);border-bottom:3px solid var(--gold)}
+.sitenav .inner{max-width:760px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:10px;min-height:46px}
+.sitenav .brand{font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;
+  text-transform:uppercase;color:#ffd980;flex:1 1 auto;min-width:0;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+details.navmenu{position:relative;flex:0 0 auto}
+details.navmenu>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:7px;
+  min-height:34px;padding:0 12px;border:1px solid rgba(255,255,255,.45);border-radius:6px;
+  color:#fff;font:700 14px/1 inherit;background:rgba(255,255,255,.08)}
+details.navmenu>summary::-webkit-details-marker{display:none}
+details.navmenu>summary .ico{font-size:15px;line-height:1}
+details.navmenu>summary .chev{font-size:11px;transition:transform .18s}
+details.navmenu[open]>summary .chev{transform:rotate(180deg)}
+details.navmenu[open]>summary{background:#fff;color:var(--navy);border-color:#fff}
+.navlist{position:absolute;right:0;top:calc(100% + 8px);z-index:50;width:290px;max-width:78vw;
+  background:#fff;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:6px;
+  box-shadow:0 10px 28px rgba(11,31,58,.28);overflow:hidden}
+.navlist a{display:block;padding:11px 13px;text-decoration:none;color:var(--navy-2);
+  font-size:15px;line-height:1.3;border-bottom:1px solid var(--rule-soft);background:#fff}
+.navlist a:last-child{border-bottom:0}
+.navlist a small{display:block;color:var(--soft);font-size:12.5px;font-weight:400;margin-top:2px}
+.navlist a b{font-weight:700}
+.navlist a[aria-current="page"]{background:var(--blue-bg);border-left:4px solid var(--gold);padding-left:9px}
+.navlist a:active{background:var(--zebra)}
+@media (max-width:360px){.sitenav .brand{font-size:10px;letter-spacing:.1em}}
+
+/* pages have a sticky search bar — park it below the sticky nav */
+.bar{top:49px}
