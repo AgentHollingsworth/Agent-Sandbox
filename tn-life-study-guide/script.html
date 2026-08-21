@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>The Script — Student Edition</title>
+<link rel="stylesheet" href="/guide.css">
+<link rel="stylesheet" href="/nav.css">
+<link rel="stylesheet" href="/script.css">
+</head>
+<body>
+<nav class="sitenav">
+  <div class="inner">
+    <div class="brand">Agent Training HQ</div>
+    <details class="navmenu">
+      <summary><span class="ico">🏠</span>Guides<span class="chev">▼</span></summary>
+      <div class="navlist">
+      <a href="/"><b>TN Exam Study Guide</b><small>Tennessee life insurance exam prep</small></a>
+      <a href="/youtube.html"><b>YouTube Study Guide</b><small>Exam prep from the 8-video series</small></a>
+      <a href="/script.html" aria-current="page"><b>The Script</b><small>The words you read on the phone</small></a>
+      <a href="/study-guide.html"><b>Script Study Guide</b><small>How you learn the call</small></a>
+      <a href="/checklist.html"><b>Training Checklist</b><small>Licensed and selling in ~14 days</small></a>
+      <a href="/schedule.html"><b>Call Schedule</b><small>Daybreak calls · days and times</small></a>
+      <a href="/leads.html"><b>Lead Response System</b><small>Working your leads · speed and rotation</small></a>
+      </div>
+    </details>
+  </div>
+</nav>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Student Edition · color-coded</div>
+  <h1>The Script</h1>
+  <p>The exact same script you were given, just reorganized so you can actually <b>learn</b> it. Nothing has been removed — every line, branch, and objection from the original is still here, just labeled, grouped, and explained.</p>
+  <div class="for">This is what you read on the phone. The Study Guide is how you learn it.</div>
+</header>
+
+<div class="bar">
+  <div class="row">
+    <input id="q" type="search" placeholder="Search the whole script…" autocomplete="off" aria-label="Search the script">
+    <button id="toggleAll" type="button">Open all</button>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <select id="jump" aria-label="Jump to a stage"><option value="">Jump to stage…</option></select>
+  </div>
+  <div class="hint" id="hint">Tap a section to start — the next one opens automatically as you scroll.</div>
+</div>
+
+<details class="ch heavy" id="colors" data-q="0" open>
+  <summary>
+    <div class="top"><span class="num">READ</span><span class="name">How to Read This Document — the color system</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">learn once</div></div>
+  </summary>
+  <div class="body">
+    <p>Four colors. Learn them once and you never have to think about it again.</p>
+    <div class="legend">
+      <div class="lg b"><span class="sym">🗣</span><span class="txt"><b>SAY — BLUE</b>Anything coming out of your mouth. Statements and questions both. If it is blue, you say it.</span></div>
+      <div class="lg k"><span class="sym">⏸</span><span class="txt"><b>PAUSE — BLACK</b>Stop talking. Let them answer.</span></div>
+      <div class="lg k"><span class="sym">( )</span><span class="txt"><b>BLACK TEXT INSIDE A BLUE LINE</b>A stage direction or a choice you make, not a word you say. If it is inside a blue line but printed black, do not read it.</span></div>
+      <div class="lg k"><span class="sym">↳</span><span class="txt"><b>IF… — BLACK BOLD</b>A branch marker. Structural — tells you which path you are on.</span></div>
+      <div class="lg r"><span class="sym">⚠</span><span class="txt"><b>DO NOT READ ALOUD — RED</b>Your notes. The client never hears this. Red because it is the one rule you cannot break.</span></div>
+      <div class="lg y"><span class="sym">🧠</span><span class="txt"><b>WHY — YELLOW HIGHLIGHT</b>Study note. Also never read aloud, highlighted because it is temporary. Clear the highlight once you no longer need it.</span></div>
+    </div>
+    <p><b>Forks are side by side.</b> Any time the call can go two ways, both paths sit next to each other so you never have to scroll past one to find the other. Read the box, pick your column, keep moving down the page.</p>
+    <p><b>Why the study notes are highlighted:</b> they are training wheels. Once they stop teaching you anything they can go, and this turns back into a clean working script without you having to keep a second version.</p>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD — the 3 rules that apply to the whole call:</span>
+      1. Slow and low tone. Never rush, never pitch-voice.<br>
+      2. Never read anything marked internal / red.<br>
+      3. Write everything down on paper, EVERY presentation. Every single time.</div>
+  </div>
+</details>
+
+<details class="ch heavy" id="glance" data-q="0">
+  <summary>
+    <div class="top"><span class="num">MAP</span><span class="name">The Call at a Glance — memorize this order first</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">10 stages</div></div>
+  </summary>
+  <div class="body">
+    <div class="lede">Before you memorize words, memorize the 10 stages. If you know the order, you can survive any call.</div>
+    <div class="rows">
+      <div><b>1. Open</b><span>Confirm who you're talking to, reference their request</span></div>
+      <div><b>2. Positioning</b><span>You're the manager, this is quick, 4–5 questions</span></div>
+      <div><b>3. Credentials text</b><span>Build trust</span></div>
+      <div><b>4. Qualify</b><span>Health, habits, goals, existing coverage</span></div>
+      <div><b>5. Term vs. Permanent</b><span>Only for under 65 leaving money behind</span></div>
+      <div><b>6. Pen and paper</b><span>Get them ready to write</span></div>
+      <div><b>7. Present</b><span>Gold / Silver / Bronze with living benefits</span></div>
+      <div><b>8. Pick an option</b><span>"Which would you want to try to qualify for?"</span></div>
+      <div><b>9. Application</b><span>DOB, height, weight, address, SSN, banking, codes</span></div>
+      <div><b>10. Close</b><span>Approval news, cement the sale, say your goodbyes</span></div>
+    </div>
+    <div class="hardstop">■ HARD STOP. The call ends here. You have done the job. ■<small>11. Referrals — OPTIONAL continuation, only if you want to push</small></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Objections are not in an appendix. Each one is parked inline at the exact stage where you are most likely to hear it. There is an index at the very end if you need to find one fast.</div>
+  </div>
+</details>
+
+<details class="ch" id="s1" data-q="1">
+  <summary>
+    <div class="top"><span class="num">STAGE 1</span><span class="name">The Open</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">phase · OPEN</div></div>
+  </summary>
+  <div class="body">
+    <div class="why"><span class="lbl">🧠 WHY</span>You are not selling yet. You're just confirming they're the right person and reminding them THEY asked for this. Sounding slightly unsure and friendly makes you sound human, not like a call center.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Hi [Name]?"</q></div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>— wait for their response.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Hey [Name], this is [Your Name]…"</q> <span class="nr">(slight pause, sound a bit unsure but friendly)</span> <q>"…I wanted to quickly touch base with you about the request you made for the Final Expense Life Insurance."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Was that insurance going to be for you or another loved one?"</q></div>
+
+    <h3>Stage 1 branch — have they already been contacted?</h3>
+    <div class="fork">
+      <div>
+        <div class="forkhd">✅ IF THEY HAVE BEEN CONTACTED</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"That's awesome! Do you happen to remember which one of my agents you spoke with?"</q></div>
+        <div class="pause"><span class="lbl">⏸ PAUSE</span>— let them answer.</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Just to make sure we're on the same page here — it does show as incomplete on my end."</q></div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Which carrier did you end up getting coverage through?"</q></div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Did they send your policy packet out to you in the mail yet?"</q></div>
+      </div>
+      <div>
+        <div class="forkhd">🚫 IF THEY HAVEN'T BEEN CONTACTED</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Got it — no problem."</q></div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"This'll only take a few minutes to run through everything with you just so you have all the information on your end."</q></div>
+      </div>
+    </div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Both paths land in the same place. Go to Stage 2.</div>
+  </div>
+</details>
+
+<details class="ch" id="s2" data-q="2">
+  <summary>
+    <div class="top"><span class="num">STAGE 2</span><span class="name">Positioning — transition to qualification</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">phase · OPEN</div></div>
+  </summary>
+  <div class="body">
+    <div class="why"><span class="lbl">🧠 WHY</span>This does three jobs at once: it makes you the authority ("manager"), it makes the call feel short and easy, and it flips the frame — you're not trying to sell them, you're checking if they even qualify.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Great, I'm actually the manager here in the office assigned to your request."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"It's a pretty simple and straightforward process with me — I'll just run through 4-5 quick questions to point us in the right direction. And the biggest thing I can do throughout this process is just make sure you do actually qualify for the coverage, okay?"</q></div>
+  </div>
+</details>
+
+<details class="ch" id="s3" data-q="3">
+  <summary>
+    <div class="top"><span class="num">STAGE 3</span><span class="name">Credentials Text — trust builder</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">phase · OPEN</div></div>
+  </summary>
+  <div class="body">
+    <div class="why"><span class="lbl">🧠 WHY</span>Sending your license and business card early kills the "is this a scam?" objection before it ever gets asked. You will also reference this text again later during the application.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"First, I'm going to send you a quick text with all of my credentials — including my state license and business card — so you have everything for your records."</q></div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>briefly. Most people will respond with "okay."</div>
+
+    <div class="obj">
+      <div class="objhd">🛑 OBJECTION YOU MAY GET RIGHT HERE — "Who do you work for?"</div>
+      <div class="objbd">
+        <div class="why"><span class="lbl">🧠 CORE IDEA</span>Independent broker, name-drop the A-rated carriers, then pivot straight to pen and paper.</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"We are private brokers and work exclusively with [specific lead type] on the private carrier side of things with companies like Mutual of Omaha, Americo, John Hancock, etc., and are able to show you the most affordable and best options for your needs based on your situation. It only takes me a minute or two just to get the information out to you. Do you happen to have a pen and paper you might be able to write down some of my information?"</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>This answer ends on a question, which hands control back to you. Do not pause after "private brokers" and wait for approval.</div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details class="ch heavy" id="s4" data-q="4">
+  <summary>
+    <div class="top"><span class="num">STAGE 4</span><span class="name">Qualifying Questions — the seven</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">biggest stage</div></div>
+  </summary>
+  <div class="body">
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Write every single answer on paper. You will need all of it in Stage 9.</div>
+    <div class="why"><span class="lbl">🧠 WHY</span>Questions 1-5 are health/underwriting (do they qualify, and at what price). Question 6 is motivation (what they actually care about). Question 7 is existing coverage (what you're competing against).</div>
+
+    <h3>Question 1 — Date of birth</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"So a couple questions here, [Client's Name]. Could you please confirm your date of birth for me sir/ma'am?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Okay, thank you."</q></div>
+
+    <h3>Question 2 — Medications</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"And are you currently taking any prescription medications? I don't need the names, just what do you take them for?"</q></div>
+    <div class="branch">↳ IF they mention diabetes medication:</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Is that insulin or pills?"</q></div>
+    <div class="branch">↳ IF diabetic:</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Do you happen to know your last A1C level?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Is there anything you may have been prescribed in the past but currently not taking?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Thank you sir/ma'am."</q></div>
+
+    <h3>Question 3 — Major health history</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Have you ever had a heart attack, stroke, cancer, or any kidney or liver disease?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Any major surgeries in the past few years?"</q></div>
+
+    <h3>Question 4 — Smoking</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Do you smoke sir/ma'am?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Okay, thank you."</q></div>
+
+    <h3>Question 5 — Height</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"And about how tall are you sir/ma'am?"</q></div>
+
+    <h4>Question 5b — Weight</h4>
+    <div class="fork">
+      <div>
+        <div class="forkhd">↳ IF FEMALE</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now, my mother told me never to ask a lady this, but about how much do you weigh?"</q></div>
+      </div>
+      <div>
+        <div class="forkhd">↳ IF MALE</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"About how much do you weigh?"</q></div>
+      </div>
+    </div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>The original script numbered this as a second "Question 6." It's the weight question — same block as height.</div>
+
+    <h3>Question 6 — Their goal (this is the important one)</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"So [Client's Name], when you originally filled this out, what was your main goal?"</q>
+      <ul>
+        <li>"Were you looking to cover final expenses?"</li>
+        <li>"Leave money behind for someone?"</li>
+        <li>"Or were you hoping for something more permanent that builds cash value and you never have to worry about again?"</li>
+      </ul>
+    </div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>— let them answer and roll with their response.</div>
+    <div class="why"><span class="lbl">🧠 WHY</span>Their answer here decides whether you go Final Expense or IUL/Term in Stage 7, and whether you run the Term vs. Permanent talk in Stage 5.</div>
+
+    <h3>Question 7 — Existing coverage</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"So last thing before we jump into some numbers here, do you currently have life insurance in place [Client's Name]?"</q></div>
+    <div class="branch">↳ IF YES:</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Is that through a private carrier or your employer?"</q></div>
+    <div class="fork">
+      <div>
+        <div class="forkhd">↳ IF PRIVATE CARRIER</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Just to make sure I don't overlap with your current private carrier, which one of those carriers do you have that coverage through?"</q></div>
+      </div>
+      <div>
+        <div class="forkhd">↳ IF EMPLOYER</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Okay great, are you aware that employer policy will only protect you while you're employed at that company?"</q></div>
+      </div>
+    </div>
+    <div class="say"><span class="lbl">🗣 SAY <span class="nr">(both paths)</span>:</span><q>"Awesome! How much coverage do you have?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"How much are you paying per month?"</q></div>
+    <div class="branch">↳ IF THEIR COVERAGE IS THROUGH THE VA:</div>
+    <div class="fork">
+      <div>
+        <div class="forkhd">↳ IF VGLI</div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Term option that doubles in price every five years.</div>
+      </div>
+      <div>
+        <div class="forkhd">↳ IF VA WHOLE LIFE</div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>50k max coverage and has a 2-year waiting period.</div>
+      </div>
+    </div>
+
+    <h3>Close out the qualifying block</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Fantastic, we will make sure to get you taken care of today sir/ma'am…"</q></div>
+    <div class="pause"><span class="lbl">⏸</span>Slight pause.</div>
+  </div>
+</details>
+
+<details class="ch" id="s5" data-q="5">
+  <summary>
+    <div class="top"><span class="num">STAGE 5</span><span class="name">Term vs. Permanent</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">conditional</div></div>
+  </summary>
+  <div class="body">
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD — USE THIS SECTION ONLY IF:</span>they want to leave money behind AND they are UNDER 65. Otherwise skip straight to Stage 6.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"So there are typically two types of insurance we can qualify for, term or permanent."</q></div>
+    <div class="fork">
+      <div>
+        <div class="forkhd">TERM</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Term is exactly what it sounds like — it has a set period attached to it, generally around 15 years. Now once that term ends, you are left with NO coverage."</q></div>
+      </div>
+      <div>
+        <div class="forkhd">PERMANENT</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now, permanent coverage lasts for the rest of your life, so no matter how old or sick you get, the price is locked in forever."</q></div>
+      </div>
+    </div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"So hearing those two options [Client's Name], which of those options sounds more like it suits your needs best?"</q></div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>— roll with whatever they choose.</div>
+  </div>
+</details>
+
+<details class="ch" id="s6" data-q="6">
+  <summary>
+    <div class="top"><span class="num">STAGE 6</span><span class="name">Pen and Paper — the closing setup</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">phase · SHOW</div></div>
+  </summary>
+  <div class="body">
+    <div class="why"><span class="lbl">🧠 WHY</span>If they're writing, they're engaged, and the three options become real numbers they own instead of noise on a phone call. Do not present prices until they have a pen.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Awesome! Now, the system is going to kick me back a few options. Do you happen to have a pen or paper handy or anything to jot down some notes with?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Just let me know when you're ready sir/ma'am."</q></div>
+  </div>
+</details>
+
+<details class="ch heavy" id="s7" data-q="7">
+  <summary>
+    <div class="top"><span class="num">STAGE 7</span><span class="name">Presenting the Options — Gold / Silver / Bronze</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">memorize cold</div></div>
+  </summary>
+  <div class="body">
+    <h3>7a. Set up the medals + living benefits</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"First off, I am going to have you write down GOLD, SILVER, and BRONZE just like the olympic medals. Now all of the options I'm going to share with you today come with living benefits. Are you familiar with what that means?"</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Most people say no. If they say YES, read the explanation anyway.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Living benefits basically mean that if you become terminally ill, critically injured, or chronically ill, you can access the entire face amount of your policy while you're still alive. You can use that money however you want — whether it's for medical expenses, living expenses, or anything else you might need during a period of time like that, okay?"</q></div>
+
+    <h3>7b. 🥇 GOLD</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now the GOLD option here is generally the most coverage the carriers would recommend to start out with. While this isn't the option I typically recommend, I am required to show you all of your options."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"The Gold option would be: [$30,000 if Final Expense / $100,000 if IUL or Term]. That option would be $xxx per month."</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Gold typically lands between $200 – $250/month.</div>
+
+    <h3>7c. 🥈 SILVER</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"The SILVER option is what most people tend to choose as it offers a solid balance of coverage and affordability."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"The Silver option would be: [$20,000 if Final Expense / $75,000 if IUL or Term]. That option would be $xxx per month."</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Silver typically lands between $125 – $199/month.</div>
+
+    <h3>7d. 🥉 BRONZE</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"The BRONZE option is more of a 'foot-in-the-door' choice. This locks in your age, health, and habits now — while you're still as young and healthy as you'll ever be."</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD — ONLY read the next line if Bronze is genuinely the cheapest option:</span></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"This is also the most affordable option."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"The Bronze option would be: [$15,000 if Final Expense / $50,000 if IUL or Term]. That option would be $xxx per month."</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Bronze typically lands between $60 – $124/month.</div>
+
+    <h3>📋 Study card — the three options</h3>
+    <div class="tbl">
+      <div class="tr"><div class="th">🥇 Gold</div><div class="td"><b>Final Expense</b><span>$30,000</span></div><div class="td"><b>IUL / Term</b><span>$100,000</span></div><div class="td"><b>Typical monthly</b><span>$200 – $250</span></div></div>
+      <div class="tr"><div class="th">🥈 Silver</div><div class="td"><b>Final Expense</b><span>$20,000</span></div><div class="td"><b>IUL / Term</b><span>$75,000</span></div><div class="td"><b>Typical monthly</b><span>$125 – $199</span></div></div>
+      <div class="tr"><div class="th">🥉 Bronze</div><div class="td"><b>Final Expense</b><span>$15,000</span></div><div class="td"><b>IUL / Term</b><span>$50,000</span></div><div class="td"><b>Typical monthly</b><span>$60 – $124</span></div></div>
+    </div>
+  </div>
+</details>
+
+<details class="ch heavy" id="s8" data-q="8">
+  <summary>
+    <div class="top"><span class="num">STAGE 8</span><span class="name">Pick an Option — next steps</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">the hinge</div></div>
+  </summary>
+  <div class="body">
+    <div class="why"><span class="lbl">🧠 WHY</span>You never "ask them to buy." You ask which one they'd want to <b>try to qualify for</b>. That's a much smaller yes.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"So [Client's Name], like I mentioned earlier, the biggest thing we can do today is just make sure this is something you do actually qualify for. If you don't, I'll have to do some homework on my end to see what other avenues we do have available for you. So if you could qualify, which option would you want to try and qualify for sir/ma'am?"</q></div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>— let them answer.</div>
+
+    <div class="fork">
+      <div>
+        <div class="forkhd">✅ IF THEY NAME AN OPTION</div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Don't oversell it. Confirm the choice and go straight to the bridge below.</div>
+      </div>
+      <div>
+        <div class="forkhd">🤔 IF THEY CAN'T DECIDE</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Hey [Client's Name], are you open to any suggestions?"</q></div>
+        <div class="pause"><span class="lbl">⏸ PAUSE</span>— they will say yes.</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"For most folks, I always recommend the Silver or Bronze option. The reason being is that we can always add coverage later but we can't decrease coverage. The last thing I want to do is take food off the table here."</q></div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"So, out of those, which would be most comfortable for you not just now but 2, 5, 10 years down the line?"</q></div>
+      </div>
+    </div>
+
+    <h3>Bridge into the application</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Perfect, it'll only take me a couple more minutes here. The good news is:"</q>
+      <ul>
+        <li>"We will know immediately if you do qualify."</li>
+        <li>"There are no medical exams or doctor visits required."</li>
+        <li>"Once I run through a few quick questions, you'll either get the greenlight — good to go — or they'll let us know if we need to explore other options."</li>
+      </ul>
+    </div>
+
+    <div class="obj">
+      <div class="objhd">🛑 OBJECTION YOU MAY GET RIGHT HERE — "I want to think about it"</div>
+      <div class="objbd">
+        <div class="why"><span class="lbl">🧠 WHY IT SHOWS UP HERE</span>It almost always lands right after you give the quotes. In their head it is about price, which means value was not built well enough. You have to take it away and rebuild.</div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>These are an escalation ladder, not five options. Work down only as far as you need to.</div>
+
+        <h4>1. The company has to think about you too</h4>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"I completely understand, and you definitely should. However, the insurance company still has to think about you as well. So what I recommend is we just submit an application to see if you could even get approved — because if you can't, then there is nothing to even think about. If you do get approved, the insurance company will mail everything out for you to review and look over the details. Okay?"</q></div>
+
+        <h4>2. No commitment today</h4>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"The cool thing is, no final decisions or commitments are made today. What we do is submit an application to see if you qualify. Worst case, you don't qualify and we look at some other options. Best case, you do qualify, the company mails you out a physical policy and gives you 30 days to review all the fine print numbers to make sure this is going to benefit you and your family in the event of a death or disability."</q></div>
+
+        <h4>3. The shopping-around rebuild</h4>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Yeah, I hear you there. Honestly, I'm the same way — always shopping for the cheapest prices so I don't get ripped off, especially with a product that I'm not very familiar with. Now, like I mentioned before, I do the medical underwriting for every A to A+ rated carrier in the state of [_____], so I was able to plug in the health conditions you made me aware of, and after hearing about your situation and the kind of coverage that would benefit you and your family the most, this is what I was able to come up with. Now unfortunately, before you can buy and pay for anything, we need to make sure you're able to medically qualify — so that's what we are going to knock out today. I've got the application already filled out for the most part, I just have to confirm a couple more things…"</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Ask the first question on the app, then circle back to picking an option right before the Social question.</div>
+
+        <h4>4. If they are STILL hesitant (concerned tone)</h4>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"I guess a better question is, what were you hoping to hear from another insurance company…?"</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Stay quiet. They will reveal their main concern.</div>
+
+        <h4>5. The closer</h4>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Yeah, I completely understand and I want you to think about it. However, these are just numbers on paper right now. The best thing we can do is see if you medically qualify, so that when you are thinking about it, you know the prices we're talking about are real."</q></div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details class="ch heavy" id="s9" data-q="9">
+  <summary>
+    <div class="top"><span class="num">STAGE 9</span><span class="name">The Application</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">phase · CLOSE</div></div>
+  </summary>
+  <div class="body">
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>The page each question lives on is noted in brackets. You already have most of these answers on paper from Stage 4 — you are <b>confirming</b>, not re-asking.</div>
+
+    <h3>1. Date of birth <span style="font-weight:400;color:var(--soft)">(Welcome page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"[Client's Name], just to confirm, your date of birth is…?"</q></div>
+    <h3>2. Height <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"You mentioned you were [height], thank you."</q></div>
+    <h3>3. Weight <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"And you mentioned you were [weight], just to confirm?"</q></div>
+    <h3>4. State of birth <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Were you born in the great state of [STATE]?"</q></div>
+    <h3>5. Mailing address <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"And what is the best mailing address for the insurance carrier to send the physical documents if we do qualify?"</q></div>
+    <h3>6. Email <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"It looks like the email address I have on file here is…"</q></div>
+    <h3>7. Phone number <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"And [Client's Name], is this the best phone number for you?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Perfect, the insurance carrier will send you a text message here once I click through to the next screen. I'll let you know when it's coming."</q></div>
+    <h3>8. Confirm your credentials text <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Lastly, just to confirm, you did receive my text message with all my credentials?"</q></div>
+
+    <h3>9. Simplified issue explanation + Social <span style="font-weight:400;color:var(--soft)">(Insured page)</span></h3>
+    <div class="why"><span class="lbl">🧠 WHY</span>This whole paragraph exists to make the SSN request feel routine. Say it smoothly and the Social usually comes without a fight.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now, everything is simplified issued. They won't send a doctor out to prick your finger, draw blood, or make you pee in a cup. Ever since COVID, all the insurance carriers switched over to simplified issued. All they will do is just verify your Social through the MIB, which is the Medical Information Bureau, just to do a quick prescription check to confirm you're healthy enough for the coverage. The main things they're checking for are that you don't have:"</q>
+      <ul>
+        <li>"No stage 4 cancer"</li>
+        <li>"Not confined to a hospital bed 24 hours a day"</li>
+        <li>"They mainly want to make sure you're just not on your final days trying to open up a life insurance policy, okay?"</li>
+      </ul>
+    </div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"And I'm assuming you have your social memorized?"</q></div>
+    <div class="fork">
+      <div>
+        <div class="forkhd">✅ IF THEY GIVE IT</div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Take the number, stay casual, keep moving. Do not thank them twice or it starts to feel like a big deal.</div>
+      </div>
+      <div>
+        <div class="forkhd">❌ IF THEY REFUSE</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Just to clarify, they only need it to verify your prescription check through the MIB to make sure that you are healthy for the coverage, and to also verify if you are actually applying for the insurance in your name — it's a standard part of the application process."</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>If they push back again, use the objection below.</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="objhd">🛑 OBJECTION RIGHT HERE — "Why do you need my Social?"</div>
+      <div class="objbd">
+        <div class="why"><span class="lbl">🧠 CORE IDEA</span>I don't need it. The carrier does, for the MIB health check. Pick whichever version sounds more natural coming out of your mouth.</div>
+        <div class="fork">
+          <div>
+            <div class="forkhd">VERSION A — the due diligence angle</div>
+            <div class="say"><span class="lbl">🗣 SAY:</span><q>"So I don't need your Social, the insurance company does, to be able to do their due diligence. If they are going to provide you with thousands of dollars in coverage that will go to your family one day, they need to make sure you are healthy enough for the coverage. How they do that is they verify your Social through the Medical Information Bureau to make sure you don't have any critical or chronic illness. Does that make sense? Okay, I'm ready when you are."</q></div>
+          </div>
+          <div>
+            <div class="forkhd">VERSION B — the no-needles angle</div>
+            <div class="say"><span class="lbl">🗣 SAY:</span><q>"Absolutely, I understand your concerns. That's why I sent you all my information for your records. This is a simplified issue life insurance policy, so what that means is no nurse needs to come out to draw blood or take urine, and all they do is check the MIB — the Medical Information Bureau — to see if you are healthy enough to qualify for the coverage. Does that make sense? Okay, I'm ready when you are."</q></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>9b — Americo authorization code</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Alright, you're going to receive a 6-digit code via text message from Americo Life Insurance, sent from an 877 number."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"All I need you to do is read back the 6-digit code from the message. Ignore the link in the text — you don't need to click it."</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>The message will read: "Thank you for applying with Americo Life Insurance. Your 6-digit authorization code is [CODE]."</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Please read the code back to me when you receive it."</q></div>
+    <h4>Once you receive the code</h4>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Perfect! From here, I'll click through some questions you've already answered. Based on those, you'll either receive a preliminary green light, which means you're about 95% approved, or you'll be booted out, and we'll need to go back to the drawing board together to explore other options you might qualify for."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Give me just a couple of moments while I get some answers."</q></div>
+
+    <h3>9c — Green light: fill out the application</h3>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Fill out the application at this point.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now [Client's Name], we are getting all of those initial preliminary green lights back, so we are looking as good as we can up until this point — so congratulations."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now, who would be playing the role of your beneficiary on something like this?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Okay, great. Can you confirm their relationship to you?"</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Get the beneficiary's FULL NAME and PHONE NUMBER. Write it on paper AND put it in the app.</div>
+
+    <h3>9d — 💳 Banking information</h3>
+    <h4>1. Set the payment date</h4>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now [Client's Name], is there a specific day of the month you'd like this to regularly take effect?"</q></div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>— let them give you a date.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Perfect! So I will have this policy go into effect on [selected date], and that will reoccur on the [selected date] of each calendar month, okay sir/ma'am."</q></div>
+    <h4>2. Confirm the bank</h4>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Just to confirm, Americo does partner with your financial institution. Who do you typically bank with?"</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Once they name the bank, quickly Google the routing number with their state, e.g. "Chase routing number Arizona."</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Awesome! It does look like [CARRIER] partners with [Bank Name]."</q></div>
+    <h4>3. Verify the routing number</h4>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"If I read back the routing number that the carrier has listed here, would you be able to recognize it, or do you need a moment to pull it up?"</q></div>
+    <div class="fork">
+      <div>
+        <div class="forkhd">✅ IF THEY CONFIRM</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Great! The routing number the carrier has here is: [123456789]"</q></div>
+      </div>
+      <div>
+        <div class="forkhd">❓ IF THEY'RE UNSURE</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"No worries! Do you have your bank's mobile app or a check book laying around?"</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Guide them to find the routing number in the app.</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Once you have it pulled up, let me know."</q></div>
+      </div>
+    </div>
+    <h4>4. Confirm the account number</h4>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Perfect! Now, what account number would you like on file?"</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Listen carefully, then read it back.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Just to double-check, I have [read back the account number]. Does that sound correct?"</q></div>
+
+    <div class="obj">
+      <div class="objhd">🛑 OBJECTION RIGHT HERE — "I don't want to give you my banking info"</div>
+      <div class="objbd">
+        <div class="why"><span class="lbl">🧠 CORE IDEA</span>They are verifying identity, not taking money today. Say the words "no payments are due today" out loud, because that is the actual fear.</div>
+        <h4>First pass:</h4>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"The biggest thing the insurance carrier is doing is making sure it is actually you applying for insurance in your name. For example, I couldn't apply for this coverage in your name with my bank account — that would be insurance fraud. Does that make sense? No payments are due today or coming out; they are just doing their due diligence to make sure everything is as it should be on their end."</q></div>
+        <h4>If they say no again:</h4>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Again, the only reason they are asking for this is to verify it is you. Ever since the 2001 PATRIOT Act, they require insurance to be tied to the person's correct account because of all the insurance fraud that happened during 9/11."</q></div>
+      </div>
+    </div>
+
+    <h3>9e — After banking: the final code</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Okay, perfect! I'm filling out a couple pieces of my agent information, then you will get one last 6-digit code — just like the first one."</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>SEND CODE.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now from here, they will do their final underwriting check. A couple things can happen here: we can either get instantly approved for the coverage, or they can take it to further underwriting, which just means the insurance carrier is crossing their T's and dotting their I's — so bear with me just a moment here [Client's Name]."</q></div>
+
+    <h3>9f — The two outcomes</h3>
+    <div class="why"><span class="lbl">🧠 WHY</span>These are the only two ways this call ends. Read them side by side until you can deliver either one without a pause, because the client will hear any hesitation as bad news.</div>
+    <div class="fork">
+      <div>
+        <div class="forkhd">✅ IF THEY DID QUALIFY (the punchline)</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Alright [Client's Name], do you want the good news or the bad news first?"</q></div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Bad news is you're stuck with me forever — because the good news is you did get instantly approved."</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Laugh a little bit. Go to Stage 10.</div>
+      </div>
+      <div>
+        <div class="forkhd">⏳ IF IT GOES TO FURTHER UNDERWRITING</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Alright [Client's Name], after submitting everything, it looks like the application is going through further underwriting. No worries at all — this is completely normal, as about 85% of policies require this step. It simply means the insurance carrier is doing their due diligence, crossing their T's and dotting their I's. We should have a final decision within the next 24-48 hours."</q></div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"In the meantime, I'll give the underwriters a call as soon as we're off the phone to see if I can expedite any answers on my end. Would you be available in the next 15-20 minutes if I give them a call to get some answers?"</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Set the callback time, then go to Stage 10.</div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details class="ch heavy" id="s10" data-q="10">
+  <summary>
+    <div class="top"><span class="num">STAGE 10</span><span class="name">Cement the Sale — once approved</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">do not skip</div></div>
+  </summary>
+  <div class="body">
+    <div class="why"><span class="lbl">🧠 WHY</span>This section is what stops cancellations and makes the claim actually get paid. Do not skip it because you're excited about the sale.</div>
+
+    <h3>Receiving the packet</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"You will receive the physical documents within the next 7-10 business days. Once you get the packet, if you have any questions please feel free to give me a call. We can address any questions you may have or make any necessary changes if needed."</q></div>
+
+    <h3>Put your name on the packet</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"When your policy packet arrives, I want you to grab a sharpie or a dark pen and write my name and number right on the front of that packet."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"God forbid something happened to you, I want your family to know exactly who to call — not to be flipping through papers trying to figure out what to do, okay? I'll be the person your beneficiary reaches out to, and I'll personally walk them through everything step by step."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now obviously, it's important that you let [beneficiary's name] know they're listed. Because if something did happen, they'll be the ones handling this. Make sure they're aware, and I promise I'll do my part and make sure they understand exactly how this works and what steps to take, if you would like."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Any questions on your end while you have me [Client's Name]?"</q></div>
+
+    <h3>Effective date — pick ONE</h3>
+    <div class="fork">
+      <div>
+        <div class="forkhd">↳ IF PAYMENT IS PROCESSING TODAY</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Lastly, this is a first day coverage policy, so even before that policy packet gets out to you, the moment that payment comes out you're all set."</q></div>
+      </div>
+      <div>
+        <div class="forkhd">↳ IF THEY CHOSE A LATER DATE</div>
+        <div class="say"><span class="lbl">🗣 SAY:</span><q>"Lastly, as a reminder, this coverage won't take effect until [EFFECTIVE DATE], so no skydiving or drag racing until after that date, okay sir?"</q></div>
+        <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Laugh a little bit.</div>
+      </div>
+    </div>
+
+    <h3>Your personal contact</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Please save this number — it's my personal line, the same one my family calls me on. I am available 7 days a week by call or text. If you need anything, don't hesitate to reach out."</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Say your goodbyes.</div>
+
+    <div class="hardstop">■ ■ ■ END OF CALL ■ ■ ■<small>THIS IS WHERE YOU ARE DONE.</small></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>The sale is complete. Application submitted, banking captured, beneficiary recorded, packet on the way, they have your personal number. If you hang up right here, you did the job correctly and you get paid.</div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Everything below this line is OPTIONAL. Referrals are a push, not a requirement, and they are not part of the sale. Only keep going if the call actually felt good and they sound happy. Pushing a referral ask onto a lukewarm or rushed call costs you the goodwill you just spent 40 minutes building.</div>
+  </div>
+</details>
+
+<details class="ch" id="s11" data-q="11">
+  <summary>
+    <div class="top"><span class="num">OPT</span><span class="name">Optional Continuation — Referrals (V-I-B-S)</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">optional</div></div>
+  </summary>
+  <div class="body">
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Do not open this section until you are fluent through Stage 10. Learn the sale first.</div>
+    <div class="why"><span class="lbl">🧠 WHY (study note)</span>This block follows a pattern. Learn the four letters and the whole thing is easy to remember:
+      <ul>
+        <li><b>V</b> = Value check ("1 to 10, how did I do?")</li>
+        <li><b>I</b> = Impact ("what was most beneficial?")</li>
+        <li><b>B</b> = Beneficiaries (offer to walk them through it)</li>
+        <li><b>S</b> = Someone else ("who else would thank you?")</li>
+      </ul>
+    </div>
+
+    <h3>(V) Value check</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Ok, now the last thing I always ask my families before I let you go here today — on a scale of 1 to 10, how did I do for you today?"</q></div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>— wait for their answer.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Awesome, thank you so much, it's been a pleasure to protect your family."</q></div>
+
+    <h3>(I) Impact</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now out of everything we covered, what did you feel was most beneficial about what we went over?"</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Repeat it back to them and expand on it.</div>
+
+    <h3>(B) Beneficiaries</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Now obviously, like I mentioned before, I will make sure we go over your policy with your beneficiaries if needed so they know exactly how that works, God forbid something happens to you. In addition, I'll make sure they get access to the same exact information as we went over with you. Now, do you want me to go over your full policy with them, or just the name of the company and the policy number?"</q></div>
+
+    <h3>(S) Someone else</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Ok, great. Other than your beneficiaries, I know there are definitely some people in your life who can benefit from this — let's go ahead and start with</q> <span class="nr">[whoever they mentioned in the presentation: brother, sister, parents, aunts, uncles, coworkers, best friends, etc.]</span><q>…"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"What was your sister's name again? Ok great, and does she have a [***] area code like you? Perfect. Now does your sister work a day shift, nights, or not working? Kids, married?"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Anyone else you care about that would thank you for putting them in a better spot if something happened?"</q></div>
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>Prompt softly — "Who's next, who's next…" — until they say they're out <b>twice</b>.</div>
+
+    <h3>Recap + beat the referral rebuttals before they happen</h3>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Perfect. So here's the game plan — I'll give them a quick call or text, just like I did with you. All I ask is that you give them a heads-up. Just say: 'Hey, I talked with [YOUR NAME], they helped me get my life insurance taken care of and they're going to reach out to you — it's actually really good info.'"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Can you do that for me?"</q></div>
+    <div class="pause"><span class="lbl">⏸ PAUSE</span>— get verbal confirmation.</div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Awesome. And hey — if they're all set, no big deal. At the very least, I'll make sure they're in the best possible spot. And if they do move forward, they'll owe you dinner, or at least a bottle of wine!"</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Alright [Client's Name], please follow up with me as soon as that packet arrives if you have questions, and I appreciate you thinking of the people you care about. That's what this is really about."</q></div>
+    <div class="say"><span class="lbl">🗣 SAY:</span><q>"Thanks again — and have a blessed day!"</q></div>
+  </div>
+</details>
+
+<details class="ch" id="objindex" data-q="12">
+  <summary>
+    <div class="top"><span class="num">INDEX</span><span class="name">Objection Index</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">4 objections</div></div>
+  </summary>
+  <div class="body">
+    <div class="internal"><span class="lbl">⚠ DO NOT READ ALOUD</span>There is no objection appendix anymore. Every objection now sits inline at the exact point in the call where you are most likely to hear it. This index is only so you know where each one lives.</div>
+    <div class="rows">
+      <div><b>"Who do you work for?"</b><span>Stage 3, right after the credentials text</span></div>
+      <div><b>"I want to think about it"</b><span>End of Stage 8, right after the quotes</span></div>
+      <div><b>"Why do you need my Social?"</b><span>Stage 9, right after the Social question</span></div>
+      <div><b>"I don't want to give you my banking info"</b><span>Stage 9d, in the banking block</span></div>
+    </div>
+    <div class="why"><span class="lbl">🧠 STUDY NOTE</span>If an objection ever hits you somewhere unexpected, it usually means you skipped a step earlier. "Who do you work for" late in the call means the credentials text never got confirmed. "I want to think about it" during the application means the options were rushed.</div>
+  </div>
+</details>
+
+<details class="ch" id="aids" data-q="13">
+  <summary>
+    <div class="top"><span class="num">STUDY</span><span class="name">Study Aids</span><span class="chev">▼</span></div>
+    <div class="meta"><div class="qct">summaries</div></div>
+  </summary>
+  <div class="body">
+    <div class="why"><span class="lbl">🧠</span>These are learning tools, not script lines. Nothing here is new material — it's a summary of what's above.</div>
+
+    <h3>The 7 qualifying questions, in order</h3>
+    <div class="rows">
+      <div><b>1</b><span>Date of birth</span></div>
+      <div><b>2</b><span>Medications (+ insulin/pills, A1C, past prescriptions)</span></div>
+      <div><b>3</b><span>Heart attack, stroke, cancer, kidney/liver + major surgeries</span></div>
+      <div><b>4</b><span>Smoke?</span></div>
+      <div><b>5</b><span>Height + weight</span></div>
+      <div><b>6</b><span>What was your main goal?</span></div>
+      <div><b>7</b><span>Do you currently have coverage? (private / employer / VA)</span></div>
+    </div>
+
+    <h3>Everything you must write on paper</h3>
+    <ul>
+      <li>Date of birth</li>
+      <li>Medications and conditions</li>
+      <li>Height and weight</li>
+      <li>Smoker yes/no</li>
+      <li>Their stated goal</li>
+      <li>Existing coverage: carrier, amount, monthly premium</li>
+      <li>State of birth</li>
+      <li>Mailing address, email, phone</li>
+      <li>Chosen option (Gold/Silver/Bronze)</li>
+      <li>Beneficiary FULL NAME, relationship, PHONE NUMBER</li>
+      <li>Bank name, routing number, account number, draft date</li>
+    </ul>
+
+    <h3>Phrases to say exactly as written (highest leverage lines)</h3>
+    <ul>
+      <li>"The biggest thing I can do throughout this process is just make sure you do actually qualify."</li>
+      <li>"We can always add coverage later but we can't decrease coverage."</li>
+      <li>"Which option would you want to try and qualify for?"</li>
+      <li>"No final decisions or commitments are made today."</li>
+      <li>"These are just numbers on paper right now."</li>
+    </ul>
+
+    <h3>The 5 most common places new agents lose the call</h3>
+    <div class="rows">
+      <div><b>1</b><span>Talking fast — the whole script dies without slow and low tone.</span></div>
+      <div><b>2</b><span>Reading internal/red notes out loud.</span></div>
+      <div><b>3</b><span>Presenting prices before they have a pen and paper.</span></div>
+      <div><b>4</b><span>Skipping the credentials text, then fighting the "is this a scam" objection later.</span></div>
+      <div><b>5</b><span>Skipping Stage 10 (cement the sale) and Stage 11 (referrals) because the sale already closed.</span></div>
+    </div>
+  </div>
+</details>
+
+<div class="foot">The Script — Student Edition · color-coded · blue = say it · red = never read aloud</div>
+</div>
+<script src="/guide.js"></script>
+<script src="/nav.js"></script>
+<script src="/autoflow.js"></script>
+</body>
+</html>

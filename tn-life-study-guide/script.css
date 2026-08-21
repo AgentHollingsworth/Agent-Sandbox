@@ -1,0 +1,73 @@
+/* ---------- FRESH LEAD SCRIPT — the four-color system ----------
+   blue = say it · black = stop talking / stage direction
+   red  = never read aloud · yellow highlight = study note        */
+:root{
+  --say:#0b3d91;          /* BLUE  — anything coming out of your mouth */
+  --red:#c0281c;          /* RED   — internal only, never read aloud   */
+  --red-bg:#fdf3f2;
+  --red-line:#e6a49d;
+  --stop:#1a1a2e;         /* BLACK — pause / stage direction           */
+}
+
+/* 🗣 SAY — blue */
+.say{color:var(--say);border-left:4px solid var(--say);background:#f7faff;
+  padding:9px 12px;margin:9px 0;border-radius:0 5px 5px 0;font-size:16px}
+.say .lbl{font:700 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;
+  color:var(--say);display:inline-block;margin-right:6px}
+.say q,.say .line{quotes:none;font-weight:600}
+.say ul{margin:7px 0 0}
+.say li{color:var(--say)}
+/* black text inside a blue line = stage direction, do NOT read it */
+.say .nr{color:var(--stop);font-weight:400;font-style:italic}
+
+/* ⏸ PAUSE — black */
+.pause{color:var(--stop);background:#f4f5f7;border-left:4px solid var(--stop);
+  padding:8px 12px;margin:9px 0;border-radius:0 5px 5px 0;font-size:15px;font-weight:600}
+.pause .lbl{font:700 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;
+  margin-right:6px}
+
+/* ↳ IF — black bold branch marker */
+.branch{color:var(--stop);font-weight:700;font-size:15.5px;margin:13px 0 5px;
+  padding-left:2px;border-bottom:2px solid var(--rule);padding-bottom:4px}
+
+/* ⚠ DO NOT READ ALOUD — red */
+.internal{color:var(--red);background:var(--red-bg);border:1px solid var(--red-line);
+  border-left:4px solid var(--red);padding:9px 12px;margin:10px 0;border-radius:0 5px 5px 0;
+  font-size:15px}
+.internal .lbl{font:700 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;
+  display:block;margin-bottom:3px}
+
+/* 🧠 WHY — yellow highlight study note */
+.why{background:var(--gold-bg);border:1px solid var(--gold);border-radius:5px;
+  padding:9px 12px;margin:10px 0;font-size:15px;color:var(--navy-ink)}
+.why .lbl{font:700 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;
+  color:var(--gold-ink);display:block;margin-bottom:3px}
+
+/* 🛑 objection parked inline */
+.obj{border:1px solid var(--red-line);border-radius:6px;margin:16px 0;overflow:hidden}
+.obj>.objhd{background:var(--red);color:#fff;padding:9px 12px;font-weight:700;font-size:15.5px}
+.obj>.objbd{padding:2px 12px 12px}
+
+/* forks sit side by side, exactly like the document */
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.fork>div{border:1px solid var(--rule);border-radius:6px;padding:9px 11px;background:#fff}
+.fork>div>.forkhd{font-weight:700;font-size:14.5px;color:var(--navy-2);margin:0 0 6px;
+  padding-bottom:5px;border-bottom:1px solid var(--rule-soft)}
+.fork .say,.fork .pause,.fork .internal{margin:7px 0;font-size:15px}
+@media (max-width:620px){.fork{grid-template-columns:1fr}}
+
+/* the colour legend on the intro card */
+.legend{margin:12px 0 4px;display:grid;gap:8px}
+.legend .lg{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--rule);
+  border-radius:5px;padding:8px 11px;font-size:15px;background:#fff}
+.legend .lg .sym{flex:0 0 auto;font-size:17px;line-height:1.3}
+.legend .lg .txt{flex:1 1 auto}
+.legend .lg b{display:block;font-size:13px;letter-spacing:.04em;margin-bottom:1px}
+.legend .lg.b b{color:var(--say)} .legend .lg.b{border-left:4px solid var(--say)}
+.legend .lg.k b{color:var(--stop)} .legend .lg.k{border-left:4px solid var(--stop)}
+.legend .lg.r b{color:var(--red)}  .legend .lg.r{border-left:4px solid var(--red);background:var(--red-bg)}
+.legend .lg.y b{color:var(--gold-ink)} .legend .lg.y{border-left:4px solid var(--gold);background:var(--gold-bg)}
+
+.hardstop{background:var(--navy);color:#fff;text-align:center;font-weight:700;
+  padding:11px 12px;border-radius:6px;margin:18px 0;font-size:15.5px;letter-spacing:.02em}
+.hardstop small{display:block;font-weight:400;font-size:13px;color:#cfe0ff;margin-top:3px;letter-spacing:0}
